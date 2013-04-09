@@ -1,0 +1,56 @@
+<ul class="breadcrumb">    
+    <li>
+        <a href="/admin/usuario">Usuario</a> <span class="divider">/</span>
+    </li>    
+</ul>
+<div id="content_wrapper">
+     <div id="content">
+         <div class="inner">
+             <form action="" method="post" enctype="multipart/form-data" class="well">
+                <div class="header">
+                    <h3>Registrar Usuario</h3>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div class="clear"></div>
+                        <label for="nombre" class="span5 no-margin">Nombres:</label>
+                        <div class="span4 no-margin">
+                            <?php echo $this->form->nombre->setAttrib('maxlength', '50')->renderViewHelper();?>
+                            <?php if ($this->form->nombre->hasErrors()) echo "Ingrese Nombres";?>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        <label for="apellido" class="span5 no-margin">Apellido:</label>
+                        <div class="span4 no-margin">
+                            <?php echo $this->form->apellido->setAttrib('maxlength', '50')->renderViewHelper();?>
+                            <?php if ($this->form->apellido->hasErrors()) echo "Ingrese Apellidos";?>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        <label for="correo" class="span5 no-margin">Correo:</label>
+                        <div class="span4 no-margin">
+                            <?php echo $this->form->email->setAttrib('class', 'span12')->setAttrib('maxlength', '40')->renderViewHelper();?>
+                            <?php if ($this->form->email->hasErrors()) echo "Ingresa un correo";?>
+                        </div>
+                        <div class="clear"></div>
+                        <label for="clave" class="span5 no-margin">Clave:</label>
+                        <div class="span4 no-margin">
+                            <?php echo $this->form->clave->setAttrib('class', 'span12')->setAttrib('maxlength', '30')->renderViewHelper();?>
+                            <?php if ($this->form->clave->hasErrors()) echo "Ingresa Password";?>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        <?php echo $this->form->csrf; ?>
+                        <?php if ($this->form->csrf->hasErrors()) echo "Intentalo nuevamente";?>
+                    </div>
+                    <div class="clear"></div>
+                                        
+                </div>
+                <div class="form-actions">
+                    <?php echo $this->form->guardar->setAttrib('class', 'btn pull-right')?>                    
+                </div>
+        </form>
+    </div>
+ </div>
+</div>
+

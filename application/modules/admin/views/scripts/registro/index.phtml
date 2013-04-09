@@ -1,0 +1,109 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#formRegistro").validate();
+});
+</script>
+<!-- Start: login-holder -->
+
+<!-- Start: login-holder -->
+<div id="registro-holder">
+
+	<!-- start logo -->
+	<div id="logo-registro">
+
+	</div>
+	<!-- end logo -->
+	
+	<div class="clear"></div>
+	
+	<!--  start loginbox ................................................................................. -->
+	<div id="registrobox">
+	
+	<!--  start login-inner -->
+	<div id="registro-inner">
+		<form  id="formRegistro" name="formRegistro" action="" method="post" enctype="multipart/form-data" >
+		<table border="0" cellpadding="4" cellspacing="4" width="540">
+		<tr>
+			<th>Pais Empresa :</th>
+			<td>
+                            <?php echo $this->form->paisEmpresa;?>
+                        </td>
+		</tr>
+		<tr>
+			<th>Tipo Documento:</th>
+			<td>
+                            <?php echo $this->form->tipoDocumento;?>
+                        </td>
+		</tr>
+		<tr>
+			<th>Nro. Documento :</th>
+			<td>
+                            <?php echo $this->form->nroDocumento;?>
+                        </td>
+		</tr>
+		<tr>
+			<th>Empresa:</th>
+			<td>
+                            <?php echo $this->form->nombreEmpresa;?>
+                        </td>
+		</tr>
+		<tr>
+			<th>Representate Legal :</th>
+			<td>
+                            <?php echo $this->form->representanteLegal;?>
+                        </td>
+		</tr>
+                <tr>
+			<th>Telefono:</th>
+			<td>
+                            <?php echo $this->form->telefono;?>
+                        </td>
+		</tr>
+		<tr>
+			<th>Email :</th>
+			<td>
+                            <?php echo $this->form->email;?>
+                        </td>
+		</tr>
+		<tr>
+			<th>Clave :</th>
+			<td>
+                            <?php echo $this->form->clave;?>
+                        </td>
+                      
+		</tr>
+		
+		
+		<tr>
+			<th></th>
+			<td valign="top">
+                        </td>
+		</tr>
+		<tr>
+			<th></th>
+                        <td >
+                            <input type="button" class="button medium blue"  value="Login"
+                                   onclick="window.location='/admin/auth'"/>
+                            <input type="submit" class="button medium blue"   value="Guarda Datos" >
+                        </td>
+		</tr>
+		</table>
+		</form>
+	</div>
+ 	<!--  end login-inner -->
+	<div class="clear"></div>
+	 
+    </div>
+ <!--  end loginbox -->
+ 
+	<!--  start forgotbox ................................................................................... -->
+	
+	<!--  end forgotbox -->
+
+</div>
+<!-- End: login-holder -->
+
+<!-- End: login-holder -->
+
+
+

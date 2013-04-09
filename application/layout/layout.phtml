@@ -1,0 +1,31 @@
+<?=$this->doctype()?>
+
+<html lang="en">
+    <head>
+        <?=$this->headTitle()?>
+        <?=$this->headMeta()?>
+        <?=$this->headLink()?>
+        <?=$this->headScript()?>
+        <?=$this->headStyle()?>
+        
+    </head>
+    <body>
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3">
+                    
+                </div>
+                <div class="span9">
+                    <div class="content" style="min-height:650px">
+                        <?=$this->render('_messages.phtml');?>
+                        <?=$this->layout()->content?>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                
+            </div>
+        </div>
+    </body>
+</html>

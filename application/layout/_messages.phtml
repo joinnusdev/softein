@@ -1,0 +1,11 @@
+<? $levels = array('debug', 'info', 'success', 'warning', 'error'); ?>
+<div id="fmsgs">
+    
+    <? if ($this->fmsgs) { foreach ($this->fmsgs as $msg): ?>
+        <div class="alert fade in <?= $msg->level == 'debug' ? 'error block-message' : $msg->level ?>">
+            <!--<a href="#" class="close">×</a>-->
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            <p><?= $msg->message ?></p>
+        </div>            
+    <? endforeach; } ?>
+</div>

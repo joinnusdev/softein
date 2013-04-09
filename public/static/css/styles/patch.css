@@ -1,0 +1,62 @@
+/*styles override a last moment*/
+.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+.ui-timepicker-div dl{ text-align: left; }
+.ui-timepicker-div dl dt{ height: 25px; }
+.ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+/*error*/
+.error{color:red;}
+input.error{}
+/*requerido*/
+.signo-requerido{font-size: 12px;font-weight: bold;}
+/*frms*/
+.frm-margin input{margin:0 0 10px 0;}
+.frm-margin .mrg-bottom10{margin-bottom:10px;}
+/*paginate override*/
+.pagination li:first-child span.element {border-left-width: 1px;border-radius: 3px 0 0 3px;}
+.pagination .disabled span.element, .pagination .disabled span.element:hover{  background-color: transparent;color: #999999;cursor: default;}
+.pagination span.element{-moz-border-bottom-colors: none;-moz-border-image: none;-moz-border-left-colors: none;-moz-border-right-colors: none;-moz-border-top-colors: none;border-color: #DDDDDD;border-style: solid;border-width: 1px 1px 1px 0;float: left;line-height: 34px;padding: 0 14px;text-decoration: none;}
+.pagination .active span.element{color: #999999;cursor: default;background-color: #F5F5F5;} 
+.pagination li:last-child span.element{border-radius: 0 3px 3px 0;}
+/*textarea*/
+textarea{resize: none !important;}
+/*calendario*/
+.seccion-calendario dl{float: left;}
+.conteiner-layout{float: left;width:231px;}
+.conteiner-layout p.preview{width:230px;display: table-cell;height: 200px;background:transparent no-repeat scroll center center;border-radius: 0px 0px 4px 4px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35) inset;margin:10px 0px 0px 0px;vertical-align: middle;text-align: center;font-style: italic;color:#A1A9A9;}
+.conteiner-layout .conteiner-seccion{display: block;float: left;width:219px;padding: 5px;min-height:18px;border-radius: 0px 0px 4px 4px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35) inset;margin:0;}
+.conteiner-layout .inner-seccion{width:230px;overflow: scroll-y;min-height: 30px;}
+.conteiner-layout .inner-seccion p{background-color: #fff;border-radius: 4px 4px 0 0;border: 1px solid #DDDDDD;margin:10px 0 0;padding:5px;width: 217px;}
+.conteiner-layout .inner-seccion span{float: right;}
+.conteiner-layout .error{background-color: #B94A48;}
+.conteiner-campanias{max-height: 250px;overflow-y: scroll;}
+.lista-campanias{width:210px;}
+.lista-campanias li, .conteiner-seccion li{border-radius: 5px;padding: 5px;margin: 5px 0px;list-style: none;color: #FFFFFF;font-size: 12px;font-weight: bold;}
+.build-layout li.borrador, .lista-campanias li.borrador{background-color:#B94A48;}
+.build-layout li.privado, .lista-campanias li.privado{background-color:#999999;}
+.build-layout li.publicado, .lista-campanias li.publicado{background-color:#468847;}
+.lista-campanias li.sin-subcampana{background-color:#C09853 !important;}
+.lista-campanias li.ui-draggable-dragging{width: 200px;}
+.lista-campanias li a{padding: 0px;float: right;}
+.build-layout{padding: 0px 20px;}
+.build-layout .ui-state-highlight{width: 217px;}
+.build-layout li a.icon-trash{display: none;}
+.build-layout li:hover a.icon-trash{float:right;display: inline-block;}
+.cargando-layout{width:230px;min-height: 200px;background: url("../../img/global/loading.gif") no-repeat scroll center center transparent;border-radius: 0px 0px 4px 4px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35) inset;margin:10px 0px 0px 0px;}
+.espacio-vacio{border:1px dotted #777;}
+/*venta efectivo*/
+div#offers {min-height: 300px;margin-top: 20px;text-align: justify;}
+div#offers div.image {display: inline-block;width: 400px;height: 240px;background-color: #F1F1F1;margin-right: 15px;float: left;}
+div#offers div.image img{width: 400px;}
+div#offers div.text {display: inline-block;width: 615px;vertical-align: top;}
+div#offers div.buy {background-color: #fff;display: inline-block;width: 100px;vertical-align: top;margin-left: 15px;border: 1px solid #4B4F5D;padding: 10px;height: 100%;text-align: center;}
+div#offers div.text p{margin-top:20px;}
+div#offers div.buy a{font-size: 18px;text-transform: uppercase;}
+div#offers div.buy a.agotado {font-size: 18px;color: #990000;text-transform: uppercase;}
+div#offers div.subcampaign {margin-top: 40px;width: 100%;}
+.container-subcampaign{background-color: #fff;}
+/*global*/
+.flright{float: right !important;}
+.info{font-style: italic;float: right;margin: 0 15px 0 0;}
+/*efectivo*/
+#content_username p{word-wrap:break-word;width: 112px;}
