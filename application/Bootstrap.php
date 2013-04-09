@@ -79,6 +79,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_executeResource('log');
         $log = $this->getResource('log');
         Zend_Registry::set('log', $log);
+        
+        $this->_executeResource('mail');
+        $mail = $this->getResource('mail');
+        Zend_Mail::setDefaultTransport($mail);
     }
     
     public function _initActionHelpers()
