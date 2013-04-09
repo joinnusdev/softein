@@ -16,7 +16,14 @@ class Admin_ExperienciaController extends App_Controller_Action_Admin
     }
     
     public function crearAction()
-    {   
+    {
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+        );
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        );
+        
         $form = new App_Form_CrearExperiencia();
         $this->view->form = $form;
         
@@ -40,6 +47,13 @@ class Admin_ExperienciaController extends App_Controller_Action_Admin
     
     public function editarAction()
     {
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+        );
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        );
+        
         $modelExperiencia = new App_Model_Experiencia();
         $form = new App_Form_CrearExperiencia();
         $id = $this->_getParam('id');
@@ -63,16 +77,11 @@ class Admin_ExperienciaController extends App_Controller_Action_Admin
     public function eliminarAction()
     {
         
-        $modelUsuario = new App_Model_Usuario();
+        $modelExperiencia = new App_Model_Experiencia();
         $id = $this->_getParam('id');
-        $data = array(
-            'idusuario' => $id,
-            'estado' => App_Model_Usuario::ESTADO_ELIMINADO
-        );        
-        
-        $modelUsuario->actualizarDatos($data);
-        $this->_flashMessenger->addMessage("Usuario eliminado con exito");
-        $this->_redirect('/admin/usuario');
+        $modelExperiencia->eliminarExperiencia($id);
+        $this->_flashMessenger->addMessage("Experiencia eliminada con exito");
+        $this->_redirect('/admin/experiencia');
     }
     
 

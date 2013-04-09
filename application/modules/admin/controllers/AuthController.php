@@ -6,6 +6,7 @@ class Admin_AuthController extends App_Controller_Action
       
     public function init() {
         parent::init();
+        
     }
 
 
@@ -54,10 +55,11 @@ class Admin_AuthController extends App_Controller_Action
                
                 $data = $this->getRequest()->getPost();
                 
-                 $auth = Zend_Auth::getInstance();
+                $auth = Zend_Auth::getInstance();
                 $estado = $auth->getStorage()->read()->estado;
                 
                  if ($estado  == App_Model_Empresa::ESTADO_PORCONFIRMAR) {
+                      $auth->clearIdentity();
                     $this->_flashMessenger->addMessage("Su cuenta está creada pero aún no ha sido activada");
                     $this->_redirect($this->view->url(array("module" => "admin",
                     "controller" => "auth",

@@ -8,7 +8,7 @@ class App_Form_CrearEmpresa extends App_Form
         
         /*========================= DATOS DEL REGISTRO ==========================*/
         
-         $e = new Zend_Form_Element_Text('idEmpresa');
+        $e = new Zend_Form_Element_Text('idEmpresa');
         $e->setAttrib('class', 'span8');  
         $this->addElement($e);
         
@@ -29,7 +29,7 @@ class App_Form_CrearEmpresa extends App_Form
         $this->getElement('tipoDocumento')->removeDecorator('Errors');
         
         
-        $e = new Zend_Form_Element_Text('nroDocumento');
+        $e = new Zend_Form_Element_Text('numeroDocumento');
         $e->setAttrib('class', 'required number');
         $e->setAttrib('minlength', '12');
         $e->setAttrib('maxlength', '12');
@@ -88,6 +88,9 @@ class App_Form_CrearEmpresa extends App_Form
         
         $e = new Zend_Form_Element_Text('cantEmpleados');
         $e->setAttrib('class', 'number');
+        $e->setAttrib('minlength', '4');
+        $e->setAttrib('maxlength', '4');
+        
         $e->setFilters(array("StripTags", "StringTrim"));
         $this->addElement($e);
         
@@ -98,11 +101,17 @@ class App_Form_CrearEmpresa extends App_Form
         
         $e = new Zend_Form_Element_Text('aniosExperiencia');
         $e->setAttrib('class', 'number');
+        $e->setAttrib('minlength', '3');
+        $e->setAttrib('maxlength', '3');
+        
         $e->setFilters(array("StripTags", "StringTrim"));
         $this->addElement($e);
         
         $e = new Zend_Form_Element_Text('nroFicha');
         $e->setAttrib('class', 'number');
+        $e->setAttrib('minlength', '10');
+        $e->setAttrib('maxlength', '10');
+        
         $e->setFilters(array("StripTags", "StringTrim"));
         $this->addElement($e);
         
@@ -111,17 +120,20 @@ class App_Form_CrearEmpresa extends App_Form
         
         //GIRO
         
-        // PERSONAS DE CONTACTO 
         
         //SUBIR PDF CON COPIA DE SU RUC DE SUNAT, EL RUC ES EL NOMBRE DEL ARCHVIO
-        $e = new Zend_Form_Element_File('pdfRuc');        
+        /*$e = new Zend_Form_Element_File('pdfRuc');        
         $config = Zend_Registry::get('config');
-        //$ruta = $config->app->mediaRoot;
-        //$e->setDestination($ruta);
-        //$this->addElement($e);
+        $ruta = $config->app->mediaRoot;
+        $e->setDestination($ruta);
+        $this->addElement($e);
+        */
         
         $e = new Zend_Form_Element_Text('fax');
         $e->setAttrib('class', 'number');
+        $e->setAttrib('minlength', '20');
+        $e->setAttrib('maxlength', '20');
+        
         $e->setFilters(array("StripTags", "StringTrim"));
         $this->addElement($e);
         

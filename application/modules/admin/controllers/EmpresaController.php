@@ -15,15 +15,7 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
                         controller => "auth",
                         action => "index")));
         }
-        
        
-                
-      /*  if ($this->authData->estado == '2') {
-            $this->_flashMessenger->addMessage("Su cuenta está creada pero aún no ha sido activada");
-            $this->_redirect($this->view->url(array("module" => "admin",
-            "controller" => "auth",
-            "action" => "index")));
-        }*/
     }
     
     public function indexAction()
@@ -32,45 +24,48 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
     }
     
     public function misDatosAction(){
-      /*
-         $this->view->headLink()->appendStylesheet(
-            $this->getConfig()->app->mediaUrl . '/css/form/validar.css'
-        );
-        $this->view->headScript()->appendFile(
-            $this->getConfig()->app->mediaUrl . '/js/form/scriptaculous/lib/prototype.js'
-        );
-        $this->view->headScript()->appendFile(
-            $this->getConfig()->app->mediaUrl . '/js/form/scriptaculous/src/scriptaculous.js'
-        );
-        $this->view->headScript()->appendFile( 
-            $this->getConfig()->app->mediaUrl . '/js/form/jsvalidate.js'
-        );
-        
-        
-      */  
-         
-        print_r($this->authData);
-        
         $this->view->headScript()->appendFile(
             $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
         );
         $this->view->headScript()->appendFile(
             $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
         );
-        
-                
-        
-        
-        
         $modelContacto = new App_Model_Contacto();
         $listaContacto = $modelContacto->listarContacto();
         $this->view->listaContacto = $listaContacto;
         
-           
-        $form = new App_Form_CrearEmpresa();
-        $this->view->form = $form;
-       
         
+        $idEmpresa = $this->view->authData->idEmpresa;
+        
+        $form = new App_Form_CrearEmpresa();
+        $modelEmpresa = new App_Model_Empresa();
+        $empresa = $modelEmpresa->getEmpresaPorId($idEmpresa);
+        
+        $fechaConstitucion=implode('-',array_reverse(explode('-',$empresa['fechaConstitucion'])));
+        $form->populate($empresa);  
+        $form->getElement('fechaConstitucion')->setValue($fechaConstitucion);
+        
+       
+        $this->view->form = $form;
+        
+        if($this->getRequest()->isPost()){            
+            
+            $data = $this->getRequest()->getPost();
+            
+                $fechaConstitucion=implode('-',array_reverse(explode('-',$data['fechaConstitucion'])));
+                $modelEmpresa = new App_Model_Empresa();
+                $idEmpresa = $this->view->authData->idEmpresa;
+                $data['idEmpresa'] = $idEmpresa;
+                $data['fechaConstitucion'] = $fechaConstitucion;
+                $data['nroDocumento'] = $data['nroDocumento'];
+                $data['clave'] = md5($data['clave']);
+                $id = $modelEmpresa ->actualizarDatos($data);
+                
+                $this->_flashMessenger->addMessage("Datos Actualizados");
+                $this->_redirect('/admin/empresa/mis-datos');
+                
+            
+        }
     }
     
     

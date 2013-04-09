@@ -1,3 +1,8 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#experiencia").validate();
+});
+</script>
 
 <div>
     <ul class="breadcrumb">
@@ -12,7 +17,7 @@
 <div class="row-fluid sortable ui-sortable">
     
     <div class="box span12">
-        <form action="" method="post" enctype="multipart/form-data" >
+        <form name="experiencia" id="experiencia" action="" method="post" enctype="multipart/form-data" >
         <div class="box-header well" data-original-title="">
             <h2><i class="icon-user"></i> Datos Principales</h2>
             <div class="box-icon">                
@@ -26,54 +31,51 @@
                     <div class="inner">
                         <div class="well">
                             <div class="row-fluid">
-                                <div class="span6">
+                                <div class="span10">
                                     
                                     <div class="clear"></div>
-                                    <label for="servicioPais" class="span5 no-margin">Pais:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->servicioPais->setAttrib('maxlength', '60')->renderViewHelper();?>
-                                        <?php if ($this->form->servicioPais->hasErrors()) echo "Ingrese Pais";?>
+                                    <label for="servicioPais" class="span3 no-margin">Pais:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->servicioPais;?>
+                       
                                     </div>
                                     
                                     <div class="clear"></div>
-                                    <label for="servicioEmpresa" class="span5 no-margin">Nombre de Empresa:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->servicioNombre->setAttrib('maxlength', '50')->renderViewHelper();?>
-                                        <?php if ($this->form->servicioNombre->hasErrors()) echo "Ingrese Nombre de la Empresa";?>
+                                    <label for="servicioEmpresa" class="span3 no-margin">Nombre de Empresa:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->servicioNombre;?>
+                                       
                                     </div>
 
                                     <div class="clear"></div>
-                                    <label for="servicioRuc" class="span5 no-margin">RUC:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->servicioRuc->setAttrib('maxlength', '12')->renderViewHelper();?>
-                                        <?php if ($this->form->servicioRuc->hasErrors()) echo "Ingrese ruc";?>
+                                    <label for="servicioRuc" class="span3 no-margin">RUC:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->servicioRuc;?>
+                                        
                                     </div>
                                     
                                     <div class="clear"></div>
-                                    <label for="fechaInicio" class="span5 no-margin">Fecha de Inicio:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->fechaInicio->setAttrib('maxlength', '30')->renderViewHelper();?>
-                                        <?php if ($this->form->fechaInicio->hasErrors()) echo "Ingrese fecha de inicio";?>
+                                    <label for="fechaInicio" class="span3 no-margin">Fecha de Inicio:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->fechaInicio;?>
+                                        
                                     </div>
                                     
                                     <div class="clear"></div>
-                                    <label for="fechaFin" class="span5 no-margin">Fecha de Fin:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->fechaFin->setAttrib('maxlength', '30')->renderViewHelper();?>
+                                    <label for="fechaFin" class="span3 no-margin">Fecha de Fin:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->fechaFin;?>
                                     </div>
                                     
                                     <div class="clear"></div>
-                                    <label for="enCurso" class="span5 no-margin">En Curso:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->enCurso->setAttrib('maxlength', '30')->renderViewHelper();?>
+                                    <label for="enCurso" class="span3 no-margin">En Curso:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->enCurso;?>
                                     </div>
-                                    
-                                    
-                                    
                                     <div class="clear"></div>
-                                    <label for="montoTotal" class="span5 no-margin">Monto total S/. :</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->montoTotal->setAttrib('maxlength', '12')->renderViewHelper();?>
+                                    <label for="montoTotal" class="span3 no-margin">Monto total S/. :</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->montoTotal;?>
                                     </div>
                                     
                                    
@@ -103,28 +105,36 @@
                     <div class="inner">
                         <div class="well">
                             <div class="row-fluid">
-                                <div class="span7">
+                                <div class="span8">
                                     <div class="clear"></div>
-                                    <label for="referenciaNombre" class="span5 no-margin">Nombre Completo:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->referenciaNombre->setAttrib('maxlength', '50')->renderViewHelper();?>
-                                        <?php if ($this->form->referenciaNombre->hasErrors()) echo "Ingrese Nombre de referencia";?>
+                                    <label for="referenciaNombre" class="span3 no-margin">Nombre Completo:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->referenciaNombre;?>
+                                        
                                     </div>
 
                                     <div class="clear"></div>
-                                    <label for="referenciaEmail" class="span5 no-margin">Email:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->referenciaEmail->setAttrib('maxlength', '50')->renderViewHelper();?>
-                                        <?php if ($this->form->referenciaEmail->hasErrors()) echo "Ingrese Email de referencia";?>
+                                    <label for="referenciaEmail" class="span3 no-margin">Email:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->referenciaEmail;?>
+                                        
                                     </div>
                                     
                                     <div class="clear"></div>
-                                    <label for="referenciaCargo" class="span5 no-margin">Cargo:</label>
-                                    <div class="span4 no-margin">
-                                        <?php echo $this->form->referenciaCargo->setAttrib('maxlength', '150')->renderViewHelper();?>
-                                        <?php if ($this->form->referenciaCargo->hasErrors()) echo "Ingrese Cargo de la referencia";?>
+                                    <label for="referenciaCargo" class="span3 no-margin">Cargo:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->referenciaCargo;?>
+                                        
                                     </div>
 
+                                    <div class="clear"></div>
+                                    <label for="referenciaTelefono" class="span3 no-margin">Telefono:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->referenciaTelefono;?>
+                                        
+                                    </div>
+
+                                    
                                     <div class="clear"></div>
                                     <?php echo $this->form->csrf; ?>
                                     <?php if ($this->form->csrf->hasErrors()) echo "Intentalo nuevamente";?>

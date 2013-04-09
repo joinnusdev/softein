@@ -17,6 +17,13 @@ class Admin_ContactoController extends App_Controller_Action_Admin
     
     public function crearAction()
     {
+         $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+        );
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        );
+        
         $form = new App_Form_CrearContacto();
         $this->view->form = $form; 
         if($this->getRequest()->isPost()){            
@@ -50,6 +57,14 @@ class Admin_ContactoController extends App_Controller_Action_Admin
     
     public function editarAction()
     {
+        
+         $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+        );
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        );
+        
         $modelContacto = new App_Model_Contacto();
         $form = new App_Form_CrearContacto();
         $id = $this->_getParam('id');

@@ -79,10 +79,12 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
         if ($id > 0) {
             $condicion = '';
             if (!empty($condicion)) {
-                $condicion = ' AND ' . $condicion;
+              echo  $condicion = ' AND ' . $condicion;
+              exit;
             }
 
-            $cantidad = $this->update($datos, 'idEmpresa= ' . $id . $condicion);
+           $cantidad = $this->update($datos, 'idEmpresa= ' . $id . $condicion);
+         
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
             $id = $this->insert($datos);

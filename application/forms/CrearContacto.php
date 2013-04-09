@@ -12,7 +12,7 @@ class App_Form_CrearContacto extends App_Form
         // name
         $e = new Zend_Form_Element_Text('nombre');
         $e->setLabel('Nombre');
-        $e->setRequired();
+        $e->setAttrib('class', 'required');
         $v = new Zend_Validate_StringLength(array('min'=>1,'max'=>45));
         $e->addValidator($v);
         $this->addElement($e);
@@ -20,13 +20,14 @@ class App_Form_CrearContacto extends App_Form
         // lastname
         $e = new Zend_Form_Element_Text('apellido');
         $e->setLabel('Apellidos');
+        $e->setAttrib('class', 'required');
         $v = new Zend_Validate_StringLength(array('min'=>1,'max'=>45));
         $e->addValidator($v);
         $this->addElement($e);
         
         // usuario
          $e = new Zend_Form_Element_Text('email');
-        $e->setAttrib('class', 'span8');
+        $e->setAttrib('class', 'required email');
         $e->setFilters(array("StripTags", "StringTrim"));
         $v = new Zend_Validate_EmailAddress();
         $e->addValidator($v);
@@ -37,6 +38,10 @@ class App_Form_CrearContacto extends App_Form
         
         // telefono
         $e = new Zend_Form_Element_Text('telefono');
+        $e->setAttrib('class', 'required number');
+        $e->setAttrib('minlength', '8');
+        $e->setAttrib('maxlength', '10');
+        
         $v = new Zend_Validate_StringLength(array('min'=>8,'max'=>10));
         $e->addValidator($v);
         $this->addElement($e);

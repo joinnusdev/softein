@@ -29,7 +29,7 @@ class App_Form_Registro extends App_Form
         $this->getElement('tipoDocumento')->removeDecorator('Errors');
         
         
-        $e = new Zend_Form_Element_Text('nroDocumento');
+        $e = new Zend_Form_Element_Text('numeroDocumento');
         $e->setAttrib('class', 'required number');
         $e->setAttrib('minlength', '12');
         $e->setAttrib('maxlength', '12');
