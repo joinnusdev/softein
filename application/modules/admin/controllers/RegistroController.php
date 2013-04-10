@@ -50,10 +50,9 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     $data['confirmar'] = $random;
                     $id = $modelEmpresa->actualizarDatos($data);
                     
-                    $ruta = 'admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;
+                   $ruta = 'admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;
                     
-                    /*
-                    
+                  /*
                   try {
                         $mail = new Zend_Mail();
                         $html = "<b>Aca va todo el html</b></br><h1>NUEVO</h1>";
@@ -65,7 +64,6 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     } catch (Zend_Exception $e) {
                         var_dump($e->getMessage());
                     }
-
                     echo "se envio correo";
                     exit;
                     */
