@@ -38,36 +38,37 @@ class Admin_RegistroController extends App_Controller_Action_Admin
             }else{
                 if ($form->isValid($data)) {
                    
-                    /*
+                    $caracteres = 15;
+                    $random = substr(md5(rand()), 0, $caracteres); 
+                    
+                    
                     $modelEmpresa = new App_Model_Empresa();
                     $fechaRegistro = Zend_Date::now()->toString('YYYY-MM-dd HH:mm:ss');
                     $data['fechaRegistro'] = $fechaRegistro;
                     $data['estado'] = App_Model_Empresa::ESTADO_PORCONFIRMAR;
                     $data['clave'] = md5($data['clave']);
+                    $data['confirmar'] = $random;
                     $id = $modelEmpresa->actualizarDatos($data);
+                    
+                    $ruta = 'admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;
+                    
+                    /*
+                    
+                  try {
+                        $mail = new Zend_Mail();
+                        $html = "<b>Aca va todo el html</b></br><h1>NUEVO</h1>";
+                        $mail->setBodyHtml($html);
+                        $mail->setFrom('garden_279@hotmail.com', 'Softein');
+                        $mail->addTo('steve_seven_7@hotmail.com','john');
+                        $mail->setSubject('titulo del mensaje');
+                        $mail->send();
+                    } catch (Zend_Exception $e) {
+                        var_dump($e->getMessage());
+                    }
+
+                    echo "se envio correo";
+                    exit;
                     */
-                     //Configuración SMTP
-                    $host = 'smtp.gmail.com';
-                    $param = array(
-                    'auth' => 'login',
-                    'ssl' => 'ssl',
-                    'port' => '465',
-                    'username' => 'steve.villano@codesystemdevelopers.com',
-                    'password' => 'prueba*123'
-                    );
-                    $tr = new Zend_Mail_Transport_Smtp($host, $param);
-                    Zend_Mail::setDefaultTransport($tr);
-                    
-                    $caracteres = 15;
-                    $random = substr(md5(rand()), 0, $caracteres); 
-                    $mail = new Zend_Mail();                    
-                    $mail->setBodyHtml("contenido");
-                    $mail->setFrom('steve_seven_7@hotmail.com', 'Softein');
-                    $mail->addTo('jsteve.villano@gmail.com');
-                    $mail->setSubject('Confirma tu registro - AlertaMovil');
-                    $mail->send();
-                    
-                    
                     
                     
                     $this->_flashMessenger->addMessage("Se le envió un correo para confirmar su Registro");
@@ -89,6 +90,31 @@ class Admin_RegistroController extends App_Controller_Action_Admin
     
     public function confirmarRegistroAction(){
             $this->_helper->layout->setLayout('login');
+            //$ruta = 'admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;
+        if ($this->_request->getParam('hash') != '') {
+            $modelEmpresa = new App_Model_Empresa();
+            
+            $dato = $modelEmpresa->getEmpresaPorId($this->_getParam('usuario'));
+            
+            if ($dato['confirmar'] == $this->_request->getParam('hash')) {
+               
+                $data['idEmpresa'] = $this->_request->getParam('usuario');
+                $data['confirmar'] = '';
+                $data['estado'] = App_Model_Empresa::ESTADO_ACTIVO;
+                
+                $id = $modelEmpresa->actualizarDatos($data);
+                $this->_flashMessenger->addMessage("Su cuenta ha sido activada puede Iniciar Sesión");
+                $this->_redirect('/admin/auth');
+                
+            } else {
+                $this->_flashMessenger->addMessage("El código de activacion es diferente o ya expiro");
+                $this->_redirect('/admin/auth');
+            }
+        }else{
+            $this->_flashMessenger->addMessage("No es posible la validacion");
+            $this->_redirect('/admin/auth');
+        }
+            
     }
   
 

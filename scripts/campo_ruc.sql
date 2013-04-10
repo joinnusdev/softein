@@ -1,0 +1,1 @@
+alter table `detalleempresa` change `servicioRuc` `servicioRuc` varchar(12) NULL  comment 'Empresa servicio RUc';
