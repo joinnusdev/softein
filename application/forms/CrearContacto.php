@@ -12,6 +12,7 @@ class App_Form_CrearContacto extends App_Form
         // name
         $e = new Zend_Form_Element_Text('nombre');
         $e->setLabel('Nombre');
+        $e->setAttrib('size', '40');
         $e->setAttrib('class', 'required');
         $v = new Zend_Validate_StringLength(array('min'=>1,'max'=>45));
         $e->addValidator($v);
@@ -20,6 +21,7 @@ class App_Form_CrearContacto extends App_Form
         // lastname
         $e = new Zend_Form_Element_Text('apellido');
         $e->setLabel('Apellidos');
+         $e->setAttrib('size', '40');
         $e->setAttrib('class', 'required');
         $v = new Zend_Validate_StringLength(array('min'=>1,'max'=>45));
         $e->addValidator($v);
@@ -48,6 +50,7 @@ class App_Form_CrearContacto extends App_Form
         
         //cargo
         $e = new Zend_Form_Element_Text('cargo');
+         $e->setAttrib('size', '40');
         $v = new Zend_Validate_StringLength(array('max'=>50));
         $e->addValidator($v);
         $this->addElement($e);

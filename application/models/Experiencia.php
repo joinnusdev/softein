@@ -3,11 +3,12 @@
 /**
  * Description of User
  *
- * @author James Otiniano
+ * @author Steve Villano Esteban
  */
 class App_Model_Experiencia extends App_Db_Table_Abstract {
 
     protected $_name = 'detalleempresa';    
+    protected $_namePais = 'pais';    
 
     const ESTADO_ACTIVO = '1';
     const ESTADO_ELIMINADO = '0';
@@ -43,11 +44,32 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
    
     public function listarExperiencia() 
     {
-      $query = $this->getAdapter()
-                ->select()->from(array('e' => $this->_name));
-                //->where('c.estado = ?', App_Model_Contacto::ESTADO_ACTIVO)
+       $db = $this->getAdapter();
+
+       $select = $db->select()
                 
-      return $this->getAdapter()->fetchAll($query);
+                ->from(array('e'=>$this->_name),array(
+                    'e.idDetalleEmpresa',
+                    'e.servicioNombre',
+                    'e.servicioRuc',
+                    'e.fechaInicio',
+                    'e.fechaFin',
+                    'p.idPais',
+                    'p.pais'
+                    
+                    ))
+             
+                ->join(array('p'=>$this->_namePais), 'e.servicioPais= p.idPais','');
+                
+
+        return $db->fetchAll($select);
+      
+      
+      
+      
+      
+      
+      
     }
     
     public function getExperienciaPorId($id) 

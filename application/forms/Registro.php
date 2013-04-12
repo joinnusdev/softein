@@ -11,18 +11,32 @@ class App_Form_Registro extends App_Form
          $e = new Zend_Form_Element_Text('idEmpresa');
         $e->setAttrib('class', 'span8');  
         $this->addElement($e);
-        
+        /*
         $e = new Zend_Form_Element_Text('paisEmpresa');        
         $e->setFilters(array("StripTags", "StringTrim"));
         $e->setAttrib('class', 'required');
         $e->setRequired(true);
         $this->addElement($e);
+        */
+        
+        $modelPais = new App_Model_Pais();
+        $listaPais = $this->fetchPairs($modelPais->listarPais());
+        
+        $this->addElement(new Zend_Form_Element_Select('paisEmpresa'));
+        $this->getElement('paisEmpresa')->addMultiOption('', 'Seleccione Pais');
+        $this->getElement('paisEmpresa')->addMultiOptions($listaPais);
+        $this->getElement('paisEmpresa')->setAttrib('class', 'required');
+        $this->getElement('paisEmpresa')->setRequired();         
+
+        
+        
+        
         
         $this->addElement(new Zend_Form_Element_Select('tipoDocumento'));
         $this->getElement('tipoDocumento')->addMultiOption('', 'Seleccione Documento');
-        $this->getElement('tipoDocumento')->addMultiOption('1', 'Pasaporte');
         $this->getElement('tipoDocumento')->addMultiOption('2', 'Ruc');
-        $this->getElement('tipoDocumento')->addMultiOption('3', 'DNI');
+        $this->getElement('tipoDocumento')->addMultiOption('4', 'Carnet Internacional');
+        
         $this->getElement('tipoDocumento')->setAttrib('class', 'required');
         $this->getElement('tipoDocumento')->setRequired();
         $this->getElement('tipoDocumento')->removeDecorator('htmlTag');
@@ -71,9 +85,8 @@ class App_Form_Registro extends App_Form
         
         
         $e = new Zend_Form_Element_Password('clave');
-        $e->setLabel('Password');
         $e->setAttrib('class', 'required');
-        $e->setAttrib('minlength', '6');
+        $e->setAttrib('minlength', '8');
         
         $e->setRequired();
         $v = new Zend_Validate_StringLength(array('min'=>5,'max'=>30));
@@ -89,5 +102,19 @@ class App_Form_Registro extends App_Form
             $e->clearDecorators();
             $e->addDecorator("ViewHelper");
          }
+    }
+    
+    
+    
+       function fetchPairs($array){
+        $data=array();
+        foreach ($array as $index){
+            $arrayKey=array_keys($index);
+            if(count($arrayKey)>=2)
+            $data[$index[$arrayKey[0]]] = $index[$arrayKey[4]];
+            else
+            $data[$index[$arrayKey[0]]] = $index[$arrayKey[0]];    
+        }
+        return $data;
     }
 }

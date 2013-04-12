@@ -67,6 +67,20 @@ $(document).ready(function() {
                                         <?php echo $this->form->fechaFin;?>
                                     </div>
                                     
+                                    
+                                    <div class="clear"></div>
+                                    <label for="observacion" class="span3 no-margin">Observacion :</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->observacion;?>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="descripcion" class="span3 no-margin">Descripcion:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->descripcion;?>
+                                    </div>
+                                    
+                                    
                                     <div class="clear"></div>
                                     <label for="enCurso" class="span3 no-margin">En Curso:</label>
                                     <div class="span7 no-margin">
@@ -158,8 +172,8 @@ $(document).ready(function() {
 <script>
 $(document).ready(function(){    
     $("#fechaInicio").datepicker();
-    $( "#fechaInicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#fechaInicio" ).datepicker( "option", "dateFormat", "yyyy-mm-dd" );
     $("#fechaFin").datepicker();
-    $( "#fechaFin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#fechaFin" ).datepicker( "option", "dateFormat", "yyyy-mm-dd" );
 });
 </script>

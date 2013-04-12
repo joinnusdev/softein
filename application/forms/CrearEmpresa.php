@@ -23,6 +23,7 @@ class App_Form_CrearEmpresa extends App_Form
         $this->getElement('tipoDocumento')->addMultiOption('1', 'Pasaporte');
         $this->getElement('tipoDocumento')->addMultiOption('2', 'Ruc');
         $this->getElement('tipoDocumento')->addMultiOption('3', 'DNI');
+        $this->getElement('tipoDocumento')->addMultiOption('4', 'Carnet Internacional');
         $this->getElement('tipoDocumento')->setAttrib('class', 'required');
         $this->getElement('tipoDocumento')->setRequired();
         $this->getElement('tipoDocumento')->removeDecorator('htmlTag');
@@ -73,7 +74,7 @@ class App_Form_CrearEmpresa extends App_Form
         $e = new Zend_Form_Element_Password('clave');
         $e->setLabel('Password');
         $e->setAttrib('class', 'required');
-        $e->setAttrib('minlength', '6');
+        $e->setAttrib('minlength', '8');
         
         $e->setRequired();
         $v = new Zend_Validate_StringLength(array('min'=>5,'max'=>30));
@@ -131,8 +132,8 @@ class App_Form_CrearEmpresa extends App_Form
         
         $e = new Zend_Form_Element_Text('fax');
         $e->setAttrib('class', 'number');
-        $e->setAttrib('minlength', '20');
-        $e->setAttrib('maxlength', '20');
+        $e->setAttrib('minlength', '7');
+        
         
         $e->setFilters(array("StripTags", "StringTrim"));
         $this->addElement($e);

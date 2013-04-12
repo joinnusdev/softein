@@ -3,7 +3,7 @@
 /**
  * Description of User
  *
- * @author James Otiniano
+ * @author Steve Villano Esteban
  */
 class App_Model_Contacto extends App_Db_Table_Abstract {
 

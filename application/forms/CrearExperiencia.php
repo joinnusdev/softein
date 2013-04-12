@@ -16,15 +16,20 @@ class App_Form_CrearExperiencia extends App_Form
         
         $e = new Zend_Form_Element_Text('servicioNombre');    
         $e->setAttrib('class', 'required');
+        $e->setAttrib('size', '50');
         $e->setFilters(array("StripTags", "StringTrim"));
         $e->setRequired(true);
         $this->addElement($e);
         
-        $e = new Zend_Form_Element_Text('servicioPais');
-        $e->setFilters(array("StripTags", "StringTrim"));
-        $e->setAttrib('class', 'required');
-        $e->setRequired(true);
-        $this->addElement($e);
+        
+        $modelPais = new App_Model_Pais();
+        $listaPais = $this->fetchPairs($modelPais->listarPais());
+        
+        $this->addElement(new Zend_Form_Element_Select('servicioPais'));
+        $this->getElement('servicioPais')->addMultiOption('', 'Seleccione Pais');
+        $this->getElement('servicioPais')->addMultiOptions($listaPais);
+        $this->getElement('servicioPais')->setAttrib('class', 'required');
+        $this->getElement('servicioPais')->setRequired(); 
         
         
         $e = new Zend_Form_Element_Text('servicioRuc');
@@ -49,9 +54,20 @@ class App_Form_CrearExperiencia extends App_Form
         
         $e = new Zend_Form_Element_Checkbox("enCurso", array("checked" => "checked"));
         $this->addElement($e);
+        //$e = new Zend_Form_Element_Checkbox("enCurso", array("checked" => "checked")
+        
         
         $e = new Zend_Form_Element_Textarea('observacion');
         $e->setFilters(array("StripTags", "StringTrim"));
+        $e->setAttrib('cols', '50');
+        $e->setAttrib('rows', '3');
+        $e->setRequired(true);
+        $this->addElement($e);
+        
+        $e = new Zend_Form_Element_Textarea('descripcion');
+        $e->setFilters(array("StripTags", "StringTrim"));
+        $e->setAttrib('cols', '50');
+        $e->setAttrib('rows', '3');
         $e->setRequired(true);
         $this->addElement($e);
         
@@ -99,5 +115,18 @@ class App_Form_CrearExperiencia extends App_Form
             $e->clearDecorators();
             $e->addDecorator("ViewHelper");
          }
+    }
+    
+    
+       function fetchPairs($array){
+        $data=array();
+        foreach ($array as $index){
+            $arrayKey=array_keys($index);
+            if(count($arrayKey)>=2)
+            $data[$index[$arrayKey[0]]] = $index[$arrayKey[4]];
+            else
+            $data[$index[$arrayKey[0]]] = $index[$arrayKey[0]];    
+        }
+        return $data;
     }
 }

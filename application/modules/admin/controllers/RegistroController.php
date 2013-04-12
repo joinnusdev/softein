@@ -22,7 +22,7 @@ class Admin_RegistroController extends App_Controller_Action_Admin
         
         $form = new App_Form_Registro();
         $this->view->form = $form;
-        
+        $form->paisEmpresa->setValue("173");
          if($this->getRequest()->isPost()){
             $modelEmpresa = new App_Model_Empresa();
             $data = $this->getRequest()->getPost();
@@ -42,7 +42,7 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     $random = substr(md5(rand()), 0, $caracteres); 
                     
                     
-                    $modelEmpresa = new App_Model_Empresa();
+                    /*$modelEmpresa = new App_Model_Empresa();
                     $fechaRegistro = Zend_Date::now()->toString('YYYY-MM-dd HH:mm:ss');
                     $data['fechaRegistro'] = $fechaRegistro;
                     $data['estado'] = App_Model_Empresa::ESTADO_PORCONFIRMAR;
@@ -52,13 +52,13 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     
                    $ruta = 'admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;
                     
-                  /*
+                  */
                   try {
                         $mail = new Zend_Mail();
                         $html = "<b>Aca va todo el html</b></br><h1>NUEVO</h1>";
                         $mail->setBodyHtml($html);
-                        $mail->setFrom('garden_279@hotmail.com', 'Softein');
-                        $mail->addTo('steve_seven_7@hotmail.com','john');
+                        $mail->setFrom('jsteve.villano.esteban@gmail.com', 'Softein');
+                        $mail->addTo('jsteve.villano.esteban@gmail.com','john');
                         $mail->setSubject('titulo del mensaje');
                         $mail->send();
                     } catch (Zend_Exception $e) {
@@ -66,7 +66,7 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     }
                     echo "se envio correo";
                     exit;
-                    */
+                    
                     
                     
                     $this->_flashMessenger->addMessage("Se le envió un correo para confirmar su Registro");
