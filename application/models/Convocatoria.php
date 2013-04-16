@@ -3,16 +3,15 @@
 /**
  * Description of User
  *
- * @author Steve Villano Esteban
+ * @author James Otiniano
  */
-class App_Model_Experiencia extends App_Db_Table_Abstract {
+class App_Model_Convocatoria extends App_Db_Table_Abstract {
 
-    protected $_name = 'detalleempresa';    
-    protected $_namePais = 'pais';    
-
+    protected $_name = 'pmsj_convoca';    
+    
     const ESTADO_ACTIVO = '1';
     const ESTADO_ELIMINADO = '0';
-    const TABLA_DETALLEEMPRESA = 'detalleempresa';
+    const TABLA_CONVOCATORIA = 'pmsj_convoca';
     
     
     
@@ -42,36 +41,21 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
         return $this->_guardar($datos);
     }
    
-    public function listarExperiencia($idEmpresa = NULL) 
+    public function listarConvocatoria() 
     {
-       $db = $this->getAdapter();
+        $fecha = Zend_Date::now()->toString('Y-M-d');
+        
+        $db = $this->getAdapter();
 
-       $select = $db->select()
-                
-                ->from(array('e'=>$this->_name),array(
-                    'e.idDetalleEmpresa',
-                    'e.descripcion',
-                    'e.servicioNombre',
-                    'e.servicioRuc',
-                    'e.fechaInicio',
-                    'e.fechaFin',
-                    'p.idPais',
-                    'p.pais'
-                    
-                    ))
-             
-                ->join(array('p'=>$this->_namePais), 'e.servicioPais= p.idPais','');
-                
-       if ($idEmpresa)
-           $select->where('e.idEmpresa = ?', $idEmpresa);
+        $select = $db->select()
+                ->from($this->_name)
+                ->where('fecha >= ?', $fecha)
+                ->where('estado = ?', self::ESTADO_ACTIVO)
+                ->order('fecha desc')
+                ;
 
+        
         return $db->fetchAll($select);
-      
-      
-      
-      
-      
-      
       
     }
     
