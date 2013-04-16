@@ -11,9 +11,19 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $lista = $model->listarConvocatoria();
         $this->view->lista = $lista;
     }
+    
+    public function paso2Action() { 
+        $model = new App_Model_Convocatoria();
+        $lista = $model->listarConvocatoria();
+        $this->view->lista = $lista;
+    }
 
     public function paso1Action() {
         $idConvocatoria = $this->_getParam('id');
+        $modelCon = new App_Model_Convocatoria();
+        $this->view->convocatoria = $modelCon->getConvocatoriaPorId($idConvocatoria);
+        
+        
         $session = new Zend_Session_Namespace('registro');
         $session->convocatoria = $idConvocatoria;
 

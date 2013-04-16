@@ -21,14 +21,20 @@
                                     <tr role="row">
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                             colspan="1" style="width: 50%; text-align: center" aria-label="Status: activate to sort column ascending">
-                                            Empresa : <?php echo $this->empresa->nombreEmpresa?>
+                                            Código Empresa : <?php echo $this->empresa->idEmpresa?>
                                         </th>
                                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                             colspan="1" style="width: 50%;" aria-sort="ascending" 
                                             aria-label="Username: activate to sort column descending">
-                                            Código Empresa : <?php echo $this->empresa->idEmpresa?>
-                                        </th>
+                                            Empresa : <?php echo $this->empresa->nombreEmpresa?>
+                                        </th>                                        
                                         
+                                    </tr>
+                                    <tr role="row">
+                                        <th colspan="2" class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                            style="text-align: center" aria-label="Status: activate to sort column ascending">
+                                            Convocatoria : <?php echo $this->convocatoria['proceso']?>                                            
+                                        </th>
                                     </tr>
                                 </thead>   
                             </table>                            

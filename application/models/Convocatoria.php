@@ -59,11 +59,11 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
       
     }
     
-    public function getExperienciaPorId($id) 
+    public function getConvocatoriaPorId($id) 
     {
         $query = $this->getAdapter()->select()
                 ->from($this->_name)
-                ->where('idDetalleEmpresa = ?', $id);
+                ->where('ID = ?', $id);
         return $this->getAdapter()->fetchRow($query);
     }
     
