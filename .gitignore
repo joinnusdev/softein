@@ -1,0 +1,10 @@
+/library/Zend/
+/library/Zend/.
+logs/
+!logs/empty
+logs/*
+cache
+cache/*
+!cache/empty
+/public/elements/productos/*
+
