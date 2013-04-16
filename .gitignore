@@ -1,10 +1,9 @@
 /library/Zend/
 /library/Zend/.
-logs/
-!logs/empty
-logs/*
+/logs/
+/logs/.
 cache
 cache/*
-!cache/empty
+/cache/empty
 /public/elements/productos/*
 
