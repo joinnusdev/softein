@@ -11,6 +11,7 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
     
     const ESTADO_ACTIVO = '1';
     const ESTADO_ELIMINADO = '0';
+    const TIPO_CONVOCATORIA = '2';
     const TABLA_CONVOCATORIA = 'pmsj_convoca';
     
     
@@ -51,6 +52,7 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
                 ->from($this->_name)
                 ->where('fecha >= ?', $fecha)
                 ->where('estado = ?', self::ESTADO_ACTIVO)
+                ->where('tipo = ?', self::TIPO_CONVOCATORIA)
                 ->order('fecha desc')
                 ;
 
