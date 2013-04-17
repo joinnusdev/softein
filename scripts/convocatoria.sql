@@ -2,7 +2,7 @@ create table `cempresa`( `idConvocatoriaExperiencia` int(7) UNSIGNED NOT NULL AU
 
 create table `detaexperiencia`( `idDetalleExperiencia` int(7) UNSIGNED NOT NULL AUTO_INCREMENT , `idConvocatoriaExperiencia` int(7) UNSIGNED NOT NULL , `idExperiencia` int(7) UNSIGNED NOT NULL , PRIMARY KEY (`idDetalleExperiencia`))  ;
 
-create table `detapersona`( `idDetallePersonal` int(7) UNSIGNED NOT NULL AUTO_INCREMENT , `idConvocatoriaExperiencia` int(7) UNSIGNED NOT NULL , `idPersonal` int(7) UNSIGNED NOT NULL , PRIMARY KEY (`idDetallePersonal`))  ;
+create table `detapersonal`( `idDetallePersonal` int(7) UNSIGNED NOT NULL AUTO_INCREMENT , `idConvocatoriaExperiencia` int(7) UNSIGNED NOT NULL , `idPersonal` int(7) UNSIGNED NOT NULL , PRIMARY KEY (`idDetallePersonal`))  ;
 
 alter table `cempresa` add column `estado` tinyint(1) NULL after `idEmpresa`;
 

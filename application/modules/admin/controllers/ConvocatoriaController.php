@@ -27,11 +27,23 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $modelConv = new App_Model_ConvocatoriaEmpresa();
         
         $convEmpresa = $modelConv->getConvocatoriaEmpresa($idConvocatoria, $idEmpresa);        
+                
+        if ($this->_request->isPost()) {
+            $data = $this->_getAllParams();
+            $modelDeta = new App_Model_DetaPersonal();
+           
+            for ($i = 0; $i < count($data['personal']); $i++){
+                $datosDeta = array(
+                    'idConvocatoriaExperiencia' => $convEmpresa['idConvocatoriaExperiencia'],
+                    'idPersonal' => $data['personal'][$i],
+                );                
+                $modelDeta->actualizarDatos($datosDeta);                                
+            }
+            $this->_flashMessenger->addMessage("Convocatoria Registrada Correctamente");
+            $this->_redirect('/admin/convocatoria');
+            
+        }
         
-        
-        $model = new App_Model_Convocatoria();
-        $lista = $model->listarConvocatoria();
-        $this->view->lista = $lista;
     }
 
     public function paso1Action() {
