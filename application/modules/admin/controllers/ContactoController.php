@@ -13,6 +13,8 @@ class Admin_ContactoController extends App_Controller_Action_Admin
         $modelContacto = new App_Model_Contacto();
         $listaContacto = $modelContacto->listarContacto();
         $this->view->listaContacto = $listaContacto;
+        
+        
     }
     
     public function crearAction()
@@ -24,17 +26,20 @@ class Admin_ContactoController extends App_Controller_Action_Admin
             $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
         );
         
+        $modelContacto = new App_Model_Contacto();
+        $total = $modelContacto->listarContacto();
+
+        if(count($total)==3){
+
+            $this->_flashMessenger->addMessage("Ya tiene 3 Contactos Registrados");
+            $this->_redirect('/admin/contacto');
+        }
+        
+        
+        
         $form = new App_Form_CrearContacto();
         $this->view->form = $form; 
         if($this->getRequest()->isPost()){            
-            $modelContacto = new App_Model_Contacto();
-            $total = $modelContacto->listarContacto();
-            
-            if(count($total)==3){
-                
-                $this->_flashMessenger->addMessage("Ya tiene 3 Contactos Registrados");
-                $this->_redirect('/admin/contacto');
-            }
             
             $data = $this->getRequest()->getPost();
             

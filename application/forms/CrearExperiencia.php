@@ -76,7 +76,8 @@ class App_Form_CrearExperiencia extends App_Form
         $e->setFilters(array("StripTags", "StringTrim"));
         $this->addElement($e);
         
-        $e = new Zend_Form_Element_Text('referenciaNombre');        
+        $e = new Zend_Form_Element_Text('referenciaNombre'); 
+        $e->setAttrib('size', '40');
         $e->setFilters(array("StripTags", "StringTrim"));
         $e->setRequired(true);
         $this->addElement($e);
@@ -95,6 +96,7 @@ class App_Form_CrearExperiencia extends App_Form
         
         
         $e = new Zend_Form_Element_Text('referenciaEmail');
+        $e->setAttrib('size', '40');
         $e->setAttrib('class', 'email');
         $e->setFilters(array("StripTags", "StringTrim"));
         $v = new Zend_Validate_EmailAddress();

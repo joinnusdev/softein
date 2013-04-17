@@ -88,6 +88,7 @@ class App_Form_CrearEmpresa extends App_Form
         /*========================= DATOS DEL COMPLEMENTARIOS ==========================*/
         
         $e = new Zend_Form_Element_Text('cantEmpleados');
+        $e->setAttrib('size', '3');
         $e->setAttrib('class', 'number');
         $e->setAttrib('minlength', '4');
         $e->setAttrib('maxlength', '4');
@@ -96,12 +97,14 @@ class App_Form_CrearEmpresa extends App_Form
         $this->addElement($e);
         
         $e = new Zend_Form_Element_Text('fechaConstitucion');
+        $e->setAttrib('class', 'required');
         $e->setRequired(true);
         $e->setFilters(array("StripTags", "StringTrim"));
         $this->addElement($e);        
         
         $e = new Zend_Form_Element_Text('aniosExperiencia');
-        $e->setAttrib('class', 'number');
+        $e->setAttrib('size', '3');
+        $e->setAttrib('class', 'required number');
         $e->setAttrib('minlength', '3');
         $e->setAttrib('maxlength', '3');
         
@@ -150,6 +153,7 @@ class App_Form_CrearEmpresa extends App_Form
         $this->getElement('tipoOrganizacion')->addMultiOption('sac', 'Sociedad Anonima Cerrada');
         $this->getElement('tipoOrganizacion')->addMultiOption('srl', 'Sociedad de Responsabilidad Limitada');
         $this->getElement('tipoOrganizacion')->addMultiOption('ong', 'Organizacion no Gubernamental');
+        $this->getElement('tipoOrganizacion')->addMultiOption('ie', 'Institucion del Estado');
         $this->getElement('tipoOrganizacion')->setAttrib('class', 'required');
         $this->getElement('tipoOrganizacion')->setRequired();
         $this->getElement('tipoOrganizacion')->removeDecorator('htmlTag');

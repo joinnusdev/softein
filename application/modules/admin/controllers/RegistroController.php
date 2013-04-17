@@ -42,7 +42,7 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     $random = substr(md5(rand()), 0, $caracteres); 
                     
                     
-                    /*$modelEmpresa = new App_Model_Empresa();
+                  $modelEmpresa = new App_Model_Empresa();
                     $fechaRegistro = Zend_Date::now()->toString('YYYY-MM-dd HH:mm:ss');
                     $data['fechaRegistro'] = $fechaRegistro;
                     $data['estado'] = App_Model_Empresa::ESTADO_PORCONFIRMAR;
@@ -52,7 +52,7 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     
                    $ruta = 'admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;
                     
-                  */
+                  /*
                   try {
                         $mail = new Zend_Mail();
                         $html = "<b>Aca va todo el html</b></br><h1>NUEVO</h1>";
@@ -66,10 +66,14 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     }
                     echo "se envio correo";
                     exit;
+                    */
                     
                     
-                    
-                    $this->_flashMessenger->addMessage("Se le envió un correo para confirmar su Registro");
+                    $this->_flashMessenger->addMessage("
+                    Verifique su cuenta de correo ". $data['email'] ." que contiene un mensaje con un link de
+                    activacion para su cuenta. <p> Si el mensaje tardara mucho en llegar o no lo
+                    visualiza verifique si carpeta de correos spam.
+                    Se le envió un correo para confirmar su Registro");
                     $this->_redirect('/admin/auth');
                 }else{
                     $this->_flashMessenger->addMessage("Ocurrio un error");

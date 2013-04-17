@@ -29,6 +29,7 @@ class App_Form_CrearContacto extends App_Form
         
         // usuario
          $e = new Zend_Form_Element_Text('email');
+         $e->setAttrib('size', '40');
         $e->setAttrib('class', 'required email');
         $e->setFilters(array("StripTags", "StringTrim"));
         $v = new Zend_Validate_EmailAddress();
