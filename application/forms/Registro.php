@@ -34,7 +34,7 @@ class App_Form_Registro extends App_Form
         
         $this->addElement(new Zend_Form_Element_Select('tipoDocumento'));
         $this->getElement('tipoDocumento')->addMultiOption('', 'Seleccione Documento');
-        $this->getElement('tipoDocumento')->addMultiOption('2', 'Ruc');
+        $this->getElement('tipoDocumento')->addMultiOption('2', 'RUC');
         $this->getElement('tipoDocumento')->addMultiOption('4', 'Carnet Internacional');
         
         $this->getElement('tipoDocumento')->setAttrib('class', 'required');
