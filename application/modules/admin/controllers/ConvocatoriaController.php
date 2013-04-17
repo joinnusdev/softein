@@ -23,7 +23,6 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $modelCon = new App_Model_Convocatoria();
         $this->view->convocatoria = $modelCon->getConvocatoriaPorId($idConvocatoria);
         
-        
         $session = new Zend_Session_Namespace('registro');
         $session->convocatoria = $idConvocatoria;
 
@@ -38,6 +37,32 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
             $data = $this->_getAllParams();
             if (isset($data['experiencia'])) {
                 $session->experiencia = $data['experiencia'];
+                
+                $idEmpresa = $this->view->authData->idEmpresa;
+                $codigo = $idConvocatoria . "-" . $idEmpresa . "-" . $this->stringAleatorio();
+                
+                $datos = array(
+                    'idConvocatoria' => $idConvocatoria,
+                    'codigo' => $codigo,
+                    'fechaRegistro' => Zend_Date::now()->toString('Y-M-d HH:mm:ss'),
+                    'idEmpresa' => $idEmpresa,
+                    );
+                $modelConvocatoria = new App_Model_ConvocatoriaEmpresa();
+                $id = $modelConvocatoria->actualizarDatos($datos);
+                
+                $modelDetaExp = new App_Model_DetaExperiencia();
+                
+                for ($i = 0; $i < count($session->experiencia); $i++){
+                    
+                    $exp = $data['experiencia'][$i];
+                    $dataDetalle = array(
+                        'idConvocatoriaExperiencia' => $id,
+                        'idExperiencia' => $exp,                    
+                    );                    
+                    $modelDetaExp->actualizarDatos($dataDetalle);                    
+                }
+                
+                
                 $this->_redirect('admin/convocatoria/paso2/id/' . $session->convocatoria);
             } else {
                 $this->_flashMessenger->addMessage("Debe seleccionar como Mínimo una experiencia");
@@ -102,6 +127,21 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $modelUsuario->actualizarDatos($data);
         $this->_flashMessenger->addMessage("Usuario eliminado con exito");
         $this->_redirect('/admin/usuario');
+    }
+    
+    function stringAleatorio($length = 3) {
+        $source = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        if ($length > 0) {
+            $rstr = "";
+            $source = str_split($source, 1);
+            for ($i = 1; $i <= $length; $i++) {
+                mt_srand((double) microtime() * 1000000);
+                $num = mt_rand(1, count($source));
+                $rstr .= $source[$num - 1];
+            }
+        }
+        return $rstr;
     }
 
 }
