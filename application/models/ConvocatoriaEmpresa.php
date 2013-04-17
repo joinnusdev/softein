@@ -53,13 +53,16 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
         return $this->getAdapter()->fetchAll($query);
     }
     
-    public function getEmpresaPorId($id, $tipo = NULL) 
+    public function getConvocatoriaEmpresa($idConvocatoria, $idEmpresa) 
     {
         $query = $this->getAdapter()->select()
-                ->from($this->_name)
-                ->where('idEmpresa = ?', $id);
-        if ($tipo)
-            $query->where ('idTipoUsuario = ?', $tipo);
+                ->from(array('ce' => $this->_name))
+                ->joinInner(array('c' => App_Model_Convocatoria::TABLA_CONVOCATORIA), 
+                        'ce.idConvocatoria = c.ID'
+                        )
+                ->where('ce.idEmpresa = ?', $idEmpresa)
+                ->where('ce.idConvocatoria = ?', $idConvocatoria)
+                ;
         
         return $this->getAdapter()->fetchRow($query);
     }    

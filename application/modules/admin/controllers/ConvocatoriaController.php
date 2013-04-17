@@ -13,6 +13,22 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
     }
     
     public function paso2Action() { 
+        
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js2/admin/agregar-personal.js'
+        );
+        
+        $modelPersonal = new App_Model_Personal();        
+        $this->view->personal = $modelPersonal->listarPersonal();
+        
+        $idConvocatoria = $this->_getParam('id');
+        $idEmpresa = $this->view->authData->idEmpresa;
+        
+        $modelConv = new App_Model_ConvocatoriaEmpresa();
+        
+        $convEmpresa = $modelConv->getConvocatoriaEmpresa($idConvocatoria, $idEmpresa);        
+        
+        
         $model = new App_Model_Convocatoria();
         $lista = $model->listarConvocatoria();
         $this->view->lista = $lista;
@@ -46,6 +62,7 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
                     'codigo' => $codigo,
                     'fechaRegistro' => Zend_Date::now()->toString('Y-M-d HH:mm:ss'),
                     'idEmpresa' => $idEmpresa,
+                    'estado' => '2',
                     );
                 $modelConvocatoria = new App_Model_ConvocatoriaEmpresa();
                 $id = $modelConvocatoria->actualizarDatos($datos);
