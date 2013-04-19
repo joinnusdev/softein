@@ -58,12 +58,13 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
         $query = $this->getAdapter()->select()
                 ->from(array('ce' => $this->_name))
                 ->joinInner(array('c' => App_Model_Convocatoria::TABLA_CONVOCATORIA), 
-                        'ce.idConvocatoria = c.ID'
+                        'ce.idConvocatoria = c.ID', 
+                        array('ID', 'proceso', 'fecha', 'limite')
                         )
                 ->where('ce.idEmpresa = ?', $idEmpresa)
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
-        
+        //echo $query;exit;
         return $this->getAdapter()->fetchRow($query);
     }    
     

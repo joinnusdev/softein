@@ -31,11 +31,11 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         if ($this->_request->isPost()) {
             $data = $this->_getAllParams();
             $modelDeta = new App_Model_DetaPersonal();
-           
-            for ($i = 0; $i < count($data['personal']); $i++){
+            $personal = array_unique($data['personal']);            
+            for ($i = 0; $i < count($personal); $i++){
                 $datosDeta = array(
                     'idConvocatoriaExperiencia' => $convEmpresa['idConvocatoriaExperiencia'],
-                    'idPersonal' => $data['personal'][$i],
+                    'idPersonal' => $personal[$i],
                 );                
                 $modelDeta->actualizarDatos($datosDeta);                                
             }
@@ -43,6 +43,8 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
             $this->_redirect('/admin/convocatoria');
             
         }
+        
+        $this->view->convocatoria = $convEmpresa;
         
     }
 

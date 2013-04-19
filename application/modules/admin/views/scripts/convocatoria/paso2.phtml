@@ -16,6 +16,41 @@
 
 <form class="form-horizontal" id="frmTicket" action="" method="post">
 
+    <div class="control-group">
+        <label class="control-label" for="inputAtendido">Código Generado : </label>
+        <div class="controls">
+            
+            <span class="help-inline">
+                
+                    <span><?php echo $this->convocatoria['codigo']?> </span>
+                
+            </span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="inputAtendido">Convocatoria: </label>
+        <div class="controls">
+            
+            <span class="help-inline">
+                
+                    <span><?php echo $this->convocatoria['proceso']?> </span>
+                
+            </span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="inputAtendido">Fecha Limite: </label>
+        <div class="controls">
+            
+            <span class="help-inline">
+                
+                    <span><?php echo $this->convocatoria['limite']?> </span>
+                
+            </span>
+        </div>
+    </div>
     
     <div class="control-group">
         <label class="control-label" for="inputAtendido">Atendido por : </label>
