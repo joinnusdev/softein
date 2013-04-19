@@ -225,7 +225,7 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
     public function paso2EditAction() { 
         
         $this->view->headScript()->appendFile(
-                $this->getConfig()->app->mediaUrl . '/js2/admin/agregar-personal.js'
+                $this->getConfig()->app->mediaUrl . '/js2/admin/editar-personal.js'
         );
         
         $modelPersonal = new App_Model_Personal();        
