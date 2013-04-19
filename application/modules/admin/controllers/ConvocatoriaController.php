@@ -214,12 +214,56 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
                     $modelDetaExp->actualizarDatos($dataDetalle);                    
                 }                
                 
-                $this->_redirect('admin/convocatoria/paso2/id/' . $session->convocatoria);
+                $this->_redirect('admin/convocatoria/paso2-edit/id/' . $session->convocatoria);
             } else {
                 $this->_flashMessenger->addMessage("Debe seleccionar como Mínimo una experiencia");
                 $this->_redirect('admin/convocatoria/paso1-edit/id/' . $session->convocatoria);
             }
         }
+    }
+    
+    public function paso2EditAction() { 
+        
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js2/admin/agregar-personal.js'
+        );
+        
+        $modelPersonal = new App_Model_Personal();        
+        $this->view->personal = $modelPersonal->listarPersonal();
+        
+        $idConvocatoria = $this->_getParam('id');
+        $idEmpresa = $this->view->authData->idEmpresa;
+        
+        $modelConv = new App_Model_ConvocatoriaEmpresa();
+        
+        $convEmpresa = $modelConv->getConvocatoriaEmpresa($idConvocatoria, $idEmpresa);
+        $modelDeta = new App_Model_DetaPersonal();
+        $this->view->lista = $modelDeta->listarPersonal($convEmpresa['idConvocatoriaExperiencia']);
+                
+        if ($this->_request->isPost()) {
+            $data = $this->_getAllParams();           
+            
+            $personal = array_unique($data['personal']);            
+            
+            $modelDeta->eliminarDetalle($convEmpresa['idConvocatoriaExperiencia']);            
+            
+            foreach ($personal as $value) {
+                $datosDeta = array(
+                    'idConvocatoriaExperiencia' => $convEmpresa['idConvocatoriaExperiencia'],
+                    'idPersonal' => $value,
+                );                
+                
+                $modelDeta->actualizarDatos($datosDeta);
+                
+            }
+            
+            $this->_flashMessenger->addMessage("Convocatoria Registrada Correctamente");
+            $this->_redirect('/admin/convocatoria');
+            
+        }
+        
+        $this->view->convocatoria = $convEmpresa;
+        
     }
 
 }

@@ -41,13 +41,13 @@ class App_Model_DetaPersonal extends App_Db_Table_Abstract {
         return $this->_guardar($datos);
     }
    
-    public function listarUsuario()
+    public function listarPersonal($id)
     {
         $query = $this->getAdapter()
                 ->select()->from(array('e' => $this->_name))
-                ->where('u.estado = ?', App_Model_Usuario::ESTADO_ACTIVO)
-                ->where('u.tipoUsuario = ?', App_Model_Usuario::TIPO_ADMIN)
-                ->limit(50);
+                ->joinInner(array('p' => App_Model_Personal::TABLA_CONTACTO), 
+                        'e.idPersonal = p.idPersonal')
+                ->where('e.idConvocatoriaExperiencia = ?', $id);
 
         return $this->getAdapter()->fetchAll($query);
     }
@@ -78,5 +78,10 @@ class App_Model_DetaPersonal extends App_Db_Table_Abstract {
             
      
         return $this->getAdapter()->fetchRow($query);
+    }
+    
+    public function eliminarDetalle($id){
+        $where = $this->getAdapter()->quoteInto('idConvocatoriaExperiencia =?', $id);
+        $this->delete($where);
     }
 }

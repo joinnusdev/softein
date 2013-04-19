@@ -103,10 +103,9 @@ $(function(){
                 var nivel = $("#idUsuario option:selected").attr("nivel");
                 var idp = $("#idUsuario option:selected").attr("value");
                     
-                $("#generar").removeAttr("disabled");
-                $("#imprimir").removeAttr("disabled");
-                var row = $(tabla+' tbody>tr:last').removeClass("hide").clone(true);
-                row.insertAfter(tabla+' tbody>tr:last');
+                $("#generar").removeAttr("disabled");                
+                var row = $(tabla+' tbody> #item:last').removeClass("hide").clone(true);
+                row.insertAfter(tabla+' tbody>#item:last');
                 
                 var inputWorker = "<input id='personal' type='hidden' name='personal[]' value='"+idp+"' />";
                 
@@ -114,7 +113,7 @@ $(function(){
                 $("th:eq(0)", row).html(nombre+inputWorker);
                 $("th:eq(1)", row).html(cargo); 
                 $("th:eq(2)", row).html(nivel);
-                $(tabla+' tbody>tr:first').addClass("hide");
+                $(tabla+' tbody>#item:first').addClass("hide");
                 
                 
                 

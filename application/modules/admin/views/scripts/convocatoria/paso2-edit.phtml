@@ -1,0 +1,124 @@
+<?php if ($this->orden){ ?>
+<form class="form-horizontal" id="frmTicket" action="/ticket/imprimir/orden/<?php echo $this->orden?>" target="_blank" method="post">
+        <div class="control-group">
+            <div class="controls">
+                <button id="imprimir" class="btn">Imprimir Ticket Generado</button>
+            </div>
+        </div>
+    </form>
+<?php } ?>
+
+<ul class="breadcrumb">    
+    <li>
+        <a href="/admin/convocatoria">Regresar Convocatorias</a> <span class="divider">/</span>
+    </li>    
+</ul>
+
+<form class="form-horizontal" id="frmTicket" action="" method="post">
+
+    <div class="control-group">
+        <label class="control-label" for="inputAtendido">Código Generado : </label>
+        <div class="controls">
+            
+            <span class="help-inline">
+                
+                    <span><?php echo $this->convocatoria['codigo']?> </span>
+                
+            </span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="inputAtendido">Convocatoria: </label>
+        <div class="controls">
+            
+            <span class="help-inline">
+                
+                    <span><?php echo $this->convocatoria['proceso']?> </span>
+                
+            </span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="inputAtendido">Fecha Limite: </label>
+        <div class="controls">
+            
+            <span class="help-inline">
+                
+                    <span><?php echo $this->convocatoria['limite']?> </span>
+                
+            </span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="inputAtendido">Atendido por : </label>
+        <div class="controls">
+            <select class="xlarge disabled" id="idUsuario" name="idUsuario">
+                <?php foreach ($this->personal as $item) :?>
+                    <option nombre="<?php echo $item['nombre'] . " " . $item['apellido']?>" cargo="<?php echo $item['cargo']?>" nivel="<?php echo $item['nivelacademico']?>" value="<?php echo $item['idPersonal']?>"> <?php echo $item['apellido'] . " " . $item['nombre']  ?></option>
+                    
+                    <?php endforeach; ?>
+                </select>
+            <span class="help-inline">
+                <a class="btn" id="agregarItem">
+                    <span>Agregar Personal a Convocatoria</span>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div id="idPanelTablaDetalleIngreso">
+                <table class="table table-condensed">
+                    <caption class="alert">Personal capacitado para convocatoria</caption>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cargo</th>
+                            <th>Nivel Académico</th>
+                            <!--<th>Comisión</th>-->
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        <?php foreach ($this->lista as $item) : ?>
+                        <tr class="">                            
+                            <th><?php echo $item['nombre'] . " " . $item['apellido']?>
+                            <input id="personal" type="hidden" name="personal[]" value="<?php echo $item['idPersonal']?>" />
+                            </th>
+                            <th><?php echo $item['cargo']?></th>
+                            <th><?php echo $item['nivelacademico']?></th>
+                            <!--<th></th>-->
+                            <th>
+                                <a class="eliminarDetalleIngreso"> Eliminar</a>
+                            </th>
+                        </tr>
+                        <?php endforeach; ?>
+                        
+                        <tr class="hide modelo nueva" id="item">                            
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <!--<th></th>-->
+                            <th>
+                                <a class="eliminarDetalleIngreso"> Eliminar</a>
+                            </th>
+                        </tr>                        
+                        
+                    </tbody>
+                </table>
+    </div>
+    <div class="control-group">
+        <div class="controls">    
+            <button id="generar" class="btn" disabled="disabled">GUARDAR CAMBIOS</button>            
+        </div>
+    </div>
+    
+</form>
+
+<style>
+    .typeahead {
+        z-index: 1100;
+    }
+</style>
+
