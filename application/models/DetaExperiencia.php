@@ -79,4 +79,9 @@ class App_Model_DetaExperiencia extends App_Db_Table_Abstract {
      
         return $this->getAdapter()->fetchRow($query);
     }
+    
+    public function eliminarDetalle($id){
+        $where = $this->getAdapter()->quoteInto('idConvocatoriaExperiencia =?', $id);
+        $this->delete($where);
+    }
 }

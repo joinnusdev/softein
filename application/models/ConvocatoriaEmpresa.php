@@ -64,9 +64,23 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                 ->where('ce.idEmpresa = ?', $idEmpresa)
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
-        //echo $query;exit;
+        
         return $this->getAdapter()->fetchRow($query);
     }    
+    
+    public function getExperienciaDeta($idConvocatoria) 
+    {
+        $query = $this->getAdapter()->select()
+                ->from(array('ce' => $this->_name))
+                ->joinInner(array('de' => App_Model_DetaExperiencia::TABLA_EMPRESA), 
+                        'ce.idConvocatoriaExperiencia = de.idConvocatoriaExperiencia')                
+                ->where('ce.idConvocatoria = ?', $idConvocatoria)
+                ;
+        //echo $query;exit;
+        return $this->getAdapter()->fetchAll($query);
+    }    
+    
+    
     
     public function getValidarEmpresaLogin($dato,$tipo) 
     {

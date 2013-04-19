@@ -174,6 +174,53 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         }
         return $rstr;
     }
+    
+    public function paso1EditAction() {
+        $idConvocatoria = $this->_getParam('id');
+        // datos de la convocatoria
+        $modelCon = new App_Model_Convocatoria();
+        $this->view->convocatoria = $modelCon->getConvocatoriaPorId($idConvocatoria);
+        
+        //datos de las experiencias registradas
+        $modelConEmp = new App_Model_ConvocatoriaEmpresa();
+        $this->view->exp = $modelConEmp->getExperienciaDeta($idConvocatoria);
+        
+        $session = new Zend_Session_Namespace('registro');
+        $session->convocatoria = $idConvocatoria;
+
+        $this->view->empresa = $this->view->authData;
+        
+        $modelExperiencia = new App_Model_Experiencia();
+        $this->view->experiencia = $modelExperiencia->listarExperiencia(
+                $this->view->authData->idEmpresa
+        );
+        if ($this->_request->isPost()) {
+            $data = $this->_getAllParams();
+            if (isset($data['experiencia'])) {
+                $session->experiencia = $data['experiencia'];
+                
+                $idEmpresa = $this->view->authData->idEmpresa;
+                $convexp = $modelConEmp->getConvocatoriaEmpresa($idConvocatoria, $idEmpresa);
+                
+                
+                $modelDetaExp = new App_Model_DetaExperiencia();
+                $modelDetaExp->eliminarDetalle($convexp['idConvocatoriaExperiencia']);
+                for ($i = 0; $i < count($session->experiencia); $i++){                    
+                    $exp = $data['experiencia'][$i];
+                    $dataDetalle = array(
+                        'idConvocatoriaExperiencia' => $convexp['idConvocatoriaExperiencia'],
+                        'idExperiencia' => $exp,                    
+                    );                    
+                    $modelDetaExp->actualizarDatos($dataDetalle);                    
+                }                
+                
+                $this->_redirect('admin/convocatoria/paso2/id/' . $session->convocatoria);
+            } else {
+                $this->_flashMessenger->addMessage("Debe seleccionar como Mínimo una experiencia");
+                $this->_redirect('admin/convocatoria/paso1-edit/id/' . $session->convocatoria);
+            }
+        }
+    }
 
 }
 
