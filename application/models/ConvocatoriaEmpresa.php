@@ -8,7 +8,7 @@
 class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
 
     protected $_name = 'cempresa';
-
+    
     const ESTADO_ACTIVO = '1';
     const ESTADO_ELIMINADO = '0';
     const TABLA_EMPRESA = 'cempresa';    

@@ -49,13 +49,15 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         $db = $this->getAdapter();
 
         $select = $db->select()
-                ->from($this->_name)
-                ->where('fecha >= ?', $fecha)
-                ->where('estado = ?', self::ESTADO_ACTIVO)
-                ->where('tipo = ?', self::TIPO_CONVOCATORIA)
-                ->order('fecha desc')
+                ->from(array('c' => $this->_name))
+                ->joinLeft(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA), 
+                        'c.ID = ce.idConvocatoria', array('est' =>'estado'))
+                ->where('c.fecha >= ?', $fecha)
+                ->where('c.estado = ?', self::ESTADO_ACTIVO)
+                ->where('c.tipo = ?', self::TIPO_CONVOCATORIA)
+                ->group('c.ID')
+                ->order('c.fecha desc')
                 ;
-
         
         return $db->fetchAll($select);
       
@@ -74,6 +76,19 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
     public function eliminarExperiencia($id){
         $where = $this->getAdapter()->quoteInto('idDetalleEmpresa=?', $id);
             $this->delete($where);
+    }
+    
+    public function validarEdicion()
+    {
+        $query = $this->getAdapter()
+                ->select()->from(array('c' => $this->_name))
+                ->joinInner(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA), 
+                        'c.ID = ce.idConvocatoria')
+                ->where('u.estado = ?', App_Model_Usuario::ESTADO_ACTIVO)
+                ->where('u.tipoUsuario = ?', App_Model_Usuario::TIPO_ADMIN)
+                ->limit(50);
+
+        return $this->getAdapter()->fetchAll($query);
     }
     
    

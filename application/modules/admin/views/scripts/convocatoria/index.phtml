@@ -47,10 +47,18 @@
                                         <td class="center "><?php echo $experiencia['proceso']?></td>
                                         <td class="center "><?php echo $experiencia['fecha']?></td>                                        
                                         <td class="center ">
+                                            <?php if (is_null($experiencia['est'])){?>
                                             <a class="btn btn-info" href="/admin/convocatoria/paso1/id/<?php echo $experiencia["ID"]; ?>">
                                                 <i class="icon-plus"></i>  
-                                                Applicar Postulación
+                                                Aplicar Postulación
                                             </a>
+                                            <?php } else {?>
+                                            <a class="btn btn-info" href="/admin/convocatoria/edit1/id/<?php echo $experiencia["ID"]; ?>">
+                                                <i class="icon-plus"></i>  
+                                                Editar
+                                            </a>
+                                            
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php
