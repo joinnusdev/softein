@@ -53,7 +53,7 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
         return $this->getAdapter()->fetchAll($query);
     }
     
-    public function getConvocatoriaEmpresa($idConvocatoria, $idEmpresa) 
+    public function getConvocatoriaEmpresa($idConvocatoria, $idEmpresa = NULL) 
     {
         $query = $this->getAdapter()->select()
                 ->from(array('ce' => $this->_name))
@@ -63,11 +63,20 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                             'limite', 'codigoproceso' => 'codigo'
                             )
                         )
-                ->where('ce.idEmpresa = ?', $idEmpresa)
+                ->joinInner(array('e' => App_Model_Empresa::TABLA_EMPRESA), 
+                        'ce.idEmpresa = e.idEmpresa', 
+                        array('idEmpresa', 'nombreEmpresa', 'telefono')
+                        )
+                
+                
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
+        if ($idEmpresa){
+            $query->where('ce.idEmpresa = ?', $idEmpresa);
+            return $this->getAdapter()->fetchRow($query);
+        }
+        return $this->getAdapter()->fetchAll($query);
         
-        return $this->getAdapter()->fetchRow($query);
     }    
     
     public function getExperienciaDeta($idConvocatoria) 

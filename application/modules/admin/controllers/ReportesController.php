@@ -7,11 +7,26 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
     }
 
     public function indexAction() {
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js2/admin/reporte.js'
+        );
         $model = new App_Model_Convocatoria();
         $lista = $model->listarConvocatoria();
         $this->view->lista = $lista;
     }
     
+    public function ajaxListarEmpresasAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $idConvocatoria = $this->_getParam("id");
+        
+        $modelConv = new App_Model_ConvocatoriaEmpresa();        
+        $convEmpresa = $modelConv->getConvocatoriaEmpresa($idConvocatoria);
+        echo Zend_Json::encode($convEmpresa);
+        
+    }
+
+
     public function paso2Action() { 
         
         $this->view->headScript()->appendFile(
