@@ -64,10 +64,15 @@ class Admin_AuthController extends App_Controller_Action
                     $this->_redirect($this->view->url(array("module" => "admin",
                     "controller" => "auth",
                     "action" => "index")));
-                }else{
+                }else{                        
+                    if ($auth->getStorage()->read()->tipoUsuario == 1)
                         $this->_redirect($this->view->url(array("module" => "admin",
-                            "controller" => "empresa",
-                            "action" => "mis-datos")));
+                                    "controller" => "empresa",
+                                    "action" => "mis-datos")));
+                    if ($auth->getStorage()->read()->tipoUsuario == 2)
+                        $this->_redirect($this->view->url(array("module" => "admin",
+                                    "controller" => "reportes")));
+                        
                 }
                 
             }else{

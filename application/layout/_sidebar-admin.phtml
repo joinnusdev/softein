@@ -1,13 +1,16 @@
 <div class="well sidebar-nav span10">
 <ul class="nav nav-list">    
     <li class="nav-header">ACCESOS RAPIDOS A:</li>
+    <?php if ($this->authData->tipoUsuario == 1) { ?>
     <li><a href="/admin/empresa/mis-datos">Mis Datos</a></li>
     <li><a href="/admin/experiencia/">Experiencia de la Empresa</a></li>
     <li><a href="/admin/contacto/">Personas de Contacto</a></li>
     <li><a href="/admin/convocatoria/">Convocatorias</a></li>
     <li><a href="/admin/personal/">Personal Empresa</a></li>
-    <li><a href="/admin/reportes/">Reporte Convocatoria</a></li>
    <!-- <li><a href="/admin/convocatoria/">Personal de la Empresa</a></li>-->
+   <?php } elseif($this->authData->tipoUsuario == 2) {?>
+   <li><a href="/admin/reportes/">Reporte Convocatoria</a></li>
+   <?php } ?>
 
 </ul>
 </div>
