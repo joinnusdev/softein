@@ -24,12 +24,12 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
     }
     
     public function misDatosAction(){
-        $this->view->headScript()->appendFile(
+        /*$this->view->headScript()->appendFile(
             $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
         );
         $this->view->headScript()->appendFile(
             $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
-        );
+        ); */
         $modelContacto = new App_Model_Contacto();
         $listaContacto = $modelContacto->listarContacto();
         $this->view->listaContacto = $listaContacto;
