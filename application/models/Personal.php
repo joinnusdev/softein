@@ -50,19 +50,19 @@ class App_Model_Personal extends App_Db_Table_Abstract {
       return $this->getAdapter()->fetchAll($query);
     }
     
-    public function getContactoPorId($id) 
+    public function getPersonalPorId($id) 
     {
         $query = $this->getAdapter()->select()
                 ->from($this->_name)
-                ->where('idContacto = ?', $id);
+                ->where('idPersonal = ?', $id);
         return $this->getAdapter()->fetchRow($query);
     }
     
     
     
-    public function eliminarContacto($id){
-        $where = $this->getAdapter()->quoteInto('idContacto =?', $id);
-            $this->delete($where);
+    public function eliminarPersonal($id){
+        $where = $this->getAdapter()->quoteInto('idPersonal =?', $id);
+        $this->delete($where);
     }
     
    

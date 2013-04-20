@@ -59,7 +59,9 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                 ->from(array('ce' => $this->_name))
                 ->joinInner(array('c' => App_Model_Convocatoria::TABLA_CONVOCATORIA), 
                         'ce.idConvocatoria = c.ID', 
-                        array('ID', 'proceso', 'fecha', 'limite')
+                        array('ID', 'proceso', 'fecha', 
+                            'limite', 'codigoproceso' => 'codigo'
+                            )
                         )
                 ->where('ce.idEmpresa = ?', $idEmpresa)
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)

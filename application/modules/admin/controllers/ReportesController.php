@@ -1,6 +1,6 @@
 <?php
 
-class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
+class Admin_ReportesController extends App_Controller_Action_Admin {
 
     public function init() {
         parent::init();
