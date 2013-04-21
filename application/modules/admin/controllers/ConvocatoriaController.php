@@ -8,7 +8,8 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
 
     public function indexAction() {
         $model = new App_Model_Convocatoria();
-        $lista = $model->listarConvocatoria();
+        $idEmpresa = $this->view->authData->idEmpresa;
+        $lista = $model->listarConvocatoria($idEmpresa);
         $this->view->lista = $lista;
     }
     

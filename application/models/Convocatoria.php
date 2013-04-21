@@ -42,7 +42,7 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         return $this->_guardar($datos);
     }
    
-    public function listarConvocatoria() 
+    public function listarConvocatoria($idEmpresa)
     {
         $fecha = Zend_Date::now()->toString('Y-M-d');
         
@@ -51,7 +51,7 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         $select = $db->select()
                 ->from(array('c' => $this->_name))
                 ->joinLeft(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA), 
-                        'c.ID = ce.idConvocatoria', 
+                        'c.ID = ce.idConvocatoria AND ce.idEmpresa= ' . $idEmpresa , 
                         array(
                             'est' =>'estado',
                             'empresa' => 'idEmpresa'
