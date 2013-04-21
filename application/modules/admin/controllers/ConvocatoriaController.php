@@ -8,7 +8,8 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
 
     public function indexAction() {
         $model = new App_Model_Convocatoria();
-        $lista = $model->listarConvocatoria();
+        $idEmpresa = $this->view->authData->idEmpresa;
+        $lista = $model->listarConvocatoria($idEmpresa);
         $this->view->lista = $lista;
     }
     
@@ -17,12 +18,11 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $this->view->headScript()->appendFile(
                 $this->getConfig()->app->mediaUrl . '/js2/admin/agregar-personal.js'
         );
-        
-        $modelPersonal = new App_Model_Personal();        
-        $this->view->personal = $modelPersonal->listarPersonal();
-        
-        $idConvocatoria = $this->_getParam('id');
         $idEmpresa = $this->view->authData->idEmpresa;
+        $modelPersonal = new App_Model_Personal();        
+        $this->view->personal = $modelPersonal->listarPersonal($idEmpresa);        
+        $idConvocatoria = $this->_getParam('id');
+        
         
         $modelConv = new App_Model_ConvocatoriaEmpresa();
         
@@ -272,12 +272,12 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $this->view->headScript()->appendFile(
                 $this->getConfig()->app->mediaUrl . '/js2/admin/editar-personal.js'
         );
-        
+        $idEmpresa = $this->view->authData->idEmpresa;
         $modelPersonal = new App_Model_Personal();        
-        $this->view->personal = $modelPersonal->listarPersonal();
+        $this->view->personal = $modelPersonal->listarPersonal($idEmpresa);
         
         $idConvocatoria = $this->_getParam('id');
-        $idEmpresa = $this->view->authData->idEmpresa;
+        
         
         $modelConv = new App_Model_ConvocatoriaEmpresa();
         

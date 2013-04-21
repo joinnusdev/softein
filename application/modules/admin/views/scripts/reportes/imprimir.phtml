@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> SOFTEIN - REPORT</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    
+    </head>
+    <body>
+        <h3>Datos Empresa </h3>
+        <table width="600px">
+            <tr>
+                <td>Empresa : </td>
+                <td><?php echo $this->empresa['nombreEmpresa'] ?> </td>
+            </tr>            
+            <tr>
+                <td>RUC : </td>
+                <td><?php echo $this->empresa['numeroDocumento'] ?> </td>
+            </tr>
+            <tr>
+                <td>Email : </td>
+                <td><?php echo $this->empresa['email'] ?> </td>
+            </tr>
+            <tr>
+                <td>Telefono : </td>
+                <td><?php echo $this->empresa['telefono'] ?> </td>
+            </tr>
+        </table>
+
+        <h4>Personal participante en la capacitación</h4>
+        <table width="600px">
+            <tr>
+                <td>Nombre</td>
+                <td>Cargo</td>
+                <td>Email</td>
+                <td>Nivel Académico</td>
+                <td>Teléfono</td>
+            </tr>
+            <?php foreach ($this->personal as $value) { ?>
+            <tr>                
+                <td><?php echo $value['nombre'] . " " . $value['apellido'] ?> </td>                
+                <td><?php echo $value['cargo'] ?> </td>                
+                <td><?php echo $value['email'] ?> </td>                
+                <td><?php echo $value['nivelacademico'] ?> </td>                
+                <td><?php echo $value['telefono'] ?> </td>
+            </tr>
+            <?php } ?>
+        </table>
+        
+    </body>
+</html>
+
+

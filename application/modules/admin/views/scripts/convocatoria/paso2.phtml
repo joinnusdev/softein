@@ -56,6 +56,7 @@
         <label class="control-label" for="inputAtendido">Atendido por : </label>
         <div class="controls">
             <select class="xlarge disabled" id="idUsuario" name="idUsuario">
+                <option value="0"> -- Seleccionar --</option>
                 <?php foreach ($this->personal as $item) :?>
                     <option nombre="<?php echo $item['nombre'] . " " . $item['apellido']?>" cargo="<?php echo $item['cargo']?>" nivel="<?php echo $item['nivelacademico']?>" value="<?php echo $item['idPersonal']?>"> <?php echo $item['apellido'] . " " . $item['nombre']  ?></option>
                     

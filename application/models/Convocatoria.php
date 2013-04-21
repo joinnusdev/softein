@@ -42,17 +42,23 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         return $this->_guardar($datos);
     }
    
-    public function listarConvocatoria() 
+    public function listarConvocatoria($idEmpresa = NULL)
     {
         $fecha = Zend_Date::now()->toString('Y-M-d');
         
         $db = $this->getAdapter();
 
         $select = $db->select()
-                ->from(array('c' => $this->_name))
-                ->joinLeft(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA), 
-                        'c.ID = ce.idConvocatoria', array('est' =>'estado'))
-                ->where('c.fecha >= ?', $fecha)
+                ->from(array('c' => $this->_name));
+        if ($idEmpresa){
+                $select->joinLeft(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA), 
+                        'c.ID = ce.idConvocatoria AND ce.idEmpresa= ' . $idEmpresa , 
+                        array(
+                            'est' =>'estado',
+                            'empresa' => 'idEmpresa'
+                            ));
+        }
+        $select->where('c.fecha >= ?', $fecha)
                 ->where('c.estado = ?', self::ESTADO_ACTIVO)
                 ->where('c.tipo = ?', self::TIPO_CONVOCATORIA)
                 ->group('c.ID')

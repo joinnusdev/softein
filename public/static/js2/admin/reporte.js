@@ -33,7 +33,7 @@ $(function(){
                                 var row = $(tabla+' tbody>tr:last').removeClass("hide").clone(true);
                                 row.insertAfter(tabla+' tbody>tr:last');
                 
-                                var link = "<a href='/admin/reportes/imprimir/empresa/"+value["idEmpresa"]+"/convocatoria/"+actual.val()+"' class='btn btn-success'><i class='icon-edit'></i>  IMPRIMIR DATOS</a>";
+                                var link = "<a target='_blank' href='/admin/reportes/imprimir/empresa/"+value["idEmpresa"]+"/convocatoria/"+actual.val()+"' class='btn btn-success'><i class='icon-edit'></i>  IMPRIMIR DATOS</a>";
                 
                 
                                 $("th:eq(0)", row).html(ID);
