@@ -28,8 +28,10 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
         //Datos Empresa y Convocatoria 
         $modelCon = new App_Model_ConvocatoriaEmpresa();
         $convEmpresa = $modelCon->getConvocatoriaEmpresa($idConvocatoria, $idEmpresa);
-        //var_dump($convEmpresa);exit;
+        
         $this->view->empresa = $convEmpresa;
+        
+        
         //Detalle Personal que ponen
         $model = new App_Model_DetaPersonal();
         $personal = $model->getConvocatoriaPersonal($convEmpresa['idConvocatoriaExperiencia']);
@@ -37,10 +39,9 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
         
         $html = $this->view->render('/reportes/imprimir.phtml');
         
+        $codigo = utf8_decode($html); 
         $dompdf = new DOMPDF();
-        $dompdf->set_paper('A4');
-        $dompdf->load_html(utf8_decode($html));
-
+        $dompdf->load_html($codigo);
         $dompdf->render();
         $dompdf->stream("convocatoria.pdf", array("Attachment" => 0));
 
