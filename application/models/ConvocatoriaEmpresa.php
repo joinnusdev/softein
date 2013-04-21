@@ -65,7 +65,8 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                         )
                 ->joinInner(array('e' => App_Model_Empresa::TABLA_EMPRESA), 
                         'ce.idEmpresa = e.idEmpresa', 
-                        array('idEmpresa', 'nombreEmpresa', 'telefono')
+                        array('idEmpresa', 'nombreEmpresa', 'telefono', 
+                            'paisEmpresa', 'numeroDocumento', 'email')
                         )
                 
                 
@@ -87,11 +88,8 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                         'ce.idConvocatoriaExperiencia = de.idConvocatoriaExperiencia')                
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
-        //echo $query;exit;
         return $this->getAdapter()->fetchAll($query);
-    }    
-    
-    
+    }
     
     public function getValidarEmpresaLogin($dato,$tipo) 
     {

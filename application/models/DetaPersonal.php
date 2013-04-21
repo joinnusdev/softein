@@ -63,6 +63,17 @@ class App_Model_DetaPersonal extends App_Db_Table_Abstract {
         return $this->getAdapter()->fetchRow($query);
     }    
     
+    public function getConvocatoriaPersonal($idConvocatoriaExp) 
+    {
+        $query = $this->getAdapter()->select()
+                ->from(array('de' => $this->_name))
+                ->joinInner(array('p' => App_Model_Personal::TABLA_CONTACTO), 
+                        'de.idPersonal= p.idPersonal')                
+                ->where('de.idConvocatoriaExperiencia = ?', $idConvocatoriaExp)
+                ;
+        return $this->getAdapter()->fetchAll($query);
+    }   
+    
     public function getValidarEmpresaLogin($dato,$tipo) 
     {
          $query = $this->getAdapter()->select()
