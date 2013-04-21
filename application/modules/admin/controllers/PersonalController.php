@@ -11,7 +11,8 @@ class Admin_PersonalController extends App_Controller_Action_Admin
     public function indexAction()
     {
         $model= new App_Model_Personal();
-        $lista = $model->listarPersonal();
+        $idEmpresa = $this->view->authData->idEmpresa;
+        $lista = $model->listarPersonal($idEmpresa);
         $this->view->listaExperiencia = $lista;
     }
     
@@ -28,6 +29,7 @@ class Admin_PersonalController extends App_Controller_Action_Admin
                 $model = new App_Model_Personal();
                 $data['fechaRegistro'] = Zend_Date::now()->toString('YYYY-MM-dd HH:mm:ss');
                 $data['estado'] = '1';
+                $data['idEmpresa'] = $this->view->authData->idEmpresa;
                 $id = $model->actualizarDatos($data);
                 
                 $this->_flashMessenger->addMessage("Personal Creado Correctamente");

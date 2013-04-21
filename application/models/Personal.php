@@ -41,11 +41,13 @@ class App_Model_Personal extends App_Db_Table_Abstract {
         return $this->_guardar($datos);
     }
    
-    public function listarPersonal() 
+    public function listarPersonal($idEmpresa) 
     {
       $query = $this->getAdapter()
                 ->select()->from(array('c' => $this->_name))
-                ->where('c.estado = ?', App_Model_Personal::ESTADO_ACTIVO)->order('c.apellido')
+                ->where('c.estado = ?', App_Model_Personal::ESTADO_ACTIVO)
+                        ->where('c.idEmpresa = ?', $idEmpresa)
+                        ->order('c.apellido')                
                 ;
       return $this->getAdapter()->fetchAll($query);
     }

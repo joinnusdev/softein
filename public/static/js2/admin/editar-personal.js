@@ -97,6 +97,8 @@ $(function(){
        
         appendTableIngresos : function(btn, tabla) {
             $(btn).bind("click", function(){
+                var valor = $("#idUsuario option:selected").val();
+                if (valor != '0') {
                 //Obteniendo valores
                 var nombre = $("#idUsuario option:selected").attr("nombre");
                 var cargo = $("#idUsuario option:selected").attr("cargo");
@@ -115,7 +117,7 @@ $(function(){
                 $("th:eq(2)", row).html(nivel);
                 $(tabla+' tbody>#item:first').addClass("hide");
                 
-                
+                }
                 
                 
                 

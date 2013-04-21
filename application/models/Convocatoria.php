@@ -51,7 +51,11 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         $select = $db->select()
                 ->from(array('c' => $this->_name))
                 ->joinLeft(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA), 
-                        'c.ID = ce.idConvocatoria', array('est' =>'estado'))
+                        'c.ID = ce.idConvocatoria', 
+                        array(
+                            'est' =>'estado',
+                            'empresa' => 'idEmpresa'
+                            ))
                 ->where('c.fecha >= ?', $fecha)
                 ->where('c.estado = ?', self::ESTADO_ACTIVO)
                 ->where('c.tipo = ?', self::TIPO_CONVOCATORIA)
