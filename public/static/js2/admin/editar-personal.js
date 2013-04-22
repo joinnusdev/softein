@@ -7,7 +7,8 @@ $(function(){
            this.ComboDependienteDos("#idTipo", "#idItem", "#idUsuario", "-- Seleccionar --", "/admin/user/get-usuarios", "idUsuario", "nombreUsuario");
            this.appendTableIngresos("#agregarItem", "#idPanelTablaDetalleIngreso");
            this.validaMonto("#generar");
-           this.deleteRowTableIngreso();           
+           this.deleteRowTableIngreso();
+           $("#generar").removeAttr("disabled");
         },        
         ComboDependiente : function (c, cd, cus, def, url, fieldv, fields) {
             $(c).live("change blur", function(){                
