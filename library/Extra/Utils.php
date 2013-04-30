@@ -21,7 +21,7 @@ class Extra_Utils
         } catch (Zend_Exception $e) {
             //throw new Zend_Mail_Exception($e->getMessage());
             $log = Zend_Registry::get('log');
-            $log->debug("Enviar-Mail: " . $e->getMessage());
+            $log->debug("Enviar-Mail: " . $e->getMessage());            
             return false;
         }
     }

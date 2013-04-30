@@ -40,9 +40,9 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
                 );                
                 $modelDeta->actualizarDatos($datosDeta);                                
             }
-            $mail = 'james.otiniano@gmail.com';
-            $name = "James";
-            $subject = "prueba";
+            $mail = $this->view->authData->email;
+            $name = $this->view->authData->nombreEmpresa;
+            $subject = "Convocatoria Registrada";
             $htmlbody = "
                 
             <!DOCTYPE html>
@@ -297,10 +297,63 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
                     'idConvocatoriaExperiencia' => $convEmpresa['idConvocatoriaExperiencia'],
                     'idPersonal' => $value,
                 );                
-                
-                $modelDeta->actualizarDatos($datosDeta);
-                
+                $modelDeta->actualizarDatos($datosDeta);                
             }
+            
+            // ------------------ Envio Email
+            
+            $mail = $this->view->authData->email;
+            $name = $this->view->authData->nombreEmpresa;
+            $subject = "Convocatoria Registrada";
+            $htmlbody = "
+                
+            <!DOCTYPE html>
+            <html lang='en'>
+                <head> <title>Email Convocatoria</title>
+                </head>
+                <body>
+                <table>
+                <tr>
+                    <td>Código Autogenerado :</td>
+                    <td> " . $convEmpresa['codigo'] . " </td>
+                </tr>
+                <tr>
+                    <td>Empresa :</td>
+                    <td> " . $this->view->authData->nombreEmpresa . " </td>
+                </tr>
+                <tr>
+                    <td>Convocatoria :</td>
+                    <td> " . $convEmpresa['proceso'] . " </td>
+                </tr>
+                <tr>
+                    <td>Código Proceso :</td>
+                    <td> " . $convEmpresa['codigoproceso'] . " </td>
+                </tr>
+                <tr>
+                    <td>Fecha Limite :</td>
+                    <td> " . $convEmpresa['limite'] . " </td>
+                </tr>
+                
+                <tr>
+                    <td colspan='2'> TEXTO POR DEFINIR</td>
+                </tr>
+                
+
+                </table>
+                </body>
+                </html>
+                ";
+            Extra_Utils::enviarMail($mail, $name, $subject, $htmlbody);
+            
+            
+            
+            
+            // ------------------
+             
+              
+             
+             
+            
             
             $this->_flashMessenger->addMessage("Convocatoria Registrada Correctamente");
             $this->_redirect('/admin/convocatoria');
