@@ -35,8 +35,8 @@ class App_Form_CrearExperiencia extends App_Form
         $e = new Zend_Form_Element_Text('servicioRuc');
         $e->setFilters(array("StripTags", "StringTrim"));
         $e->setAttrib('class', 'number');
-        $e->setAttrib('minlength', '12');
-        $e->setAttrib('maxlength', '12');
+        $e->setAttrib('minlength', '11');
+        $e->setAttrib('maxlength', '11');
         $e->setRequired();
         $this->addElement($e);
         
