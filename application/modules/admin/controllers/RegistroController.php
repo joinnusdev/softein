@@ -48,6 +48,8 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     $data['estado'] = App_Model_Empresa::ESTADO_PORCONFIRMAR;
                     $data['clave'] = md5($data['clave']);
                     $data['confirmar'] = $random;
+                    $data['tipoUsuario'] = '1' ;
+                    
                     $id = $modelEmpresa->actualizarDatos($data);
                     
                    $ruta = 'admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;

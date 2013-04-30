@@ -43,12 +43,12 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
         $form = new App_Form_CrearEmpresa();
         $modelEmpresa = new App_Model_Empresa();
         $empresa = $modelEmpresa->getEmpresaPorId($idEmpresa);
-        
+       
         
         $form->populate($empresa);  
         $fechaConstitucion=implode('-',array_reverse(explode('-',$empresa['fechaConstitucion'])));
         $form->getElement('fechaConstitucion')->setValue($fechaConstitucion);
-        
+       
         $this->view->form = $form;
         
         if($this->getRequest()->isPost()){            

@@ -90,7 +90,7 @@ class App_Form_CrearEmpresa extends App_Form
         $e = new Zend_Form_Element_Text('cantEmpleados');
         $e->setAttrib('size', '3');
         $e->setAttrib('class', 'number');
-        $e->setAttrib('minlength', '4');
+        $e->setAttrib('minlength', '1');
         $e->setAttrib('maxlength', '4');
         
         $e->setFilters(array("StripTags", "StringTrim"));
