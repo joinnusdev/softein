@@ -20,10 +20,10 @@ class App_Form_CrearEmpresa extends App_Form
         
         $this->addElement(new Zend_Form_Element_Select('tipoDocumento'));
         $this->getElement('tipoDocumento')->addMultiOption('', 'Seleccione Documento');
-        $this->getElement('tipoDocumento')->addMultiOption('1', 'Pasaporte');
-        $this->getElement('tipoDocumento')->addMultiOption('2', 'Ruc');
-        $this->getElement('tipoDocumento')->addMultiOption('3', 'DNI');
-        $this->getElement('tipoDocumento')->addMultiOption('4', 'Carnet Internacional');
+        $this->getElement('tipoDocumento')->addMultiOption('2', 'RUC');
+        /* $this->getElement('tipoDocumento')->addMultiOption('1', 'Pasaporte');
+        $this->getElement('tipoDocumento')->addMultiOption('3', 'DNI')*/
+        $this->getElement('tipoDocumento')->addMultiOption('4', 'Otros Internacional');
         $this->getElement('tipoDocumento')->setAttrib('class', 'required');
         $this->getElement('tipoDocumento')->setRequired();
         $this->getElement('tipoDocumento')->removeDecorator('htmlTag');
@@ -105,7 +105,7 @@ class App_Form_CrearEmpresa extends App_Form
         $e = new Zend_Form_Element_Text('aniosExperiencia');
         $e->setAttrib('size', '3');
         $e->setAttrib('class', 'required number');
-        $e->setAttrib('minlength', '3');
+        $e->setAttrib('minlength', '1');
         $e->setAttrib('maxlength', '3');
         
         $e->setFilters(array("StripTags", "StringTrim"));
@@ -152,8 +152,8 @@ class App_Form_CrearEmpresa extends App_Form
         $this->getElement('tipoOrganizacion')->addMultiOption('', 'Seleccione');
         $this->getElement('tipoOrganizacion')->addMultiOption('sac', 'Sociedad Anonima Cerrada');
         $this->getElement('tipoOrganizacion')->addMultiOption('srl', 'Sociedad de Responsabilidad Limitada');
-        $this->getElement('tipoOrganizacion')->addMultiOption('ong', 'Organizacion no Gubernamental');
-        $this->getElement('tipoOrganizacion')->addMultiOption('ie', 'Institucion del Estado');
+        $this->getElement('tipoOrganizacion')->addMultiOption('ong', 'Organización no Gubernamental');
+        $this->getElement('tipoOrganizacion')->addMultiOption('ie', 'Institución del Estado');
         $this->getElement('tipoOrganizacion')->setAttrib('class', 'required');
         $this->getElement('tipoOrganizacion')->setRequired();
         $this->getElement('tipoOrganizacion')->removeDecorator('htmlTag');

@@ -35,7 +35,7 @@ class App_Form_Registro extends App_Form
         $this->addElement(new Zend_Form_Element_Select('tipoDocumento'));
         $this->getElement('tipoDocumento')->addMultiOption('', 'Seleccione Documento');
         $this->getElement('tipoDocumento')->addMultiOption('2', 'RUC');
-        $this->getElement('tipoDocumento')->addMultiOption('4', 'Carnet Internacional');
+        $this->getElement('tipoDocumento')->addMultiOption('4', 'Otros Internacional');
         
         $this->getElement('tipoDocumento')->setAttrib('class', 'required');
         $this->getElement('tipoDocumento')->setRequired();
@@ -45,8 +45,8 @@ class App_Form_Registro extends App_Form
         
         $e = new Zend_Form_Element_Text('numeroDocumento');
         $e->setAttrib('class', 'required number');
-        $e->setAttrib('minlength', '12');
-        $e->setAttrib('maxlength', '12');
+        $e->setAttrib('minlength', '11');
+        $e->setAttrib('maxlength', '11');
         $e->setFilters(array("StripTags", "StringTrim"));
         $e->setRequired();
         $this->addElement($e);

@@ -11,7 +11,9 @@ class Default_IndexController extends App_Controller_Action_Portal
     
     public function indexAction()
     {       	
-        
+         $this->_redirect($this->view->url(array("module" => "admin",
+                        controller => "auth",
+                        action => "index")));
         
     }
     public function index2Action()

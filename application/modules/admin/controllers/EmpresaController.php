@@ -30,6 +30,9 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
         $this->view->headScript()->appendFile(
             $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
         ); 
+        
+        
+        
         $modelContacto = new App_Model_Contacto();
         $listaContacto = $modelContacto->listarContacto();
         $this->view->listaContacto = $listaContacto;
@@ -44,7 +47,7 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
         $form->populate($empresa);  
         $fechaConstitucion=implode('-',array_reverse(explode('-',$empresa['fechaConstitucion'])));
         $form->getElement('fechaConstitucion')->setValue($fechaConstitucion);
-       
+        $form->getElement('clave')->setValue($empresa['clave']);
         $this->view->form = $form;
         
         if($this->getRequest()->isPost()){            

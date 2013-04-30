@@ -3,13 +3,14 @@ $(document).ready(function() {
 	$("#fichaForm").validate();
 });
 </script>
+
 <div>
     <ul class="breadcrumb">
             <li>
                     <a href="#">Home</a> <span class="divider">/</span>
             </li>
             <li>
-                    <a href="#">Mis Datos</a>
+                    <a href="#">Datos de la Empresa</a>
             </li>
     </ul>
 </div>
@@ -75,6 +76,12 @@ $(document).ready(function() {
                                     <label for="clave" class="span3 no-margin">Clave:</label>
                                     <div class="span8 no-margin">
                                         <?php echo $this->form->clave;?>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="clave" class="span3 no-margin"></label>
+                                    <div class="span8 no-margin">
+                                        (SOLO escriba aquí si desea cambiar su clave).
                                     </div>
                                     
                                    
@@ -150,7 +157,7 @@ $(document).ready(function() {
                                         
                                     </div>
                                     
-                                    <label for="opcion" class="span3 no-margin">Tipo de Organizacion:</label>
+                                    <label for="opcion" class="span3 no-margin">Tipo de Organización:</label>
                                     <div class="span8 no-margin">
                                         <?php echo $this->form->tipoOrganizacion;?>
                                     </div>
@@ -179,7 +186,7 @@ $(document).ready(function() {
         </div>
            </form>
        
-        
+        <!--
         <div class="box-header well" data-original-title="">
             <h2><i class="icon-user"></i> Convocatorias </h2>
             <div class="box-icon">                
@@ -260,7 +267,7 @@ $(document).ready(function() {
             </div>         
         </div>
         
-        
+        -->
         
         
         <div class="box-header well" data-original-title="">
@@ -297,11 +304,11 @@ $(document).ready(function() {
                                             Fecha Reg.
                                         </th>
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
-                                            colspan="1" style="width: 90px;" aria-label="Status: activate to sort column ascending">
+                                            colspan="1" style="width: 70px;" aria-label="Status: activate to sort column ascending">
                                             Estado
                                         </th>
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" c
-                                            olspan="1" style="width: 150px;" aria-label="Actions: activate to sort column ascending">
+                                            olspan="1" style="width: 170px;" aria-label="Actions: activate to sort column ascending">
                                             Accion
                                         </th>
                                     </tr>
@@ -328,11 +335,11 @@ $(document).ready(function() {
                                         <td class="center ">
                                             <a class="btn btn-info" href="/admin/contacto/editar/id/<?php echo $contacto["idContacto"]; ?>">
                                                 <i class="icon-edit icon-white"></i>  
-                                                Edit                                            
+                                                Editar                                           
                                             </a>
                                             <a class="btn btn-danger" href="/admin/contacto/eliminar/id/<?php echo $contacto["idContacto"]; ?>">
                                                 <i class="icon-trash icon-white"></i> 
-                                                Delete
+                                                Eliminar
                                             </a>
                                         </td>
                                     </tr>

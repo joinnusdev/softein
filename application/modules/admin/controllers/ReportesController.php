@@ -36,7 +36,6 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
         $model = new App_Model_DetaPersonal();
         $personal = $model->getConvocatoriaPersonal($convEmpresa['idConvocatoriaExperiencia']);
         $this->view->personal = $personal;
-        $this->view->convo = $convEmpresa['proceso'];
         
         $html = $this->view->render('/reportes/imprimir.phtml');
         

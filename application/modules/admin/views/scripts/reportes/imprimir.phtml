@@ -4,23 +4,13 @@
         <title> SOFTEIN - REPORT</title>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <style>
-            td{
-                padding-top: 5px; padding-bottom: 5px;
-            }
-            #personal td{
-                padding-top: 10px; padding-bottom: 10px;
-                padding-left: 10px;padding-right: 10px;
-                text-align: left;
-            }
-        </style>        
     
     </head>
     <body>
         <h3>Datos Empresa </h3>
-        <table width="800px">
+        <table width="600px">
             <tr>
-                <td width="150px">Empresa : </td>
+                <td>Empresa : </td>
                 <td><?php echo $this->empresa['nombreEmpresa'] ?> </td>
             </tr>            
             <tr>
@@ -34,32 +24,18 @@
             <tr>
                 <td>Telefono : </td>
                 <td><?php echo $this->empresa['telefono'] ?> </td>
-            </tr>            
-            
-            
+            </tr>
         </table>
-        <br/>        
-        <h4>Proceso Convocatoria :</h4>
-        <?php echo $this->convo;?>
-        <table>
+
+        <h4>Personal participante en la capacitación</h4>
+        <table width="600px">
             <tr>
-                <td><?php echo $this->convo;?></td>
+                <td>Nombre</td>
+                <td>Cargo</td>
+                <td>Email</td>
+                <td>Nivel Académico</td>
+                <td>Teléfono</td>
             </tr>
-        </table>
-        <br/>
-        <h5>Personal participante en la convocatoria</h5>
-        
-        <table id ="personal"width="600px" style="border-collapse: collapse;" border="1">
-            <thead>
-                <tr>
-            <th> Nombre</th>
-            <th> Cargo</th>
-            <th> Email</th>
-            <th> Nivel Académico</th>
-            <th> Teléfono</th>
-            </tr>
-            </thead>
-            <tbody>
             <?php foreach ($this->personal as $value) { ?>
             <tr>                
                 <td><?php echo $value['nombre'] . " " . $value['apellido'] ?> </td>                
@@ -69,7 +45,6 @@
                 <td><?php echo $value['telefono'] ?> </td>
             </tr>
             <?php } ?>
-            </tbody>
         </table>
         
     </body>
