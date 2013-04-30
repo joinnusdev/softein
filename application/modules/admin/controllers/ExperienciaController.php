@@ -11,7 +11,7 @@ class Admin_ExperienciaController extends App_Controller_Action_Admin
     public function indexAction()
     {
         $modelExperiencia= new App_Model_Experiencia();
-        $listaExperiencia = $modelExperiencia->listarExperiencia();
+        $listaExperiencia = $modelExperiencia->listarExperiencia( $this->authData->idEmpresa);
         $this->view->listaExperiencia = $listaExperiencia;        
     }
     
