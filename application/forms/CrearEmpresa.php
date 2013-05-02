@@ -32,8 +32,8 @@ class App_Form_CrearEmpresa extends App_Form
         
         $e = new Zend_Form_Element_Text('numeroDocumento');
         $e->setAttrib('class', 'required number');
-        $e->setAttrib('minlength', '12');
-        $e->setAttrib('maxlength', '12');
+        $e->setAttrib('minlength', '11');
+        $e->setAttrib('maxlength', '11');
         $e->setFilters(array("StripTags", "StringTrim"));
         $e->setRequired();
         $this->addElement($e);
