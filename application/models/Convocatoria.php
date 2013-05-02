@@ -94,20 +94,19 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
     private function _updateDB($fecha) {        
         Zend_Db_Table::setDefaultAdapter('dbconv');
         
-        $db = $this->_db;
+        $db = $this->getDefaultAdapter();
         
         $select = $db->select()
                 ->from(array('c' => $this->_name))
                 ->where('c.limite >= ?', $fecha)
                 ->where('c.estado = ?', self::ESTADO_ACTIVO)
-                ->where('c.tipo = ?', self::TIPO_CONVOCATORIA)
-                ->group('c.ID')
+                ->where('c.tipo = ?', self::TIPO_CONVOCATORIA)                
                 ->order('c.limite desc')
                 ;
         
         $result = $db->fetchAll($select);
         
-        Zend_Db_Table::setDefaultAdapter('db');
+        
         foreach ($result as $item) {
             $this->actualizarDatos($item);
         }
