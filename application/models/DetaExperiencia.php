@@ -84,4 +84,20 @@ class App_Model_DetaExperiencia extends App_Db_Table_Abstract {
         $where = $this->getAdapter()->quoteInto('idConvocatoriaExperiencia =?', $id);
         $this->delete($where);
     }
+    
+    public function getExperienciaEmpresa($idEmpresa, $idConvocatoria) 
+    {
+        $query = $this->getAdapter()->select()
+                ->from(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA))
+                ->joinInner(array('d' => $this->_name), 
+                        'ce.idConvocatoriaExperiencia = d.idConvocatoriaExperiencia')
+                ->joinInner(array('e' => App_Model_Experiencia::TABLA_DETALLEEMPRESA), 
+                        'd.idExperiencia = e.idDetalleEmpresa')
+                ->joinInner(array('p' => App_Model_Pais::TABLA_EMPRESA), 
+                        'e.servicioPais = p.idPais')
+                ->where('ce.idEmpresa = ?', $idEmpresa)
+                ->where('ce.idConvocatoria = ?', $idConvocatoria)
+                ;
+        return $this->getAdapter()->fetchAll($query);
+    }   
 }

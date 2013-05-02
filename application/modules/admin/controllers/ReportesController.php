@@ -36,10 +36,14 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
         $model = new App_Model_DetaPersonal();
         $personal = $model->getConvocatoriaPersonal($convEmpresa['idConvocatoriaExperiencia']);
         $this->view->personal = $personal;
+        // Detalle de las experiencias
+        $modelExp = new App_Model_DetaExperiencia();
+        $exper = $modelExp->getExperienciaEmpresa($idEmpresa, $idConvocatoria);
+        $this->view->exp = $exper;
         
         $html = $this->view->render('/reportes/imprimir.phtml');
         
-        $codigo = utf8_decode($html); 
+        $codigo = $html; 
         $dompdf = new DOMPDF();
         $dompdf->load_html($codigo);
         $dompdf->render();

@@ -7,6 +7,8 @@
     
     </head>
     <body>
+        <h6> --- Reporte Creado por el Sistema de Gestión de Convocatorias  --- 2013</h6>
+        
         <h3>Datos Empresa </h3>
         <table width="600px">
             <tr>
@@ -25,27 +27,63 @@
                 <td>Telefono : </td>
                 <td><?php echo $this->empresa['telefono'] ?> </td>
             </tr>
+            <tr>
+                <td>Convocatoria : </td>
+                <td><?php echo $this->empresa['proceso'] ?> </td>
+            </tr>
+            
+            <tr>
+                <td>Fecha Registro: </td>
+                <td><?php echo $this->empresa['fechaRegistro'] ?> </td>
+            </tr>
+            
         </table>
-
+        <br/>
         <h4>Personal participante en la capacitación</h4>
-        <table width="600px">
+        <table width="700px">
             <tr>
                 <td>Nombre</td>
                 <td>Cargo</td>
                 <td>Email</td>
                 <td>Nivel Académico</td>
-                <td>Teléfono</td>
+                <td>Experiencia <br/>(Años / Mes)</td>
+                <td>Tipo</td>
             </tr>
             <?php foreach ($this->personal as $value) { ?>
             <tr>                
                 <td><?php echo $value['nombre'] . " " . $value['apellido'] ?> </td>                
                 <td><?php echo $value['cargo'] ?> </td>                
                 <td><?php echo $value['email'] ?> </td>                
-                <td><?php echo $value['nivelacademico'] ?> </td>                
-                <td><?php echo $value['telefono'] ?> </td>
+                <td><?php echo $value['nivelacademico'] ?> </td>
+                <?php $a = ($value['expanos'])?$value['expanos']:'0'?>
+                <td><?php echo $a . "/" . $value['expmeses'] ?> </td>
+                <?php $b = ($value['tipo']== '1')?'oferente':'contratado'?>
+                <td><?php echo $b ?> </td>
             </tr>
             <?php } ?>
         </table>
+        
+        <br/>
+        <h4>Experiencia de la Empresa : </h4>
+        <table width="700px">
+            <tr>
+                <td>País</td>
+                <td>Experiencia</td>
+                <td>Ruc</td>
+                <td>Fecha Inicio</td>
+                <td>Fecha Finalización</td>                
+            </tr>
+            <?php foreach ($this->exp as $value) { ?>
+            <tr>                
+                <td><?php echo $value['pais']?> </td>                
+                <td><?php echo $value['servicioNombre'] ?> </td>                
+                <td><?php echo $value['servicioRuc'] ?> </td>                
+                <td><?php echo $value['fechaInicio'] ?> </td>                
+                <td><?php echo $value['fechaFin'] ?> </td>                
+            </tr>
+            <?php } ?>
+        </table>
+        
         
     </body>
 </html>
