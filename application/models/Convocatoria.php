@@ -58,13 +58,13 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
                             'empresa' => 'idEmpresa'
                             ));
         }
-        $select->where('c.fecha >= ?', $fecha)
+        $select->where('c.limite >= ?', $fecha)
                 ->where('c.estado = ?', self::ESTADO_ACTIVO)
                 ->where('c.tipo = ?', self::TIPO_CONVOCATORIA)
                 ->group('c.ID')
                 ->order('c.fecha desc')
                 ;
-        
+        //echo $select;
         return $db->fetchAll($select);
       
     }
