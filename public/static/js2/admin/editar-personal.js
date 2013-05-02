@@ -97,9 +97,19 @@ $(function(){
        },
        
         appendTableIngresos : function(btn, tabla) {
+            
             $(btn).bind("click", function(){
-                var valor = $("#idUsuario option:selected").val();
+                var valor = $("#idUsuario option:selected").val();                
+                
                 if (valor != '0') {
+                
+                var per = document.getElementsByTagName("input");
+                for (var i = 0; i < per.length; i++) {
+                    var camp = per[i].getAttribute("value");
+                    if (camp == valor)
+                        return false;
+                }
+                    
                 //Obteniendo valores
                 var nombre = $("#idUsuario option:selected").attr("nombre");
                 var cargo = $("#idUsuario option:selected").attr("cargo");
