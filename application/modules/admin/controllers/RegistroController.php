@@ -54,21 +54,21 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     
                    $ruta = 'admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;
                     
-                  /*
+                  
                   try {
                         $mail = new Zend_Mail();
                         $html = "<b>Aca va todo el html</b></br><h1>NUEVO</h1>";
                         $mail->setBodyHtml($html);
-                        $mail->setFrom('jsteve.villano.esteban@gmail.com', 'Softein');
-                        $mail->addTo('jsteve.villano.esteban@gmail.com','john');
+                        $mail->setFrom('jsteve.villano@gmail.com', 'Softein');
+                        $mail->addTo('jsteve.villano@gmail.com','john');
                         $mail->setSubject('titulo del mensaje');
                         $mail->send();
                     } catch (Zend_Exception $e) {
                         var_dump($e->getMessage());
                     }
                     echo "se envio correo";
-                    exit;
-                    */
+                    //exit;
+                    
                     
                     
                     $this->_flashMessenger->addMessage("
