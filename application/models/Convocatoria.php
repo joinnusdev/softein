@@ -14,28 +14,20 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
     const TIPO_CONVOCATORIA = '2';
     const TABLA_CONVOCATORIA = 'pmsj_convoca';
     
-    
+    public function init(){
+        Zend_Db_Table::setDefaultAdapter('db');
+        $this->_db = $this->getDefaultAdapter();
+    }
     
     private function _guardar($datos, $condicion = NULL) {
-        $id = 0;
-        if (!empty($datos['idDetalleEmpresa'])) {
-            $id = (int) $datos['idDetalleEmpresa'];
-        }
-        unset($datos['idDetalleEmpresa']);
-        $datos = array_intersect_key($datos, array_flip($this->_getCols()));
+        Zend_Db_Table::setDefaultAdapter('db');
+        $db = $this->_db;
+        $where = $db->quoteInto('ID = ?', $datos['ID']);
 
-        if ($id > 0) {
-            $condicion = '';
-            if (!empty($condicion)) {
-                $condicion = ' AND ' . $condicion;
-            }
-
-            $cantidad = $this->update($datos, 'idDetalleEmpresa = ' . $id . $condicion);
-            $id = ($cantidad < 1) ? 0 : $id;
-        } else {
-            $id = $this->insert($datos);
-        }
-        return $id;
+        $db->delete($this->_name, $where);        
+        $id = $db->insert($this->_name, $datos);
+     
+     return $id;
     }
 
     public function actualizarDatos($datos) {
@@ -43,13 +35,16 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
     }
    
     public function listarConvocatoria($idEmpresa = NULL)
-    {
+    {   
         $fecha = Zend_Date::now()->toString('Y-M-d');
         
-        $db = $this->getAdapter();
+        $this->_updateDB($fecha);
+        
+        $db = $this->_db;
 
         $select = $db->select()
                 ->from(array('c' => $this->_name));
+            
         if ($idEmpresa){
                 $select->joinLeft(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA), 
                         'c.ID = ce.idConvocatoria AND ce.idEmpresa= ' . $idEmpresa , 
@@ -71,22 +66,22 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
     
     public function getConvocatoriaPorId($id) 
     {
-        $query = $this->getAdapter()->select()
+        $query = $this->_db->select()
                 ->from($this->_name)
                 ->where('ID = ?', $id);
-        return $this->getAdapter()->fetchRow($query);
+        return $this->_db->fetchRow($query);
     }
     
     
     
     public function eliminarExperiencia($id){
-        $where = $this->getAdapter()->quoteInto('idDetalleEmpresa=?', $id);
-            $this->delete($where);
+        $where = $this->_db->quoteInto('idDetalleEmpresa=?', $id);
+        $this->_db->delete($this->_name, $where);
     }
     
     public function validarEdicion()
     {
-        $query = $this->getAdapter()
+        $query = $this->_db
                 ->select()->from(array('c' => $this->_name))
                 ->joinInner(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA), 
                         'c.ID = ce.idConvocatoria')
@@ -94,8 +89,33 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
                 ->where('u.tipoUsuario = ?', App_Model_Usuario::TIPO_ADMIN)
                 ->limit(50);
 
-        return $this->getAdapter()->fetchAll($query);
+        return $this->_db->fetchAll($query);
     }
-    
+    private function _updateDB($fecha) {        
+        Zend_Db_Table::setDefaultAdapter('dbconv');
+        
+        $db = $this->_db;
+        
+        $select = $db->select()
+                ->from(array('c' => $this->_name))
+                ->where('c.limite >= ?', $fecha)
+                ->where('c.estado = ?', self::ESTADO_ACTIVO)
+                ->where('c.tipo = ?', self::TIPO_CONVOCATORIA)
+                ->group('c.ID')
+                ->order('c.limite desc')
+                ;
+        
+        $result = $db->fetchAll($select);
+        
+        Zend_Db_Table::setDefaultAdapter('db');
+        foreach ($result as $item) {
+            $this->actualizarDatos($item);
+        }
+        
+        
+        
+    }
+
+
    
 }

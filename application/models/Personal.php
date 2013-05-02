@@ -13,7 +13,10 @@ class App_Model_Personal extends App_Db_Table_Abstract {
     const ESTADO_ELIMINADO = '0';
     const TABLA_CONTACTO = 'personal';
     
-    
+    public function init(){
+        Zend_Db_Table::setDefaultAdapter('db');
+        $this->_db = $this->getDefaultAdapter();
+    }
     
     private function _guardar($datos, $condicion = NULL) {
         $id = 0;
@@ -21,6 +24,7 @@ class App_Model_Personal extends App_Db_Table_Abstract {
             $id = (int) $datos['idPersonal'];
         }
         unset($datos['idPersonal']);
+        
         $datos = array_intersect_key($datos, array_flip($this->_getCols()));
 
         if ($id > 0) {
@@ -29,10 +33,10 @@ class App_Model_Personal extends App_Db_Table_Abstract {
                 $condicion = ' AND ' . $condicion;
             }
 
-            $cantidad = $this->update($datos, 'idPersonal = ' . $id . $condicion);
+            $cantidad = $this->_db->update($this->_name, $datos, 'idPersonal = ' . $id . $condicion);
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
-            $id = $this->insert($datos);
+            $id = $this->_db->insert($this->_name, $datos);
         }
         return $id;
     }
@@ -43,28 +47,28 @@ class App_Model_Personal extends App_Db_Table_Abstract {
    
     public function listarPersonal($idEmpresa) 
     {
-      $query = $this->getAdapter()
-                ->select()->from(array('c' => $this->_name))
+      $query = $this->_db->select()
+          ->from(array('c' => $this->_name))
                 ->where('c.estado = ?', App_Model_Personal::ESTADO_ACTIVO)
                         ->where('c.idEmpresa = ?', $idEmpresa)
                         ->order('c.apellido')                
                 ;
-      return $this->getAdapter()->fetchAll($query);
+      return $this->_db->fetchAll($query);
     }
     
     public function getPersonalPorId($id) 
     {
-        $query = $this->getAdapter()->select()
+        $query = $this->_db->select()
                 ->from($this->_name)
                 ->where('idPersonal = ?', $id);
-        return $this->getAdapter()->fetchRow($query);
+        return $this->_db->fetchRow($query);
     }
     
     
     
     public function eliminarPersonal($id){
-        $where = $this->getAdapter()->quoteInto('idPersonal =?', $id);
-        $this->delete($where);
+        $where = $this->_db->quoteInto('idPersonal =?', $id);
+        $this->_db->delete($this->_name, $where);
     }
     
    

@@ -14,7 +14,10 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
     const ESTADO_ELIMINADO = '0';
     const TABLA_DETALLEEMPRESA = 'detalleempresa';
     
-    
+    public function init(){
+        Zend_Db_Table::setDefaultAdapter('db');
+        $this->_db = $this->getDefaultAdapter();
+    }
     
     private function _guardar($datos, $condicion = NULL) {
         $id = 0;
@@ -30,10 +33,10 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
                 $condicion = ' AND ' . $condicion;
             }
 
-            $cantidad = $this->update($datos, 'idDetalleEmpresa = ' . $id . $condicion);
+            $cantidad = $this->_db->update(self::TABLA_DETALLEEMPRESA, $datos, 'idDetalleEmpresa = ' . $id . $condicion);
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
-            $id = $this->insert($datos);
+            $id = $this->_db->insert(self::TABLA_DETALLEEMPRESA, $datos);
         }
         return $id;
     }
@@ -44,7 +47,7 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
    
     public function listarExperiencia($idEmpresa = NULL) 
     {
-       $db = $this->getAdapter();
+       $db = $this->_db;
 
        $select = $db->select()
                 
@@ -77,17 +80,17 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
     
     public function getExperienciaPorId($id) 
     {
-        $query = $this->getAdapter()->select()
+        $query = $this->_db->select()
                 ->from($this->_name)
                 ->where('idDetalleEmpresa = ?', $id);
-        return $this->getAdapter()->fetchRow($query);
+        return $this->_db->fetchRow($query);
     }
     
     
     
     public function eliminarExperiencia($id){
-        $where = $this->getAdapter()->quoteInto('idDetalleEmpresa=?', $id);
-            $this->delete($where);
+        $where = $this->_db->quoteInto('idDetalleEmpresa=?', $id);
+            $this->_db->delete(self::TABLA_DETALLEEMPRESA, $where);
     }
     
    

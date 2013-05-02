@@ -11,6 +11,11 @@ class App_Model_DetaExperiencia extends App_Db_Table_Abstract {
 
     const TABLA_EMPRESA = 'detaexperiencia';
     
+    public function init(){
+        Zend_Db_Table::setDefaultAdapter('db');
+        $this->_db = $this->getDefaultAdapter();
+    }
+    
     private function _guardar($datos, $condicion = NULL) {
        
         $id = 0;
@@ -27,12 +32,14 @@ class App_Model_DetaExperiencia extends App_Db_Table_Abstract {
               exit;
             }
 
-           $cantidad = $this->update($datos, 'idDetalleExperiencia = ' . $id . $condicion);
+           $cantidad = $this->_db->update(self::TABLA_EMPRESA, 
+               $datos, 'idDetalleExperiencia = ' . $id . $condicion
+           );
          
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
             
-            $id = $this->insert($datos);
+            $id = $this->_db->insert(self::TABLA_EMPRESA, $datos);
         }
         return $id;
     }
@@ -43,29 +50,29 @@ class App_Model_DetaExperiencia extends App_Db_Table_Abstract {
    
     public function listarUsuario()
     {
-        $query = $this->getAdapter()
+        $query = $this->_db
                 ->select()->from(array('e' => $this->_name))
                 ->where('u.estado = ?', App_Model_Usuario::ESTADO_ACTIVO)
                 ->where('u.tipoUsuario = ?', App_Model_Usuario::TIPO_ADMIN)
                 ->limit(50);
 
-        return $this->getAdapter()->fetchAll($query);
+        return $this->_db->fetchAll($query);
     }
     
     public function getEmpresaPorId($id, $tipo = NULL) 
     {
-        $query = $this->getAdapter()->select()
+        $query = $this->_db->select()
                 ->from($this->_name)
                 ->where('idEmpresa = ?', $id);
         if ($tipo)
             $query->where ('idTipoUsuario = ?', $tipo);
         
-        return $this->getAdapter()->fetchRow($query);
+        return $this->_db->fetchRow($query);
     }    
     
     public function getValidarEmpresaLogin($dato,$tipo) 
     {
-         $query = $this->getAdapter()->select()
+         $query = $this->_db->select()
                 ->from($this->_name);
               
             if ($tipo == 1){ //email
@@ -77,17 +84,17 @@ class App_Model_DetaExperiencia extends App_Db_Table_Abstract {
             }
             
      
-        return $this->getAdapter()->fetchRow($query);
+        return $this->_db->fetchRow($query);
     }
     
     public function eliminarDetalle($id){
-        $where = $this->getAdapter()->quoteInto('idConvocatoriaExperiencia =?', $id);
-        $this->delete($where);
+        $where = $this->_db->quoteInto('idConvocatoriaExperiencia =?', $id);
+        $this->_db->delete(self::TABLA_EMPRESA,$where);
     }
     
     public function getExperienciaEmpresa($idEmpresa, $idConvocatoria) 
     {
-        $query = $this->getAdapter()->select()
+        $query = $this->_db->select()
                 ->from(array('ce' => App_Model_ConvocatoriaEmpresa::TABLA_EMPRESA))
                 ->joinInner(array('d' => $this->_name), 
                         'ce.idConvocatoriaExperiencia = d.idConvocatoriaExperiencia')
@@ -98,6 +105,6 @@ class App_Model_DetaExperiencia extends App_Db_Table_Abstract {
                 ->where('ce.idEmpresa = ?', $idEmpresa)
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
-        return $this->getAdapter()->fetchAll($query);
+        return $this->_db->fetchAll($query);
     }   
 }

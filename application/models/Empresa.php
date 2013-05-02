@@ -17,6 +17,11 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
     const VERIFICAR_ESTADO = 2;
     const TIPO_ADMIN = 1;
     
+    public function init(){
+        Zend_Db_Table::setDefaultAdapter('db');
+        $this->_db = $this->getDefaultAdapter();
+    }
+    
     public function loguinUsuario($username, $passwordIng, $tipoUsuario)
     {   
 
@@ -24,7 +29,7 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
 
         try {
             
-            $db = $this->getAdapter();
+            $db = $this->_db;
             $adapter = new Zend_Auth_Adapter_DbTable($db);
             $adapter->setTableName(self::TABLA_EMPRESA)
                 ->setIdentityColumn('email')
@@ -83,11 +88,11 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
               exit;
             }
 
-           $cantidad = $this->update($datos, 'idEmpresa= ' . $id . $condicion);
+           $cantidad = $this->_db->update(self::TABLA_EMPRESA, $datos, 'idEmpresa= ' . $id . $condicion);
          
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
-            $id = $this->insert($datos);
+            $id = $this->_db->insert(self::TABLA_EMPRESA, $datos);
         }
         return $id;
     }
@@ -98,30 +103,30 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
    
     public function listarUsuario() 
     {
-        $query = $this->getAdapter()
+        $query = $this->_db
                 ->select()->from(array('e' => $this->_name))
                 ->where('u.estado = ?', App_Model_Usuario::ESTADO_ACTIVO)
                 ->where('u.tipoUsuario = ?', App_Model_Usuario::TIPO_ADMIN)
                 ->limit(50);
 
-        return $this->getAdapter()->fetchAll($query);
+        return $this->_db->fetchAll($query);
     }
     
     public function getEmpresaPorId($id, $tipo = NULL) 
     {
-        $query = $this->getAdapter()->select()
+        $query = $this->_db->select()
                 ->from($this->_name)
                 ->where('idEmpresa = ?', $id);
         if ($tipo)
             $query->where ('idTipoUsuario = ?', $tipo);
         
-        return $this->getAdapter()->fetchRow($query);
+        return $this->_db->fetchRow($query);
     }
     
     
     public function getValidarEmpresaLogin($dato,$tipo) 
     {
-         $query = $this->getAdapter()->select()
+         $query = $this->_db->select()
                 ->from($this->_name);
               
             if ($tipo == 1){ //email
@@ -133,7 +138,7 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
             }
             
      
-        return $this->getAdapter()->fetchRow($query);
+        return $this->_db->fetchRow($query);
     }
     
     

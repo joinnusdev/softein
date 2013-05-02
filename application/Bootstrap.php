@@ -72,9 +72,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $cacheManager = $this->getResource('cachemanager');
         Zend_Registry::set('cache', $cacheManager->getCache($config->app->cache));*/
 
-        $this->_executeResource('db');
-        $adapter = $this->getResource('db');
-        Zend_Registry::set('db', $adapter);
+        $this->_executeResource('multidb');        
+        $adapter = $this->getPluginResource('multidb');        
+        Zend_Registry::set('db', $adapter->getDb('db'));
+        Zend_Registry::set('dbconv', $adapter->getDb('dbconv'));        
 
         $this->_executeResource('log');
         $log = $this->getResource('log');

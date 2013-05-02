@@ -13,6 +13,10 @@ class App_Model_Contacto extends App_Db_Table_Abstract {
     const ESTADO_ELIMINADO = '0';
     const TABLA_CONTACTO = 'contacto';
     
+    public function init(){
+        Zend_Db_Table::setDefaultAdapter('db');
+        $this->_db = $this->getDefaultAdapter();
+    }
     
     
     private function _guardar($datos, $condicion = NULL) {
@@ -29,10 +33,10 @@ class App_Model_Contacto extends App_Db_Table_Abstract {
                 $condicion = ' AND ' . $condicion;
             }
 
-            $cantidad = $this->update($datos, 'idContacto = ' . $id . $condicion);
+            $cantidad = $this->_db->update($this->_name, $datos, 'idContacto = ' . $id . $condicion);
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
-            $id = $this->insert($datos);
+            $id = $this->_db->insert($this->_name, $datos);
         }
         return $id;
     }
@@ -43,26 +47,25 @@ class App_Model_Contacto extends App_Db_Table_Abstract {
    
     public function listarContacto() 
     {
-      $query = $this->getAdapter()
+      $query = $this->_db
                 ->select()->from(array('c' => $this->_name))
-                //->where('c.estado = ?', App_Model_Contacto::ESTADO_ACTIVO)
                 ->limit(50);
-      return $this->getAdapter()->fetchAll($query);
+      return $this->_db->fetchAll($query);
     }
     
     public function getContactoPorId($id) 
     {
-        $query = $this->getAdapter()->select()
+        $query = $this->_db->select()
                 ->from($this->_name)
                 ->where('idContacto = ?', $id);
-        return $this->getAdapter()->fetchRow($query);
+        return $this->_db->fetchRow($query);
     }
     
     
     
     public function eliminarContacto($id){
-        $where = $this->getAdapter()->quoteInto('idContacto =?', $id);
-            $this->delete($where);
+        $where = $this->_db->quoteInto('idContacto =?', $id);
+            $this->_db->delete($where);
     }
     
    
