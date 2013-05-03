@@ -44,16 +44,23 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
         $modelEmpresa = new App_Model_Empresa();
         $empresa = $modelEmpresa->getEmpresaPorId($idEmpresa);
        
-        
         $form->populate($empresa);  
         $fechaConstitucion=implode('-',array_reverse(explode('-',$empresa['fechaConstitucion'])));
         $form->getElement('fechaConstitucion')->setValue($fechaConstitucion);
-       
+        //$form->getElement('clavesita')->setValue('●●●●●●●●');
+        //$form->getElement('clave')->setValue('dddddd');
         $this->view->form = $form;
         
         if($this->getRequest()->isPost()){            
             
             $data = $this->getRequest()->getPost();
+            
+            if($data['clavesita']!= '........'){
+                $nuevaClave = md5($data['clavesita']);
+                
+            }else{
+                 $nuevaClave = $empresa['clave'];
+            }        
             
                 $fechaConstitucion=implode('-',array_reverse(explode('-',$data['fechaConstitucion'])));
                 $modelEmpresa = new App_Model_Empresa();
@@ -61,7 +68,7 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
                 $data['idEmpresa'] = $idEmpresa;
                 $data['fechaConstitucion'] = $fechaConstitucion;
                 $data['nroDocumento'] = $data['nroDocumento'];
-                $data['clave'] = md5($data['clave']);
+                $data['clave'] = $nuevaClave;
                 $id = $modelEmpresa ->actualizarDatos($data);
                 
                 $this->_flashMessenger->addMessage("Datos Actualizados");

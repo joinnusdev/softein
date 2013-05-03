@@ -75,13 +75,19 @@ class App_Form_CrearEmpresa extends App_Form
         $e->setLabel('Password');
         $e->setAttrib('class', 'required');
         $e->setAttrib('minlength', '8');
-        
         $e->setRequired();
         $v = new Zend_Validate_StringLength(array('min'=>5,'max'=>30));
         $e->addValidator($v);
         $this->addElement($e);
         
-        
+  
+        $e = new Zend_Form_Element_Text('clavesita');
+        $e->setAttrib('class', 'required');
+        $e->setAttrib('minlength', '8');
+        $v = new Zend_Validate_StringLength(array('min'=>5,'max'=>30));
+        $e->addValidator($v);
+        $this->addElement($e);
+                
         
         
         
