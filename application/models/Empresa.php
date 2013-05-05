@@ -101,6 +101,12 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
         return $this->_guardar($datos);
     }
    
+    public function insertEmpresa($data){
+       $idUS = $this->insert($data);
+       return $idUS;
+       
+    }
+    
     public function listarUsuario() 
     {
         $query = $this->_db
@@ -142,10 +148,7 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
     }
     
     
-    
-    
-    
-    
+     
     public function _getRealIP()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
