@@ -11,7 +11,8 @@ class Admin_ContactoController extends App_Controller_Action_Admin
     public function indexAction()
     {     
         $modelContacto = new App_Model_Contacto();
-        $listaContacto = $modelContacto->listarContacto();
+        $idEmpresa = $this->view->authData->idEmpresa;
+        $listaContacto = $modelContacto->listarContacto($idEmpresa);
         $this->view->listaContacto = $listaContacto;
         
         
@@ -25,9 +26,9 @@ class Admin_ContactoController extends App_Controller_Action_Admin
         $this->view->headScript()->appendFile(
             $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
         );
-        
+        $idEmpresa = $this->view->authData->idEmpresa;
         $modelContacto = new App_Model_Contacto();
-        $total = $modelContacto->listarContacto();
+        $total = $modelContacto->listarContacto($idEmpresa);
 
         if(count($total)==3){
 

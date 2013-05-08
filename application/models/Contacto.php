@@ -45,10 +45,11 @@ class App_Model_Contacto extends App_Db_Table_Abstract {
         return $this->_guardar($datos);
     }
    
-    public function listarContacto() 
+    public function listarContacto($idEmpresa) 
     {
       $query = $this->_db
                 ->select()->from(array('c' => $this->_name))
+                ->where('c.idEmpresa = ?', $idEmpresa)
                 ->limit(50);
       return $this->_db->fetchAll($query);
     }

@@ -31,14 +31,14 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
             $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
         ); 
         
+        $idEmpresa = $this->view->authData->idEmpresa;
         
         
         $modelContacto = new App_Model_Contacto();
-        $listaContacto = $modelContacto->listarContacto();
+        $listaContacto = $modelContacto->listarContacto($idEmpresa);
         $this->view->listaContacto = $listaContacto;
         
         
-        $idEmpresa = $this->view->authData->idEmpresa;
         
         $form = new App_Form_CrearEmpresa();
         $modelEmpresa = new App_Model_Empresa();
