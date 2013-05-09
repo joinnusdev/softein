@@ -99,7 +99,7 @@ class Admin_RegistroController extends App_Controller_Action_Admin
                     Verifique su cuenta de correo ". $data['email'] ." que contiene un mensaje con un link de
                     activacion para su cuenta. <p> Si el mensaje tardara mucho en llegar o no lo
                     visualiza verifique su carpeta de correos spam.
-                    Se le envió un correo para confirmar su registro");
+                    Se le envió un correo para confirmar su registro.");
                     $this->_redirect('/admin/auth');
                 }else{
                     $this->_flashMessenger->addMessage("Ocurrio un error");
