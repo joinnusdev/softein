@@ -82,7 +82,8 @@ class App_Form_CrearExperiencia extends App_Form
         $e->setRequired(true);
         $this->addElement($e);
         
-        $e = new Zend_Form_Element_Text('referenciaCargo');        
+        $e = new Zend_Form_Element_Text('referenciaCargo');  
+        $e->setAttrib('size', '40');
         $e->setFilters(array("StripTags", "StringTrim"));
         $e->setRequired(true);
         $this->addElement($e);
