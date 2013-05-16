@@ -169,9 +169,21 @@ $(document).ready(function() {
 </div>
 <script>
 $(document).ready(function(){    
-    $("#fechaInicio").datepicker();
+    $("#fechaInicio").datepicker({
+        "dateFormat" : "yy-mm-dd",
+        onClose: function( selectedDate ) {
+            console.log(selectedDate);
+            fecha = selectedDate.split("-");
+            console.log(fecha);
+            f = new Date(fecha[0], parseInt(fecha[1]) - 1, fecha[2]);
+            $( "#fechaFin" ).datepicker( "option", "minDate", f);
+            $( "#fechaFin" ).val(selectedDate);
+        }
+    });
     $( "#fechaInicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#fechaInicio" ).val("<?=$this->experiencia["fechaInicio"]?>");
     $("#fechaFin").datepicker();
     $( "#fechaFin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#fechaFin" ).val("<?=$this->experiencia["fechaFin"]?>");
 });
 </script>

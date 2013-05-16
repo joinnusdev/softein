@@ -57,7 +57,7 @@ class Admin_ExperienciaController extends App_Controller_Action_Admin
         $modelExperiencia = new App_Model_Experiencia();
         $form = new App_Form_CrearExperiencia();
         $id = $this->_getParam('id');
-        $experiencia = $modelExperiencia->getExperienciaPorId($id);
+        $this->view->experiencia = $experiencia = $modelExperiencia->getExperienciaPorId($id);
         $form->populate($experiencia);        
         if($this->getRequest()->isPost()){            
             $data = $this->getRequest()->getParams();            

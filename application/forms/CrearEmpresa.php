@@ -105,7 +105,7 @@ class App_Form_CrearEmpresa extends App_Form
         $e = new Zend_Form_Element_Text('fechaConstitucion');
         $e->setAttrib('class', 'required');
         $e->setRequired(true);
-        $e->setFilters(array("StripTags", "StringTrim"));
+        //$e->setFilters(array("StripTags", "StringTrim"));
         $this->addElement($e);        
         
         $e = new Zend_Form_Element_Text('aniosExperiencia');

@@ -360,5 +360,6 @@ $(document).ready(function() {
 $(document).ready(function(){    
     $("#fechaConstitucion").datepicker();
     $( "#fechaConstitucion" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+    $("#fechaConstitucion").val("<?=$this->fechaConstitucion?>");
 });
 </script>

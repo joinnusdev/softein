@@ -44,9 +44,11 @@ class Admin_EmpresaController extends App_Controller_Action_Admin
         $modelEmpresa = new App_Model_Empresa();
         $empresa = $modelEmpresa->getEmpresaPorId($idEmpresa);
        
-        $form->populate($empresa);  
+        //$form->populate($empresa);  
+        $form->isValid($empresa);
         $fechaConstitucion=implode('-',array_reverse(explode('-',$empresa['fechaConstitucion'])));
         $form->getElement('fechaConstitucion')->setValue($fechaConstitucion);
+        $this->view->fechaConstitucion = $fechaConstitucion;
         //$form->getElement('clavesita')->setValue('●●●●●●●●');
         //$form->getElement('clave')->setValue('dddddd');
         $this->view->form = $form;
