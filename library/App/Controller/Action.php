@@ -140,8 +140,8 @@ class App_Controller_Action extends Zend_Controller_Action
                     ->setCredential($password);
                 
             
-               /*$authAdapter->getDbSelect()
-                ->where('estado = ?', App_Model_Empresa::ESTADO_ACTIVO);*/
+               $authAdapter->getDbSelect()
+                ->where('consorcio = ?', 0);
                 
                 $auth = Zend_Auth::getInstance();
                 $result = $auth->authenticate($authAdapter);

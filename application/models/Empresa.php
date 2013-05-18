@@ -160,6 +160,15 @@ class App_Model_Empresa extends App_Db_Table_Abstract {
         return $_SERVER['REMOTE_ADDR'];
     }
     
+    public function getConsorciosEmpresa($idEmpresa) 
+    {
+        $query = $this->_db->select()
+                ->from($this->_name)
+                ->where('consorcio = ?', $idEmpresa);
+        
+        return $this->_db->fetchAll($query);
+    }
+    
     
     
    
