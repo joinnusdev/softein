@@ -66,7 +66,7 @@ class App_Model_Contacto extends App_Db_Table_Abstract {
     
     public function eliminarContacto($id){
         $where = $this->_db->quoteInto('idContacto =?', $id);
-            $this->_db->delete($where);
+            $this->_db->delete($this->_name, $where);
     }
     
    
