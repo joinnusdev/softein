@@ -425,5 +425,126 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
         $this->_flashMessenger->addMessage("Personal eliminado correctamente");
         $this->_redirect('/admin/consorcio/personal/empresa/'.$idEmpresa);
     }
+    
+    public function referenciaAction()
+    {     
+        $model = new App_Model_Referencia();
+        $idEmpresa = $this->_getParam("empresa");
+        $this->view->empresa = $idEmpresa;
+        $lista = $model->listarReferencia($idEmpresa);
+        $this->view->listaContacto = $lista;
+    }
+    
+    public function referenciaCrearAction() {
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+        );
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        );        
+        $idEmpresa = $this->_getParam("empresa");
+        if ($idEmpresa) {
+            $modelRef = new App_Model_Referencia();
+            $form = new App_Form_CrearContacto();
+            $this->view->form = $form;
+            $this->view->empresa = $idEmpresa;
+            
+            if ($this->getRequest()->isPost()) {
+
+                $data = $this->getRequest()->getPost();
+                if ($form->isValid($data)) {
+                    $fechaRegistro = Zend_Date::now()->toString('YYYY-MM-dd HH:mm:ss');
+                    $data['idEmpresa'] = $idEmpresa;
+                    $data['fechaRegistro'] = $fechaRegistro;
+                    $data['estado'] = App_Model_Contacto::ESTADO_ACTIVO;
+                    $id = $modelRef->actualizarDatos($data);
+
+                    $this->_flashMessenger->addMessage("Referencia creada con exito");
+                    $this->_redirect('/admin/consorcio/referencia/empresa/'.$idEmpresa);
+                } else {
+                    $form->populate($data);
+                }
+            }
+        } else {
+            $this->_redirect('/admin/consorcio');
+        }
+    }
+    
+    public function referenciaEditarAction()
+    {        
+         $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+        );
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        );
+        
+        $modelRef = new App_Model_Referencia();
+        $form = new App_Form_CrearContacto();
+        $id = $this->_getParam('id');
+        $idEmpresa = $this->_getParam('empresa');
+        $referencia = $modelRef->getReferenciaPorId($id);
+        $form->populate($referencia);
+        if($this->getRequest()->isPost()){            
+            $data = $this->getRequest()->getParams();             
+            $data['estado'] = App_Model_Contacto::ESTADO_ACTIVO;
+            $data['idReferencia'] = $id;
+            if ($form->isValid($data)) {
+                $id = $modelRef->actualizarDatos($data);
+                $this->_flashMessenger->addMessage("Referencia editada con éxito");
+                $this->_redirect('/admin/consorcio/referencia/empresa/'.$idEmpresa);
+                
+            } else {
+                $form->populate($data);                
+            }
+        }
+        $this->view->form = $form;
+        $this->view->empresa = $idEmpresa;
+    }
+    
+    public function personalExplaboralAction() {
+        $idPersonal = $this->_getParam("id");
+        if ($idPersonal) {
+            $modelExperiencia = new App_Model_Experiencia();
+            $listaExperiencia = $modelExperiencia->listarExperiencia(NULL, $idPersonal);
+            $this->view->listaExperiencia = $listaExperiencia;
+            $this->view->empresa = $idPersonal;
+        } else {
+            $this->_redirect('/admin/consorcio');
+        }
+    }
+    
+    public function personalExplaboralCrearAction() {
+        $idPersonal = $this->_getParam("personal");
+        if ($idPersonal) {
+            $this->view->headScript()->appendFile(
+                    $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+            );
+            $this->view->headScript()->appendFile(
+                    $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+            );
+
+            $form = new App_Form_CrearExperiencia();
+            $this->view->form = $form;
+
+            if ($this->getRequest()->isPost()) {
+
+                $data = $this->getRequest()->getPost();
+
+                //if ($form->isValid($data)) {
+                $modelExperiencia = new App_Model_Experiencia();
+                $data['idPersonal'] = $idPersonal;
+                $id = $modelExperiencia->actualizarDatos($data);
+
+                $this->_flashMessenger->addMessage("Experiencia Laboral creada con exito");
+                $this->_redirect('/admin/consorcio/personal-explaboral/id/' . $idPersonal);
+
+            }
+        } else {
+            $this->_redirect('/admin/consorcio');
+            
+        }
+    }
+    
 }
 

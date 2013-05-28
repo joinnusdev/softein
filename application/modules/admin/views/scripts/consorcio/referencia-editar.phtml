@@ -1,0 +1,76 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#referencia").validate();
+});
+</script>
+<ul class="breadcrumb">    
+    <li>
+        <a href="/admin/consorcio/">Referencia</a> <span class="divider">/</span>
+        
+    </li>    
+    <li>
+                    <a href="#">Editar Referencia</a>
+            </li>
+</ul>
+<div id="content_wrapper">
+     <div id="content">
+         <div class="inner">
+             <form  name="referencia" id="referencia" method="post" enctype="multipart/form-data" class="well">
+                <div class="header">
+                    <h3></h3>
+                </div>
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="clear"></div>
+                        <label for="nombre" class="span2 no-margin">Nombres:</label>
+                        <div class="span6 no-margin">
+                            <?php echo $this->form->nombre;?>
+                            
+                        </div>
+                        
+                        <div class="clear"></div>
+                        <label for="apellido" class="span2 no-margin">Apellidos:</label>
+                        <div class="span6 no-margin">
+                            <?php echo $this->form->apellido;?>
+                            
+                        </div>
+                        
+                        <div class="clear"></div>
+                        <label for="correo" class="span2 no-margin">Correo:</label>
+                        <div class="span6 no-margin">
+                            <?php echo $this->form->email;?>
+                            
+                        </div>
+                        
+                        
+                        <div class="clear"></div>
+                        <label for="correo" class="span2 no-margin">Teléfono:</label>
+                        <div class="span6 no-margin">
+                            <?php echo $this->form->telefono;?>
+                            
+                        </div>
+                        
+                        
+                        <div class="clear"></div>
+                        <label for="correo" class="span2 no-margin">Cargo:</label>
+                        <div class="span6 no-margin">
+                            <?php echo $this->form->cargo;?>
+                            
+                        </div>
+                        
+                        
+                        <div class="clear"></div>
+                        <?php echo $this->form->csrf; ?>
+                        <?php if ($this->form->csrf->hasErrors()) echo "Intentalo nuevamente";?>
+                    </div>
+                    <div class="clear"></div>
+                                        
+                </div>
+                <div class="form-actions">
+                    <?php echo $this->form->guardar->setAttrib('class', 'btn pull-right')?>                    
+                </div>
+        </form>
+    </div>
+ </div>
+</div>
+

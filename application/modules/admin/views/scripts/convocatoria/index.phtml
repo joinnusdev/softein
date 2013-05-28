@@ -33,6 +33,14 @@
                                             rowspan="1" colspan="1" style="width: 55px;" aria-label="Date registered: activate to sort column ascending">
                                             Fecha Inicio
                                         </th>
+                                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" 
+                                            rowspan="1" colspan="1" style="width: 55px;" aria-label="Date registered: activate to sort column ascending">
+                                            Fecha Limite
+                                        </th>
+                                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" 
+                                            rowspan="1" colspan="1" style="width: 55px;" aria-label="Date registered: activate to sort column ascending">
+                                            Hora Limite
+                                        </th>
                                         
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" c
                                             olspan="1" style="width: 80px;" aria-label="Actions: activate to sort column ascending">
@@ -48,7 +56,9 @@
                                     <tr class="odd">
                                         <td class="  sorting_1"><?php echo $experiencia['codigo']?></td>
                                         <td class="center "><?php echo $experiencia['proceso']?></td>
-                                        <td class="center "><?php echo $experiencia['fecha']?></td>                                        
+                                        <td class="center "><?php echo $experiencia['fecha']?></td>
+                                        <td class="center "><?php echo $experiencia['limite']?></td>
+                                        <td class="center "><?php echo $experiencia['hora_lim']?></td>
                                         <td class="center ">                                            
                                             <?php if($experiencia['empresa'] != $this->authData->idEmpresa) {?>
                                             <a class="btn btn-info" href="/admin/convocatoria/paso1/id/<?php echo $experiencia["ID"]; ?>">

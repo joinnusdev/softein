@@ -7,7 +7,7 @@
  */
 class App_Model_Experiencia extends App_Db_Table_Abstract {
 
-    protected $_name = 'detalleempresa';    
+    protected $_name = 'detalleempresa';
     protected $_namePais = 'pais';    
 
     const ESTADO_ACTIVO = '1';
@@ -45,7 +45,7 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
         return $this->_guardar($datos);
     }
    
-    public function listarExperiencia($idEmpresa = NULL) 
+    public function listarExperiencia($idEmpresa = NULL, $idPersonal = NULL) 
     {
        $db = $this->_db;
 
@@ -67,6 +67,8 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
                 
        if ($idEmpresa)
            $select->where('e.idEmpresa = ?', $idEmpresa);
+       if ($idPersonal)
+           $select->where('e.idPersonal = ?', $idPersonal);
 
         return $db->fetchAll($select);
       
