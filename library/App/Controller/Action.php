@@ -47,10 +47,10 @@ class App_Controller_Action extends Zend_Controller_Action
 
         
 
-        if (APPLICATION_ENV != 'production') {
-            $sep = sprintf('[%s]', strtoupper(substr(APPLICATION_ENV, 0, 3)));
-            $this->view->headTitle()->prepend($sep);
-        }
+//        if (APPLICATION_ENV != 'production') {
+//            $sep = sprintf('[%s]', strtoupper(substr(APPLICATION_ENV, 0, 3)));
+//            $this->view->headTitle()->prepend($sep);
+//        }
     }
 
 
