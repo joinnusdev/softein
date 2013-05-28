@@ -1,7 +1,7 @@
 <div>
     <ul class="breadcrumb">
             <li>
-                    <a href="#">Experiencia del Personal</a> <span class="divider">/</span>
+                    <a href="/admin/consorcio/personal/empresa/<?php echo $this->personal?>">Experiencia del Personal</a> <span class="divider">/</span>
             </li>
             <li>
                     <a href="/admin/consorcio/personal-explaboral-crear/personal/<?php echo $this->empresa?>">Agregar Experiencia Laboral</a>
@@ -61,11 +61,11 @@
                                         <td class="center "><?php echo $experiencia['fechaFin']?></td>
                                         
                                         <td class="center ">
-                                            <a class="btn btn-info" href="/admin/consorcio/experiencia-editar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>">
+                                            <a class="btn btn-info" href="/admin/consorcio/personal-explaboral-editar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>/personal/<?php echo $this->empresa?>">
                                                 <i class="icon-edit icon-white"></i>  
                                                 Editar                                            
                                             </a>
-                                            <a class="btn btn-danger" href="/admin/consorcio/experiencia-eliminar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>">
+                                            <a class="btn btn-danger" href="/admin/consorcio/experiencia-eliminar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>/personal/<?php echo $this->empresa?>">
                                                 <i class="icon-trash icon-white"></i> 
                                                 Eliminar
                                             </a>
