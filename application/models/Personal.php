@@ -59,8 +59,8 @@ class App_Model_Personal extends App_Db_Table_Abstract {
     public function getPersonalPorId($id) 
     {
         $query = $this->_db->select()
-                ->from($this->_name)
-                ->where('idPersonal = ?', $id);
+                ->from(array('p' => $this->_name))                
+                ->where('p.idPersonal = ?', $id);
         return $this->_db->fetchRow($query);
     }
     

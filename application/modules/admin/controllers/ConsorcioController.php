@@ -348,7 +348,11 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
     }
 
     public function personalCrearAction()
-    {   
+    {  
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js/admin/personal.js'
+        );
+        
         $idEmpresa = $this->_getParam('empresa');
         if (!$idEmpresa)
             $this->_redirect("/admin/consorcio");
@@ -378,11 +382,24 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
     
     public function personalEditarAction()
     {        
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js/admin/personal-editar.js'
+        );
         $model = new App_Model_Personal();
         $form = new App_Form_CrearPersonal();
         $id = $this->_getParam('id');
         $idEmpresa = $this->_getParam('empresa');
         $experiencia = $model->getPersonalPorId($id);
+        
+        $modelEsp = new App_Model_Especialidad();
+        $espec = $modelEsp->getComboEspecialidad($experiencia['idProfesion']);
+        $modelSubEsp = new App_Model_SubEspecialidad();
+        $subespec = $modelSubEsp->getComboSubEspecialidad($experiencia['idSubEspecialidad']);
+        $form->getElement('idEspecialidad')->setMultiOptions(
+            array("0" => "--- Seleccionar ---")+$espec);
+        $form->getElement('idSubEspecialidad')->setMultiOptions(
+            array("0" => "--- Seleccionar ---")+$subespec);
+        
         $form->populate($experiencia);        
         if($this->getRequest()->isPost()){            
             $data = $this->getRequest()->getParams();            

@@ -11,7 +11,7 @@ $(function(){
            this.buscarAlumnoInto("#modalBuscarAlumno");
            this.medioPagoHide("#idMedioPago");
            this.seleccionarAlumno('#modalBuscarAlumno', "#frmIngresos");           
-           this.ComboDependiente("#nivel", "#grado", "-- Seleccionar --", "/admin/grados/get-grados-por-nivel-ajax", "id", "descripcion");
+           this.ComboDependiente("#idProfesion", "#idEspecialidad", "-- Seleccionar --", "/admin/especialidad/especialidad-ajax", "idEspecialidad", "descripcion");
            this.ComboDependienteTipo("#idTipoConcepto", "#idConcepto", "-- Seleccionar --", "/admin/concepto/get-concepto-ajax", "id", "descripcion");
            this.ComboDependienteBanco("#idBanco", "#idCuentaBancaria", "-- Seleccionar --", "/admin/cuenta-bancaria/get-cuenta-bancaria-ajax", "id", "numerocuenta");
            this.appendTableIngresos("#btnAgregarDetalleIngreso", "#idPanelTablaDetalleIngreso");
@@ -44,23 +44,25 @@ $(function(){
         ComboDependiente : function (c, cd, def, url, fieldv, fields) {
             $(c).live("change blur", function(){                
                 var actual = $(this);
-                if (actual.val()!=0) {                    
-                    $(cd).removeAttr("disabled");
+                if (actual.val()!=0) {
                     $.ajax({
-                        url: url,
-                        type: 'post',
+                        dataType: 'json',
+                        type: 'POST',    
+                        url: '/admin/especialidad/especialidad-ajax',
+                                           
                         data: {
                            id : actual.val()
                         },
-                        dataType: 'json',
-                        success: function(response){                            
-                            if (response.status==true) {
-                                var data = response.data;
-                                $(cd).html("");
-                                $.each(data, function(index, value){
-                                    $(cd).append("<option value='"+value[fieldv]+"'>"+value[fields]+"</option>");
-                                    
-                                });
+                        
+                        success: function(data){                            
+                            if(data.length){                               
+                                $(cd).children("option").remove();
+                                $(cd).append('<option value="0"> --- Seleccionar --- </option>');
+                                for(var i = 0;i < data.length; i++){
+                                    for(var elem in data[i]){
+                                        $(cd).append('<option value='+ elem +'>'+ data[i][elem]+'</option>');
+                                    }
+                                }
                             }
                         }
                     });

@@ -56,10 +56,29 @@ class App_Form_CrearPersonal extends App_Form
         $e->addMultiOption('Doctorado', 'Doctorado')
             ->addMultiOption('Maestria', 'Maestria')
             ->addMultiOption('Titulado', 'Titulado')
-            ->addMultiOption('Bachiller', 'Bachiller')
-            ;
+            ->addMultiOption('Bachiller', 'Bachiller');
         $e->setAttrib('class', 'span5');
         $this->addElement($e);
+        
+        $prof = new App_Model_Profesion();        
+        $e = new Zend_Form_Element_Select('idProfesion');        
+        $e->setMultiOptions(array("0" => "--- Seleccionar ---") + $prof->listarProfesiones());
+        $e->setRegisterInArrayValidator(false);
+        $e->setAttrib('class', 'span5');
+        $this->addElement($e);
+        
+        $e = new Zend_Form_Element_Select('idEspecialidad');
+        $e->setMultiOptions(array("0" => "--- Seleccionar ---"));
+        $e->setRegisterInArrayValidator(false);
+        $e->setAttrib('class', 'span5');
+        $this->addElement($e);
+        
+        $e = new Zend_Form_Element_Select('idSubEspecialidad');
+        $e->setMultiOptions(array("0" => "--- Seleccionar ---"));
+        $e->setRegisterInArrayValidator(false);
+        $e->setAttrib('class', 'span5');
+        $this->addElement($e);
+        
         
         $e = new Zend_Form_Element_Text('telefono');
         $e->setFilters(array("StripTags", "StringTrim"));        
