@@ -86,12 +86,15 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
             $header="From: comunica@sigece.softein.com"."\nReply-To:comunica@sigece.softein.com"."\n"; 
                     $header=$header."X-Mailer:PHP/".phpversion()."\n"; 
                     $header=$header."Mime-Version: 1.0\n"; 
-                    $header=$header."Content-Type: text/html";
+                    $header=$header."Content-Type: text/html; charset=utf-8\n";
+
 
                     mail($mail, $subject, $htmlbody, $header);
             
             
-            $this->_flashMessenger->addMessage("Convocatoria Registrada Correctamente");
+            $this->_flashMessenger->addMessage("Su postulación ha sido registrada.
+                                                En pocos minutos recibirá un email con sus datos de registro. 
+                                                Si no lo visualiza revise su carpeta de correo spam");
             $this->_redirect('/admin/convocatoria');
             
         }
