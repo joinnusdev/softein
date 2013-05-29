@@ -69,8 +69,12 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         if ($tipoBD) {
             Zend_Db_Table::setDefaultAdapter('dbconv');
             $db = $this->getDefaultAdapter();
-            $this->_db = $db;
+            $query = $db->select()
+                ->from($this->_name)
+                ->where('ID = ?', $id);
+            return $db->fetchRow($query);            
         }
+        
         $query = $this->_db->select()
                 ->from($this->_name)
                 ->where('ID = ?', $id);

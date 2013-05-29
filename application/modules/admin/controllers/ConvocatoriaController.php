@@ -377,11 +377,15 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $modelConv = new App_Model_Convocatoria();
         $data = $modelConv->getConvocatoriaPorId('261', '1');
         $this->view->convoca = $data;
+        $this->view->fecha = Zend_Date::now()->toString('Y-MM-dd');
         
         $modelExperiencia = new App_Model_Experiencia();
         $form = new App_Form_CrearExperiencia();
         
         $this->view->experiencia = $experiencia = $modelExperiencia->getExperienciaPorId($id);
+        if (!$experiencia)$this->_redirect ('/admin/reportes');
+            
+        
         $form->populate($experiencia);        
         if($this->getRequest()->isPost()){            
             $data = $this->getRequest()->getParams();            

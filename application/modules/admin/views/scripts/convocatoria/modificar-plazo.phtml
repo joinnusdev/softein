@@ -30,7 +30,6 @@ $(document).ready(function() {
                                     <div class="clear"></div>
                                     <label for="fechaInicio" class="span3 no-margin">Fecha de Inicio:</label>
                                     <div class="span7 no-margin">
-                                        <?php //echo $this->form->fechaInicio;?>
                                         <input type="text" name="limite" id="fechaInicio" value="<?php echo $this->convoca['limite']?>"/>
                                     </div>
                                     
@@ -59,23 +58,24 @@ $(document).ready(function() {
     
     <!--/span-->
 </div>
-<script>
+<script>    
 $(document).ready(function(){    
+    var fec = '<?php echo $this->fecha?>';    
     $("#fechaInicio").datepicker({
-        "dateFormat" : "yy-mm-dd",
+        "dateFormat" : "yy-mm-dd",        
         onClose: function( selectedDate ) {
-            console.log(selectedDate);
-            fecha = selectedDate.split("-");
-            console.log(fecha);
+            //fecha = selectedDate.split("-");
+            fecha = fec.split("-");
             f = new Date(fecha[0], parseInt(fecha[1]) - 1, fecha[2]);
-            $( "#fechaFin" ).datepicker( "option", "minDate", f);
-            $( "#fechaFin" ).val(selectedDate);
+            $( "#fechaInicio" ).datepicker( "option", "minDate", f);
+            //$( "#fechaFin" ).datepicker( "option", "minDate", f);
+            //$( "#fechaInicio" ).val(selectedDate);
         }
     });
     $( "#fechaInicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-    $( "#fechaInicio" ).val("<?=$this->experiencia["fechaInicio"]?>");
-    $("#fechaFin").datepicker();
-    $( "#fechaFin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-    $( "#fechaFin" ).val("<?=$this->experiencia["fechaFin"]?>");
+    $( "#fechaInicio" ).val("<?=$this->convoca["limite"]?>");
+    //$("#fechaFin").datepicker();
+    //$( "#fechaFin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    //$( "#fechaFin" ).val("<?//=$this->experiencia["fechaFin"]?>");
 });
 </script>
