@@ -355,23 +355,47 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
                 ";
             Extra_Utils::enviarMail($mail, $name, $subject, $htmlbody);
             
-            
-            
-            
             // ------------------
              
-              
-             
-             
-            
-            
             $this->_flashMessenger->addMessage("Convocatoria Registrada Correctamente");
             $this->_redirect('/admin/convocatoria');
             
-        }
-        
+        }        
         $this->view->convocatoria = $convEmpresa;
         
+    }
+    
+    public function modificarPlazoAction()
+    {
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+        );
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        );
+        $id = $this->_getParam('id');
+        $modelConv = new App_Model_Convocatoria();
+        $data = $modelConv->getConvocatoriaPorId('261', '1');
+        $this->view->convoca = $data;
+        
+        $modelExperiencia = new App_Model_Experiencia();
+        $form = new App_Form_CrearExperiencia();
+        
+        $this->view->experiencia = $experiencia = $modelExperiencia->getExperienciaPorId($id);
+        $form->populate($experiencia);        
+        if($this->getRequest()->isPost()){            
+            $data = $this->getRequest()->getParams();            
+            $data['idDetalleEmpresa'] = $id;
+            //if ($form->isValid($data)) {                
+                $id = $modelExperiencia->actualizarDatos($data);
+                $this->_flashMessenger->addMessage("Experiencia editado con éxito");
+                $this->_redirect('/admin/experiencia');
+                
+            /*} else {
+                $form->populate($data);                
+            }*/
+        }
+        $this->view->form = $form;
     }
 
 }

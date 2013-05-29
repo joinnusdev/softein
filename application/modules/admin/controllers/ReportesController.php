@@ -14,6 +14,22 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
         $lista = $model->listarConvocatoria();
         $this->view->lista = $lista;
     }
+    public function convocatoriaActivaAction() {        
+        $model = new App_Model_Convocatoria();
+        $lista = $model->reporteConvocatoria(1);
+        $this->view->lista = $lista;
+    }
+    
+    public function convocatoriaInactivaAction() {
+        $model = new App_Model_Convocatoria();
+        $lista = $model->reporteConvocatoria(2);
+        $this->view->lista = $lista;
+    }
+    public function modificarPlazoAction() {
+        $model = new App_Model_Convocatoria();
+        $lista = $model->reporteConvocatoria();
+        $this->view->lista = $lista;
+    }
     
     public function imprimirAction() {
         $this->_helper->layout->disableLayout();
