@@ -47,10 +47,10 @@ class App_Controller_Action extends Zend_Controller_Action
 
         
 
-        if (APPLICATION_ENV != 'production') {
-            $sep = sprintf('[%s]', strtoupper(substr(APPLICATION_ENV, 0, 3)));
-            $this->view->headTitle()->prepend($sep);
-        }
+//        if (APPLICATION_ENV != 'production') {
+//            $sep = sprintf('[%s]', strtoupper(substr(APPLICATION_ENV, 0, 3)));
+//            $this->view->headTitle()->prepend($sep);
+//        }
     }
 
 
@@ -127,7 +127,7 @@ class App_Controller_Action extends Zend_Controller_Action
     
     function autentificateUser($usuario, $password) {
         
-         Zend_Loader::loadClass('Zend_Auth_Adapter_DbTable');
+        Zend_Loader::loadClass('Zend_Auth_Adapter_DbTable');
         try {
                 $db = $this->getAdapter();
                 $authAdapter = new Zend_Auth_Adapter_DbTable($db);
@@ -141,11 +141,11 @@ class App_Controller_Action extends Zend_Controller_Action
                 
             
                $authAdapter->getDbSelect()
-                ->where('consorcio = ?', 0);
-                
+                ->where('consorcio = ?', 0);               
+        
                 $auth = Zend_Auth::getInstance();
                 $result = $auth->authenticate($authAdapter);
-                if ($result->isValid()) {                
+                if ($result->isValid()) {
 
                     $data = $authAdapter->getResultRowObject(null,'clave');
                     $auth->getStorage()->write($data);

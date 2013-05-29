@@ -504,11 +504,13 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
     
     public function personalExplaboralAction() {
         $idPersonal = $this->_getParam("id");
+        $empresa = $this->_getParam("empresa");
         if ($idPersonal) {
             $modelExperiencia = new App_Model_Experiencia();
             $listaExperiencia = $modelExperiencia->listarExperiencia(NULL, $idPersonal);
             $this->view->listaExperiencia = $listaExperiencia;
             $this->view->empresa = $idPersonal;
+            $this->view->personal = $empresa;
         } else {
             $this->_redirect('/admin/consorcio');
         }
@@ -544,6 +546,35 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
             $this->_redirect('/admin/consorcio');
             
         }
+    }
+    
+    public function personalExplaboralEditarAction() {
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
+        );
+        $this->view->headScript()->appendFile(
+                $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        );
+
+        $modelExperiencia = new App_Model_Experiencia();
+        $form = new App_Form_CrearExperiencia();
+        $id = $this->_getParam('id');
+        $personal = $this->_getParam('personal');
+        $this->view->experiencia = $experiencia = $modelExperiencia->getExperienciaPorId($id);
+        $form->populate($experiencia);
+        if ($this->getRequest()->isPost()) {
+            $data = $this->getRequest()->getParams();
+            $data['idDetalleEmpresa'] = $id;
+            //if ($form->isValid($data)) {                
+            $id = $modelExperiencia->actualizarDatos($data);
+            $this->_flashMessenger->addMessage("Experiencia Laboral modificada con éxito");
+            $this->_redirect('/admin/consorcio/personal-explaboral/id/'.$personal);
+
+            /* } else {
+              $form->populate($data);
+              } */
+        }
+        $this->view->form = $form;
     }
     
 }

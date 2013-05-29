@@ -36,7 +36,7 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
    
     public function listarConvocatoria($idEmpresa = NULL)
     {   
-        $fecha = Zend_Date::now()->toString('Y-MM-dd HH:mm:ss');        
+        $fecha = Zend_Date::now()->toString('Y-MM-dd HH:mm:ss');
         
         $this->_updateDB($fecha);
         
@@ -64,8 +64,17 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
       
     }
     
-    public function getConvocatoriaPorId($id) 
+    public function getConvocatoriaPorId($id, $tipoBD = NULL) 
     {
+        if ($tipoBD) {
+            Zend_Db_Table::setDefaultAdapter('dbconv');
+            $db = $this->getDefaultAdapter();
+            $query = $db->select()
+                ->from($this->_name)
+                ->where('ID = ?', $id);
+            return $db->fetchRow($query);            
+        }
+        
         $query = $this->_db->select()
                 ->from($this->_name)
                 ->where('ID = ?', $id);
@@ -111,6 +120,31 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         }
         
         
+        
+    }
+    public function reporteConvocatoria($tipo = NULL) {
+        
+        Zend_Db_Table::setDefaultAdapter('dbconv');
+        
+        $fecha = Zend_Date::now()->toString('Y-MM-dd HH:mm:ss');
+        
+        $db = $this->getDefaultAdapter();
+        
+        $select = $db->select()
+                ->from(array('c' => $this->_name))                
+                ->where('c.estado = ?', self::ESTADO_ACTIVO)
+                ->where('c.tipo = ?', self::TIPO_CONVOCATORIA)
+                ;
+        if ($tipo == 1)
+            $select->where('CONCAT(c.limite," ",c.hora_lim) >= ?', $fecha);
+        if ($tipo == 2)
+            $select->where('CONCAT(c.limite," ",c.hora_lim) <= ?', $fecha);
+                
+        $select->order('c.limite desc');
+        
+        $result = $db->fetchAll($select);
+        
+        return $result;
         
     }
 

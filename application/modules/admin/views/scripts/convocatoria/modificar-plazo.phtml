@@ -1,0 +1,81 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#modifica").validate();
+});
+</script>
+<div class="row-fluid sortable ui-sortable">
+    
+    <div class="box span12">
+        <form name="modifica" id="experiencia" action="" method="post" enctype="multipart/form-data" >
+        <div class="box-header well" data-original-title="">
+            <h2><i class="icon-user"></i> Actualización del Plazo</h2>
+            <div class="box-icon">                
+                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>                
+            </div>
+        </div>
+        <div class="box-content">
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+                
+                <div id="content">
+                    <div class="inner">
+                        <div class="well">
+                            <div class="row-fluid">
+                                <div class="span10">
+                                    <div class="clear"></div>
+                                    <label for="servicioEmpresa" class="span3 no-margin">Convocatoria:</label>
+                                    <div class="span7 no-margin">
+                                        <label><?php echo $this->convoca['proceso']?></label>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="fechaInicio" class="span3 no-margin">Fecha de Inicio:</label>
+                                    <div class="span7 no-margin">
+                                        <input type="text" name="limite" id="fechaInicio" value="<?php echo $this->convoca['limite']?>"/>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="fechaFin" class="span3 no-margin">Fecha de Fin:</label>
+                                    <div class="span7 no-margin">
+                                        <?php //echo $this->form->fechaFin;?>
+                                        <input type="text" name="hora_lim" id="fechaFin" value="<?php echo $this->convoca['hora_lim']?>" />
+                                    </div>
+                                   
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-actions">
+                                <input type="button" name="update" value="Actualizar" class="btn pull-right"/>
+</div>
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>          
+            </div>            
+        </div>
+        
+     </form>
+    </div>
+    
+    <!--/span-->
+</div>
+<script>    
+$(document).ready(function(){    
+    var fec = '<?php echo $this->fecha?>';    
+    $("#fechaInicio").datepicker({
+        "dateFormat" : "yy-mm-dd",        
+        onClose: function( selectedDate ) {
+            //fecha = selectedDate.split("-");
+            fecha = fec.split("-");
+            f = new Date(fecha[0], parseInt(fecha[1]) - 1, fecha[2]);
+            $( "#fechaInicio" ).datepicker( "option", "minDate", f);
+            //$( "#fechaFin" ).datepicker( "option", "minDate", f);
+            //$( "#fechaInicio" ).val(selectedDate);
+        }
+    });
+    $( "#fechaInicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#fechaInicio" ).val("<?=$this->convoca["limite"]?>");
+    //$("#fechaFin").datepicker();
+    //$( "#fechaFin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    //$( "#fechaFin" ).val("<?//=$this->experiencia["fechaFin"]?>");
+});
+</script>
