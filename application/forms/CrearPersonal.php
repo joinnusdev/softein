@@ -86,8 +86,8 @@ class App_Form_CrearPersonal extends App_Form
         
         $e = new Zend_Form_Element_Radio('tipo');
         $e->addMultiOptions(array(
-            '1' => 'oferente',
-            '2' => 'contratado')
+            '1' => ' Oferente (Personal estable de la empresa)',
+            '2' => ' Contratado')
         );
         $this->addElement($e);
         
