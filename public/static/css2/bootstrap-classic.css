@@ -170,7 +170,7 @@ a {
 }
 
 a:hover {
-  color: #ffffff;
+  color: #000000;
   text-decoration: underline;
 }
 
@@ -3253,7 +3253,7 @@ input[type="submit"].btn.btn-mini {
 
 .nav-list > .active > a,
 .nav-list > .active > a:hover {
-  color: #ffffff;
+  color: #000000;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
   background-color: #0088cc;
 }
@@ -3346,7 +3346,7 @@ input[type="submit"].btn.btn-mini {
 
 .nav-pills > .active > a,
 .nav-pills > .active > a:hover {
-  color: #ffffff;
+  color: #000000;
   background-color: #0088cc;
 }
 
@@ -3433,7 +3433,7 @@ input[type="submit"].btn.btn-mini {
 .nav-tabs .open .dropdown-toggle,
 .nav-pills .open .dropdown-toggle,
 .nav > li.dropdown.open.active > a:hover {
-  color: #ffffff;
+  color: #000000;
   background-color: #999999;
   border-color: #999999;
 }
@@ -3811,14 +3811,14 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar .nav > li > a:hover {
-  color: #ffffff;
+  color: #000000;
   text-decoration: none;
   background-color: transparent;
 }
 
 .navbar .nav .active > a,
 .navbar .nav .active > a:hover {
-  color: #ffffff;
+  color: #000000;
   text-decoration: none;
   background-color: #222222;
 }

@@ -26,6 +26,7 @@ class Admin_ExperienciaController extends App_Controller_Action_Admin
         
         $form = new App_Form_CrearExperiencia();
         $this->view->form = $form;
+        $form->servicioPais->setValue("173");
         
         if($this->getRequest()->isPost()){            
             
