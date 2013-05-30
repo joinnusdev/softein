@@ -108,7 +108,84 @@ class Admin_AuthController extends App_Controller_Action
             $this->_helper->redirector->gotoUrl('/admin');
         }*/
 
-    } 
+    }
+    
+    public function claveAction(){
+     
+         if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getPost();
+             $modelEmpresa = new App_Model_Empresa();
+            $validarEmail = $modelEmpresa->getValidarEmpresaLogin($data['email'],  App_Model_Empresa::TIPO_EMAIL);
+           
+           
+            if ($validarEmail['email'] == $data['email']) {
+                $characters = array(
+                            "A","B","C","D","E","F","G","H","J","K","L","M",
+                            "N","P","Q","R","S","T","U","V","W","X","Y","Z",
+                            "1","2","3","4","5","6","7","8","9");
+
+                    $keys = array();
+
+                    while(count($keys) < 8) {
+                        $x = mt_rand(0, count($characters)-1);
+                        if(!in_array($x, $keys)) {
+                        $keys[] = $x;
+                        }
+                    }
+
+                    foreach($keys as $key){
+                    $nuevaClave .= $characters[$key];
+                    }
+                //$new = $nuevaClave;
+                $nuevaClave = '123456789';    
+                $modelEmpresa = new App_Model_Empresa();
+                
+                $data['idEmpresa'] = $validarEmail['idEmpresa'];
+                $data['clave'] = md5($nuevaClave);
+                    
+                $id = $modelEmpresa->actualizarDatos($data);
+                    
+                $ruta = 'http://sigece.softein.com/admin/registro/confirmar-registro/usuario/'.$id.'/hash/'.$random;
+                $to      = $data['email'];
+                $subject = 'Nueva clave - SIGECE consultorías de firma';        
+
+                $message = '
+                         <html>
+                                <body>
+                                    Estimados Sres. '. $validarEmail["nombreEmpresa"] .', 
+                                   Su nuevo clave es el siguiente. <p>
+                                    '.$nuevaClave.' 
+                                    <p>
+                                    Ya puede Ingresar a SIGECE y poder cambiar su Clave.
+                                </body>
+                        </html>
+                                ';
+
+                    $header="From: comunica@sigece.softein.com"."\nReply-To:comunica@sigece.softein.com"."\n"; 
+                    $header=$header."X-Mailer:PHP/".phpversion()."\n"; 
+                    $header=$header."Mime-Version: 1.0\n"; 
+                    $header=$header."Content-Type: text/html; charset=utf-8\n";
+
+                    mail($to, $subject, $message, $header);
+                    
+                    $this->_flashMessenger->addMessage("
+                    Verifique su cuenta de correo ". $data['email'] ." que contiene un mensaje con su nuevo password.");
+                    $this->_redirect('/admin/auth');
+                
+              
+            }else{
+                    $this->_flashMessenger->addMessage("Email no existe");
+                
+                $this->_redirect($this->view->url(array("module" => "admin",
+                "controller" => "auth",
+                "action" => "index")));
+            }
+                
+            }  
+            
+        
+        
+    }
 
 }
 

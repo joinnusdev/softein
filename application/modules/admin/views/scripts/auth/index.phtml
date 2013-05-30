@@ -50,23 +50,26 @@
  
 	<!--  start forgotbox ................................................................................... -->
 	<div id="forgotbox">
+            <form  method="post" name="login" id="login" action="/admin/auth/clave">
 		<div id="forgotbox-text">Le enviaremos un email para restablecer su password.</div>
 		<!--  start forgot-inner -->
 		<div id="forgot-inner">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<th>Ingrese E-mail</th>
-			<td><input type="text" value=""   class="login-inp" /></td>
+                        <td><input type="text" value=""  name="email" id="email" class="login-inp" /></td>
 		</tr>
 		<tr>
 			<th> </th>
-                        <td><input type="button" class="button medium blue"  value="Enviar" /></td>
+                        <td><input type="submit" class="button medium blue"  value="Enviar" /></td>
 		</tr>
 		</table>
 		</div>
 		<!--  end forgot-inner -->
 		<div class="clear"></div>
-		<a href="" class="back-login">Login</a>	</div>
+		<a href="" class="back-login">Login</a>	
+              </form>
+        </div>
 	<!--  end forgotbox -->
 
 </div>
