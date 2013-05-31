@@ -27,7 +27,7 @@ class App_Model_SubEspecialidad extends App_Db_Table_Abstract {
     public function getComboSubEspecialidad($id) 
     {
         $query = $this->_db->select()
-                ->from($this->_name, array('idEspecialidad', 'descripcion'))
+                ->from($this->_name, array('idSubEspecialidad', 'descripcion'))
                 ->where('idEspecialidad = ?', $id);
         
         return $this->_db->fetchPairs($query);

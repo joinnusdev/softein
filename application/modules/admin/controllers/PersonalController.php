@@ -53,19 +53,22 @@ class Admin_PersonalController extends App_Controller_Action_Admin
         $model = new App_Model_Personal();
         $form = new App_Form_CrearPersonal();
         $id = $this->_getParam('id');
-        $experiencia = $model->getPersonalPorId($id);
+        $personalData = $model->getPersonalPorId($id);
         
         $modelEsp = new App_Model_Especialidad();
-        $espec = $modelEsp->getComboEspecialidad($experiencia['idProfesion']);
+        $espec = $modelEsp->getComboEspecialidad($personalData['idProfesion']);
+                
         $modelSubEsp = new App_Model_SubEspecialidad();
-        $subespec = $modelSubEsp->getComboSubEspecialidad($experiencia['idSubEspecialidad']);
+        $subespec = $modelSubEsp->getComboSubEspecialidad($personalData['idEspecialidad']);
+        
+        
         $form->getElement('idEspecialidad')->setMultiOptions(
             array("0" => "--- Seleccionar ---")+$espec);
         $form->getElement('idSubEspecialidad')->setMultiOptions(
             array("0" => "--- Seleccionar ---")+$subespec);
         
         
-        $form->populate($experiencia);        
+        $form->populate($personalData);        
         if($this->getRequest()->isPost()){            
             $data = $this->getRequest()->getParams();            
             $data['idPersonal'] = $id;
