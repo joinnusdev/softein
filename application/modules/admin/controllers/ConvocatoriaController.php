@@ -375,31 +375,24 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         );
         $id = $this->_getParam('id');
         $modelConv = new App_Model_Convocatoria();
-        $data = $modelConv->getConvocatoriaPorId('261', '1');
+        $data = $modelConv->getConvocatoriaPorId($id, '1');
         $this->view->convoca = $data;
         $this->view->fecha = Zend_Date::now()->toString('Y-MM-dd');
         
-        $modelExperiencia = new App_Model_Experiencia();
-        $form = new App_Form_CrearExperiencia();
-        
-        $this->view->experiencia = $experiencia = $modelExperiencia->getExperienciaPorId($id);
-        if (!$experiencia)$this->_redirect ('/admin/reportes');
-            
-        
-        $form->populate($experiencia);        
-        if($this->getRequest()->isPost()){            
+        if($this->getRequest()->isPost()){
             $data = $this->getRequest()->getParams();            
-            $data['idDetalleEmpresa'] = $id;
-            //if ($form->isValid($data)) {                
-                $id = $modelExperiencia->actualizarDatos($data);
-                $this->_flashMessenger->addMessage("Experiencia editado con éxito");
-                $this->_redirect('/admin/experiencia');
-                
-            /*} else {
-                $form->populate($data);                
-            }*/
+            
+            $dataFecha = array(
+                'ID' => $id,
+                'limite' => $data['limite'],
+                'hora_lim' => trim($data['hora']) . ":". trim($data['minuto']) . ":". trim($data['segu'])
+            );
+            
+            $modelConv->updateConvocatoria($dataFecha);
+            $this->_redirect('/admin/reportes/modificar-plazo');
+            
         }
-        $this->view->form = $form;
+        
     }
 
 }

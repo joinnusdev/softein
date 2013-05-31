@@ -147,6 +147,33 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         return $result;
         
     }
+    
+    public function updateConvocatoria($datos, $condicion = NULL) {
+        Zend_Db_Table::setDefaultAdapter('dbconv');        
+        $db = $this->getDefaultAdapter();
+       
+        $id = 0;
+        if (!empty($datos['ID'])) {
+            $id = (int) $datos['ID'];
+        }
+        unset($datos['ID']);
+        $datos = array_intersect_key($datos, array_flip($this->_getCols()));
+
+        if ($id > 0) {
+            $condicion = '';
+            if (!empty($condicion)) {
+              echo  $condicion = ' AND ' . $condicion;
+              exit;
+            }
+
+           $cantidad = $db->update($this->_name, $datos, 'ID = ' . $id . $condicion);
+         
+            $id = ($cantidad < 1) ? 0 : $id;
+        } else {
+            $id = $db->insert($this->_name ,$datos);
+        }
+        return $id;
+    }
 
 
    
