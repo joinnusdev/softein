@@ -29,16 +29,13 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
         $this->view->headScript()->appendFile(
                 $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
         );
-        $idEmpresa = $this->_getParam("id");
-        $modelContacto = new App_Model_Contacto();
-        $listaContacto = $modelContacto->listarContacto($idEmpresa);
-        $this->view->listaContacto = $listaContacto;
+        $idEmpresa = $this->_getParam("id");        
         $this->view->empresaConsorcio = $idEmpresa;
 
         $form = new App_Form_CrearEmpresa();
         $modelEmpresa = new App_Model_Empresa();
         $empresa = $modelEmpresa->getEmpresaPorId($idEmpresa);
-
+        
         $form->isValid($empresa);
         $fechaConstitucion = implode('-', array_reverse(explode('-', $empresa['fechaConstitucion'])));
         $form->getElement('fechaConstitucion')->setValue($fechaConstitucion);

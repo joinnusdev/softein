@@ -12,11 +12,16 @@ class App_Form_CrearEmpresa extends App_Form
         $e->setAttrib('class', 'span8');  
         $this->addElement($e);
         
-        $e = new Zend_Form_Element_Text('paisEmpresa');        
-        $e->setFilters(array("StripTags", "StringTrim"));
-        $e->setAttrib('class', 'required');
-        $e->setRequired(true);
-        $this->addElement($e);
+        $modelPais = new App_Model_Pais();
+        $listaPais = $modelPais->listarPair();
+        
+        $this->addElement(new Zend_Form_Element_Select('paisEmpresa'));
+        $this->getElement('paisEmpresa')->addMultiOption('0', '-- Seleccione Pais --');
+        $this->getElement('paisEmpresa')->addMultiOptions($listaPais);
+        $this->getElement('paisEmpresa')->setAttrib('class', 'required');
+        $this->getElement('paisEmpresa')->setRequired(); 
+        
+        
         
         $this->addElement(new Zend_Form_Element_Select('tipoDocumento'));
         $this->getElement('tipoDocumento')->addMultiOption('', 'Seleccione Documento');

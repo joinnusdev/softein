@@ -24,5 +24,14 @@ class App_Model_Pais extends App_Db_Table_Abstract {
                 
         return $this->_db->fetchAll($query);
     }
+    
+    public function listarPair() 
+    {
+        $query = $this->_db
+                ->select()->from(array('e' => $this->_name), array('idPais', 'pais'))
+                ->order('pais');
+                
+        return $this->_db->fetchPairs($query);
+    }
 }
 
