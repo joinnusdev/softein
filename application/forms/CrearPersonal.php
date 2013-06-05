@@ -37,7 +37,7 @@ class App_Form_CrearPersonal extends App_Form
         $e = new Zend_Form_Element_Text('email');        
         $e->setFilters(array("StripTags", "StringTrim"));        
         $v = new Zend_Validate_EmailAddress();
-        $e->setAttrib('class', 'span8');
+        $e->setAttrib('size', '20');
         $e->addValidator($v);
         $this->addElement($e);
         
@@ -93,15 +93,29 @@ class App_Form_CrearPersonal extends App_Form
         
         $e = new Zend_Form_Element_Text('expanos');
         $e->setFilters(array("StripTags", "StringTrim"));        
-        $e->setAttrib('class', 'span3');
+        
         $this->addElement($e);
         
-        $e = new Zend_Form_Element_Text('expmeses');
-        $e->setFilters(array("StripTags", "StringTrim"));        
-        $e->setAttrib('class', 'span3');
+        
+        $e = new Zend_Form_Element_Select('expmeses');
+        $e->addMultiOption('1', '1')
+            ->addMultiOption('2', '2')
+            ->addMultiOption('3', '3')
+            ->addMultiOption('4', '4')
+            ->addMultiOption('5', '5')
+            ->addMultiOption('6', '6')
+            ->addMultiOption('7', '7')
+            ->addMultiOption('8', '8')
+            ->addMultiOption('9', '9')
+            ->addMultiOption('10', '10')
+            ->addMultiOption('11', '11')
+            ->addMultiOption('12', '12');
+        $e->setAttrib('class', 'span2');
         $this->addElement($e);
-
-
+        
+        
+        
+        
         
         $e = new Zend_Form_Element_Submit('guardar');
         $e->setLabel('Guardar')->setAttrib('class', 'btn pull-right');
