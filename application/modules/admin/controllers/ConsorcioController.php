@@ -579,6 +579,20 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
         }
         $this->view->form = $form;
     }
+        
+    public function personalDetaEstudioAction() {
+        $idPersonal = $this->_getParam("id");
+        $empresa = $this->_getParam("empresa");
+        if ($idPersonal) {
+            $modelExperiencia = new App_Model_Experiencia();
+            $listaExperiencia = $modelExperiencia->listarExperiencia(NULL, $idPersonal);
+            $this->view->listaExperiencia = $listaExperiencia;
+            $this->view->empresa = $idPersonal;
+            $this->view->personal = $empresa;
+        } else {
+            $this->_redirect('/admin/consorcio');
+        }
+    }
     
 }
 
