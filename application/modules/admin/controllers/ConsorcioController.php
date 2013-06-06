@@ -340,8 +340,13 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
         $idEmpresa = $this->_getParam('empresa');
         $model= new App_Model_Personal();
         $lista = $model->listarPersonal($idEmpresa);
-        $this->view->listaExperiencia = $lista;
-        $this->view->empresa = $idEmpresa;
+        if ($lista) {
+            $this->view->listaExperiencia = $lista;
+            $this->view->empresa = $idEmpresa;
+        } else 
+            $this->_redirect('/admin');
+            
+        
     }
 
     public function personalCrearAction()
@@ -557,6 +562,7 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
         $form = new App_Form_CrearExperiencia();
         $id = $this->_getParam('id');
         $personal = $this->_getParam('personal');
+        $idempresa = $this->_getParam('empresa');
         $this->view->experiencia = $experiencia = $modelExperiencia->getExperienciaPorId($id);
         $form->populate($experiencia);
         if ($this->getRequest()->isPost()) {
@@ -565,7 +571,7 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
             //if ($form->isValid($data)) {                
             $id = $modelExperiencia->actualizarDatos($data);
             $this->_flashMessenger->addMessage("Experiencia Laboral modificada con éxito");
-            $this->_redirect('/admin/consorcio/personal-explaboral/id/'.$personal);
+            $this->_redirect('/admin/consorcio/personal-explaboral/id/'.$personal.'/empresa/'.$idempresa);
 
             /* } else {
               $form->populate($data);
