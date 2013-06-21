@@ -93,6 +93,20 @@ class Admin_PersonalController extends App_Controller_Action_Admin
         $this->_redirect('/admin/personal');
     }
     
+    public function detalleEstudioAction() {
+        $idPersonal = $this->_getParam("id");
+        $empresa = $this->_getParam("empresa");
+        if ($idPersonal) {
+            $modelExperiencia = new App_Model_Experiencia();
+            $listaExperiencia = $modelExperiencia->listarExperiencia(NULL, $idPersonal);
+            $this->view->listaExperiencia = $listaExperiencia;
+            $this->view->empresa = $idPersonal;
+            $this->view->personal = $empresa;
+        } else {
+            $this->_redirect('/admin/consorcio');
+        }
+    }
+    
 
 }
 
