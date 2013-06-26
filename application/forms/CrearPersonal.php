@@ -35,6 +35,7 @@ class App_Form_CrearPersonal extends App_Form
         
         
         $e = new Zend_Form_Element_Text('email');        
+        $e->setAttrib('class', 'email');
         $e->setFilters(array("StripTags", "StringTrim"));        
         $v = new Zend_Validate_EmailAddress();
         $e->setAttrib('size', '20');
@@ -42,13 +43,16 @@ class App_Form_CrearPersonal extends App_Form
         $this->addElement($e);
         
         $e = new Zend_Form_Element_Text('telefono');
-        $e->setFilters(array("StripTags", "StringTrim"));        
-        $e->setAttrib('class', 'span8');
+        $e->setAttrib('class', 'number');
+        $e->setAttrib('minlength', '9');
+        $e->setAttrib('maxlength', '9');
         $this->addElement($e);
         
         $e = new Zend_Form_Element_Text('numerodocumento');
+        $e->setAttrib('class', 'required number');
+        $e->setAttrib('minlength', '8');
+        $e->setAttrib('maxlength', '8');
         $e->setFilters(array("StripTags", "StringTrim"));        
-        $e->setAttrib('class', 'span8');
         $this->addElement($e);
         
         
@@ -80,10 +84,6 @@ class App_Form_CrearPersonal extends App_Form
         $this->addElement($e);
         
         
-        $e = new Zend_Form_Element_Text('telefono');
-        $e->setFilters(array("StripTags", "StringTrim"));        
-        $this->addElement($e);
-        
         $e = new Zend_Form_Element_Radio('tipo');
         $e->addMultiOptions(array(
             '1' => ' Oferente (Personal estable de la empresa)',
@@ -93,7 +93,10 @@ class App_Form_CrearPersonal extends App_Form
         
         $e = new Zend_Form_Element_Text('expanos');
         $e->setFilters(array("StripTags", "StringTrim"));        
-        
+        $e->setAttrib('size', '1');
+        $e->setAttrib('class', 'number');
+        $e->setAttrib('minlength', '1');
+        $e->setAttrib('maxlength', '2');
         $this->addElement($e);
         
         
@@ -110,7 +113,7 @@ class App_Form_CrearPersonal extends App_Form
             ->addMultiOption('10', '10')
             ->addMultiOption('11', '11')
             ->addMultiOption('12', '12');
-        $e->setAttrib('class', 'span2');
+        
         $this->addElement($e);
         
         

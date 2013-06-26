@@ -1,7 +1,13 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#personal").validate();
+});
+</script>
+
 <div>
     <ul class="breadcrumb">
             <li>
-                    <a href="/admin/experiencia">Personal Empresa</a> <span class="divider">/</span>
+                    <a href="/admin/personal">Personal de la Empresa</a> <span class="divider">/</span>
             </li>
     </ul>
 </div>
@@ -97,7 +103,7 @@
                                     <div class="clear"></div>
                                     <div class="clear"></div>
                                     <label for="expanos" class="span3 no-margin">Experiencia:</label>
-                                    <div class="span8 no-margin">
+                                    <div class="span6 no-margin">
                                         Años <?php echo $this->form->expanos;?>  con <?php echo $this->form->expmeses;?> meses
                                     </div>
                                     <div class="span7 no-margin">

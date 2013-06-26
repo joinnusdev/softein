@@ -17,10 +17,16 @@ class Admin_PersonalController extends App_Controller_Action_Admin
     }
     
     public function crearAction()
-    {        
+    {     
         $this->view->headScript()->appendFile(
                 $this->getConfig()->app->mediaUrl . '/js/admin/personal.js'
         );
+        
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        ); 
+        
+        
         
         $form = new App_Form_CrearPersonal();
         $this->view->form = $form;
@@ -50,6 +56,12 @@ class Admin_PersonalController extends App_Controller_Action_Admin
         $this->view->headScript()->appendFile(
                 $this->getConfig()->app->mediaUrl . '/js/admin/personal-editar.js'
         );
+        
+        $this->view->headScript()->appendFile(
+            $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
+        ); 
+        
+        
         $model = new App_Model_Personal();
         $form = new App_Form_CrearPersonal();
         $id = $this->_getParam('id');
