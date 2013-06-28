@@ -1,6 +1,18 @@
 <script type="text/javascript">
+
 $(document).ready(function() {
-	$("#experiencia").validate();
+    $("#experiencia").validate();
+});
+
+$(document).submit(function() {
+    var fechaInicial = $("input#fechaInicio").val();
+    var fechaFinal = $("input#fechaFinal").val();
+    if(fechaInicial<fechaFinal){
+         return true;
+    }else{    
+        alert("Fecha Final es menor que fecha inicial");
+        return false
+    }
 });
 </script>
 

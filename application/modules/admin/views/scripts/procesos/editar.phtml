@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
-        $("#personal").validate();
+	$("#personal").validate();
 });
 </script>
 
@@ -46,10 +46,8 @@ $(document).ready(function() {
                                     <div class="clear"></div>
                                     <label for="cargo" class="span3 no-margin">Cargo :</label>
                                     <div class="span7 no-margin">
-                                        <?php echo $this->form->cargo;?>
-                                        
+                                        <?php echo $this->form->cargo;?>                                        
                                     </div>
-                                    
                                     <div class="clear"></div>
                                     <label for="numerodocumento" class="span3 no-margin">DNI :</label>
                                     <div class="span7 no-margin">
@@ -74,9 +72,7 @@ $(document).ready(function() {
                                     <div class="span7 no-margin">
                                         <?php echo $this->form->nivelacademico;?>
                                     </div>
-                                    
                                     <div class="clear"></div>
-
                                     <label for="nivelacademico" class="span3 no-margin">Profesión :</label>
                                     <div class="span7 no-margin">
                                         <?php echo $this->form->idProfesion;?>
@@ -95,18 +91,20 @@ $(document).ready(function() {
                                     </div>
                                     
                                     <div class="clear"></div>
-                                    <label for="tipo" class="span3 no-margin">Tipo de Personal:</label>
-
+                                    <label for="tipo" class="span3 no-margin">Tipo de Personal :</label>
                                     <div class="span7 no-margin">
                                         <?php echo $this->form->tipo;?>
                                     </div>
                                     <div class="clear"></div>
                                     <div class="clear"></div>
-                                    <label for="expanos" class="span3 no-margin">Experiencia:</label>
-                                    <div class="span6 no-margin">
-                                        Años <?php echo $this->form->expanos;?>  con <?php echo $this->form->expmeses;?> meses
-                                    </div>
+                                    <label for="expanos" class="span3 no-margin">Experiencia Años:</label>
                                     <div class="span7 no-margin">
+                                        <?php echo $this->form->expanos;?>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <label for="expmeses" class="span3 no-margin">Experiencia en Meses :</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->expmeses;?>
                                         <?php echo $this->form->csrf;?>
                                     </div>
                                     

@@ -44,19 +44,27 @@
                                 </thead>   
 
                                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                     <?php foreach ($this->lista as $experiencia):
+                                     <?php foreach ($this->lista as $convocatoria):
                                          
                                       ?>
                                     <tr class="odd">
-                                        <td class="  sorting_1"><?php echo $experiencia['codigo']?></td>
-                                        <td class="center "><?php echo $experiencia['proceso']?></td>
-                                        <td class="center "><?php echo $experiencia['fecha']?></td>
-                                        <td class="center "><?php echo $experiencia['limite']?></td>
-                                        <td class="center "><?php echo $experiencia['hora_lim']?></td>
+                                        <td class="  sorting_1"><?php echo $convocatoria['codigo']?></td>
+                                        <td class="center "><?php echo $convocatoria['proceso']?></td>
+                                        <td class="center "><?php echo $convocatoria['fecha']?></td>
+                                        <td class="center "><?php echo $convocatoria['limite']?></td>
+                                        <td class="center "><?php echo $convocatoria['hora_lim']?></td>
                                         <td class="center ">
-                                            <a class="btn btn-info" href="/admin/convocatoria/modificar-plazo/id/<?php echo $experiencia["ID"]; ?>">
+                                            <a class="btn btn-info" href="/admin/convocatoria/modificar-plazo/id/<?php echo $convocatoria["ID"]; ?>">
                                                 <i class="icon-upload"></i>  
                                                 Actualizar
+                                            </a>
+                                            <a class="btn btn-success" href="/admin/procesos/modificar-seleccion/id/<?php echo $convocatoria["ID"]; ?>">
+                                                <i class="icon-list icon-white"></i>  
+                                                Criterios de Selección
+                                            </a>
+                                            <a class="btn btn-danger" href="/admin/procesos/evaluar-convocatoria-plazo/id/<?php echo $convocatoria["ID"]; ?>">
+                                                <i class="icon-adjust"></i>  
+                                                Evaluar Convocatorias
                                             </a>
                                         </td>
                                         
