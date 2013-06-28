@@ -1,10 +1,7 @@
 <div>
     <ul class="breadcrumb">
             <li>
-                    <a href="/admin/consorcio/personal/empresa/<?php echo $this->personal?>">Detalle de estudios del Personal</a> <span class="divider">/</span>
-            </li>
-            <li>
-                    <a href="/admin/consorcio/personal-explaboral-crear/personal/<?php echo $this->empresa?>">Agregar Experiencia Laboral</a>
+                    <a href="#">>Evaluar Convocatoria</a> <span class="divider">/</span>
             </li>
     </ul>
 </div>
@@ -16,34 +13,34 @@
                 
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
                             
-                            <table class="table table-striped table-bordered bootstrap-datatable dataTable dataTable" 
+                            <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable" 
                                    id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                             colspan="1" style="width: 180px;" aria-label="Status: activate to sort column ascending">
-                                            Pais
+                                            Nombre
                                         </th>
                                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                             colspan="1" style="width: 150px;" aria-sort="ascending" 
                                             aria-label="Username: activate to sort column descending">
-                                            Empresa
+                                            Cargo
                                         </th>
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" 
                                             rowspan="1" colspan="1" style="width: 100px;" aria-label="Date registered: activate to sort column ascending">
-                                            RUC
+                                            Email
+                                        </th>
+                                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" 
+                                            colspan="1" style="width: 100px;" aria-label="Role: activate to sort column ascending">
+                                            Teléfono
                                         </th>
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" 
                                             colspan="1" style="width: 130px;" aria-label="Role: activate to sort column ascending">
-                                            Fecha Inicio
-                                        </th>
-                                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" 
-                                            colspan="1" style="width: 130px;" aria-label="Role: activate to sort column ascending">
-                                            Fecha Fin.
+                                            Nivel Académico
                                         </th>
                                         
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" c
-                                            olspan="1" style="width: 150px;" aria-label="Actions: activate to sort column ascending">
+                                            olspan="1" style="width: 170px;" aria-label="Actions: activate to sort column ascending">
                                             Accion
                                         </th>
                                     </tr>
@@ -54,18 +51,23 @@
                                          
                                       ?>
                                     <tr class="odd">
-                                        <td class="  sorting_1"><?php echo $experiencia['pais']?></td>
-                                        <td class="center "><?php echo $experiencia['servicioNombre']?></td>
-                                        <td class="center "><?php echo $experiencia['servicioRuc']?></td>
-                                        <td class="center "><?php echo $experiencia['fechaInicio']?></td>
-                                        <td class="center "><?php echo $experiencia['fechaFin']?></td>
+                                        <td class="  sorting_1"><?php echo $experiencia['nombre'] . " " . $experiencia['apellido']?></td>
+                                        <td class="center "><?php echo $experiencia['cargo']?></td>
+                                        <td class="center "><?php echo $experiencia['email']?></td>
+                                        <td class="center "><?php echo $experiencia['telefono']?></td>
+                                        <td class="center "><?php echo $experiencia['nivelacademico']?></td>
                                         
                                         <td class="center ">
-                                            <a class="btn btn-info" href="/admin/consorcio/personal-explaboral-editar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>/personal/<?php echo $this->empresa?>/empresa/<?php echo $this->personal?>">
+                                            <a class="btn btn-info" href="/admin/personal/editar/id/<?php echo $experiencia["idPersonal"]; ?>">
                                                 <i class="icon-edit icon-white"></i>  
-                                                Editar                                            
+                                                Editar                                        
                                             </a>
-                                            <a class="btn btn-danger" href="/admin/consorcio/experiencia-eliminar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>/personal/<?php echo $this->empresa?>/empresa/<?php echo $this->personal?>">
+                                            
+                                            <a class="btn btn-success" href="/admin/personal/detalle-estudio/id/<?php echo $experiencia["idPersonal"]; ?>">
+                                                <i class="icon-list icon-white"></i>  
+                                                Detalle Estudios
+                                            </a>    
+                                            <a class="btn btn-danger" href="/admin/personal/eliminar/id/<?php echo $experiencia["idPersonal"]; ?>">
                                                 <i class="icon-trash icon-white"></i> 
                                                 Eliminar
                                             </a>
