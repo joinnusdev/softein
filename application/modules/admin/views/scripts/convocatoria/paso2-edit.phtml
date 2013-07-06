@@ -52,10 +52,10 @@
                     
                     <?php endforeach; ?>
             </select>
-            <select class="xlarge disabled" id="idUsuario" name="idUsuario">
+            <select class="xlarge disabled" id="cargop" name="cargop">
                 <option value="0"> -- Cargo a Postular --</option>
-                <?php foreach ($this->evaluacion as $item2) :?>
-                    <option value="<?php echo $item2['idCriterioEvaluacion']?>"> 
+                <?php foreach ($this->evaluacion as $item2) : ?>                
+                    <option cargo="<?php echo $item2['cargo']; ?>" value="<?php echo $item2['idCriterioEvaluacion']?>"> 
                         <?php echo $item2['cargo'];?>
                     </option>
                     
@@ -88,7 +88,9 @@
                             </th>
                             <th><?php echo $item['cargo']?></th>
                             <th><?php echo $item['nivelacademico']?></th>
-                            <th>cargo a postular </th>
+                            <th><?php echo $item['cargop']?> 
+                            <input id="cargop" type="hidden" name="cargop[]" value="<?php echo $item['idc']?>" />
+                            </th>
                             <th>
                                 <a class="eliminarDetalleIngreso"> Eliminar</a>
                             </th>
@@ -99,7 +101,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <!--<th></th>-->
+                            <th></th>
                             <th>
                                 <a class="eliminarDetalleIngreso"> Eliminar</a>
                             </th>

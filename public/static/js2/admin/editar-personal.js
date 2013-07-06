@@ -100,8 +100,9 @@ $(function(){
             
             $(btn).bind("click", function(){
                 var valor = $("#idUsuario option:selected").val();                
+                var valorcargo = $("#cargop option:selected").val();
                 
-                if (valor != '0') {
+                if (valor != '0' && valorcargo != '0') {
                 
                 var per = document.getElementsByTagName("input");
                 for (var i = 0; i < per.length; i++) {
@@ -114,6 +115,8 @@ $(function(){
                 var nombre = $("#idUsuario option:selected").attr("nombre");
                 var cargo = $("#idUsuario option:selected").attr("cargo");
                 var nivel = $("#idUsuario option:selected").attr("nivel");
+                var cargop = $("#cargop option:selected").attr("cargo");
+                var idc = $("#cargop option:selected").attr("value");
                 var idp = $("#idUsuario option:selected").attr("value");
                     
                 $("#generar").removeAttr("disabled");                
@@ -121,11 +124,13 @@ $(function(){
                 row.insertAfter(tabla+' tbody>#item:last');
                 
                 var inputWorker = "<input id='personal' type='hidden' name='personal[]' value='"+idp+"' />";
+                var inputc = "<input id='cargop' type='hidden' name='cargop[]' value='"+idc+"' />";
                 
                 
                 $("th:eq(0)", row).html(nombre+inputWorker);
                 $("th:eq(1)", row).html(cargo); 
                 $("th:eq(2)", row).html(nivel);
+                $("th:eq(3)", row).html(cargop+inputc);
                 $(tabla+' tbody>#item:first').addClass("hide");
                 
                 }

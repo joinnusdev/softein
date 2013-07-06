@@ -52,6 +52,9 @@ class App_Model_DetaPersonal extends App_Db_Table_Abstract {
                 ->select()->from(array('e' => $this->_name))
                 ->joinInner(array('p' => App_Model_Personal::TABLA_CONTACTO), 
                         'e.idPersonal = p.idPersonal')
+                ->joinInner(array('c' => App_Model_CriterioEvaluacion::TABLA_CRITERIOS_EVALUACION), 
+                        'c.idCriterioEvaluacion = e.idCriterioEvaluacion', 
+                        array('idc' => 'idCriterioEvaluacion', 'cargop' => 'cargo'))
                 ->where('e.idConvocatoriaExperiencia = ?', $id);
 
         return $this->_db->fetchAll($query);

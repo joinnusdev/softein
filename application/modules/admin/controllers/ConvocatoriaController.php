@@ -32,11 +32,14 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         if ($this->_request->isPost()) {
             $data = $this->_getAllParams();
             $modelDeta = new App_Model_DetaPersonal();
-            $personal = array_unique($data['personal']);            
+            $personal = array_unique($data['personal']);
+            $cargop = $data['cargop'];
+            
             for ($i = 0; $i < count($personal); $i++){
                 $datosDeta = array(
                     'idConvocatoriaExperiencia' => $convEmpresa['idConvocatoriaExperiencia'],
                     'idPersonal' => $personal[$i],
+                    'idCriterioEvaluacion' => $cargop[$i],
                 );                
                 $modelDeta->actualizarDatos($datosDeta);                                
             }
@@ -303,20 +306,20 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         if ($this->_request->isPost()) {
             $data = $this->_getAllParams();           
             
-            $personal = array_unique($data['personal']);            
+            $personal = array_unique($data['personal']);
+            $cargop = $data['cargop'];
             
             $modelDeta->eliminarDetalle($convEmpresa['idConvocatoriaExperiencia']);            
             
-            foreach ($personal as $value) {
+            for ($i = 0; $i < count($personal); $i++){
                 $datosDeta = array(
                     'idConvocatoriaExperiencia' => $convEmpresa['idConvocatoriaExperiencia'],
-                    'idPersonal' => $value,
+                    'idPersonal' => $personal[$i],
+                    'idCriterioEvaluacion' => $cargop[$i],
                 );                
-                $modelDeta->actualizarDatos($datosDeta);                
-            }
-            
-            // ------------------ Envio Email
-            
+                $modelDeta->actualizarDatos($datosDeta);
+            }           
+            // ------------------ Envio Email            
             $mail = $this->view->authData->email;
             $name = $this->view->authData->nombreEmpresa;
             $subject = "Convocatoria Registrada";
