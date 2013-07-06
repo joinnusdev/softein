@@ -1,0 +1,156 @@
+<script type="text/javascript">
+$(document).ready(function() {
+        $("#criterios").validate();
+});
+
+$(document).submit(function() {
+    var antiguedadEmpresa = $("input#antiguedadEmpresa").val();
+    
+    var expEspecifica = $("input#experienciaEspecificaAnos").val();
+    
+    var expGeneral = $("input#experienciaGeneralAnos").val();
+    
+    if(parseInt(antiguedadEmpresa) > parseInt(expEspecifica)){
+        if(parseInt(expEspecifica) > parseInt(expGeneral)){
+            alert("La experiencia especifica NO puede ser Mayor que la experiencia General");
+            return false;
+        }
+     return true;
+        
+    }else{    
+        alert("La experiencia especifica NO puede ser Mayor a la antiguedad de la Empresa");
+        return false;
+        
+    }
+});
+</script>
+
+<div>
+    <ul class="breadcrumb">
+            <li>
+                    <a href="/admin/procesos/criterios-seleccion">Criterios de Selección</a> <span class="divider">/</span>
+            </li>
+    </ul>
+</div>
+<div class="row-fluid sortable ui-sortable">
+    
+    <div class="box span12">
+        <form name="criterios" id="criterios" action="" method="post" enctype="multipart/form-data" >
+        <div class="box-header well" data-original-title="">
+            <h2><i class="icon-user"></i> Convocatoria: </h2>
+            <div class="box-icon">                
+                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>                
+            </div>
+        </div>
+        <div class="box-content">
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+                
+                <div id="content">
+                    <div class="inner">
+                        <div class="well">
+                            <div class="row-fluid">
+                                <div class="span10">
+                                    <div class="clear"></div>
+                                    <label for="nombre" class="span4 no-margin">
+                                        Convocatoria:
+                                    </label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->idConvocatoria;?>
+                                    </div>
+                                    
+                                    
+                                    <div class="clear"></div>
+                                    <label for="nombre" class="span4 no-margin">
+                                        Antiguedad de la Empresa:
+                                    </label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->antiguedadEmpresa;?>
+                                    </div>
+                                    
+                                    <label for="apellido" class="span3 no-margin">Puntaje de la Antiguedad:</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->puntajeAntiguedad;?>                                       
+                                    </div>
+
+                                    <div class="clear"></div>
+                                    <label for="numerodocumento" class="span4 no-margin">Puntaje del Monto Minimo:</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->puntajeMonto;?>                                        
+                                    </div>
+                                    
+                                    
+                                    <div class="clear"></div>
+                                    <label for="cargo" class="span4 no-margin">Monto minimo:</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->montoMinimo;?>
+                                    </div>
+                                    <label for="numerodocumento" class="span3 no-margin">en:</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->anosMontoMinimo;?> Años                                        
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="clear"></div>
+                                    <label for="email" class="span4 no-margin">Experiencia Especifica en Años:</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->experienciaEspecificaAnos;?>
+                                    </div>
+                                    <label for="nivelacademico" class="span3 no-margin">Puntaje Experiencia Especifica :</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->puntajeExperienciaEspecifica;?>
+                                    </div>
+
+                                    
+                                    <div class="clear"></div>
+                                    <label for="telefono" class="span4 no-margin">Experiencia Especifa en  Meses :</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->experienciaEspecificaMeses;?>
+                                    </div>
+                                    
+                                    
+                                    <div class="clear"></div>
+                                    <label for="email" class="span4 no-margin">Experiencia General en Años:</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->experienciaGeneralAnos;?>
+                                    </div>
+
+                                    <label for="nivelacademico" class="span3 no-margin">Puntaje Experiencia General:</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->puntajeExperienciaGeneral;?>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="telefono" class="span4 no-margin">Experiencia General en  Meses :</label>
+                                    <div class="span2 no-margin">
+                                        <?php echo $this->form->experienciaGeneralMeses;?>
+                                    </div>
+                                    
+                                    
+                                    <div class="clear"></div>
+
+                                    <label for="nivelacademico" class="span4 no-margin"> Resumen de la Experiencia:</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->resumenExperiencia;?>
+                                    </div>
+                                    
+                                </div>
+                                <div class="clear"></div>
+                            <div class="form-actions">
+                                <?php echo $this->form->guardar->setAttrib('class', 'btn pull-right')?>
+                                  <?php echo $this->form->csrf; ?>
+                        <?php if ($this->form->csrf->hasErrors()) echo "Intentalo nuevamente";?>
+                            </div> 
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>          
+            </div>            
+        </div>        
+
+     </form>
+    </div>
+    
+    <!--/span-->
+</div>

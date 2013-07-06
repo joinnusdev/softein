@@ -143,7 +143,6 @@ class App_Model_Convocatoria extends App_Db_Table_Abstract {
         $select->order('c.limite desc');
         
         $result = $db->fetchAll($select);
-        
         return $result;
         
     }

@@ -286,6 +286,11 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $modelPersonal = new App_Model_Personal();        
         $this->view->personal = $modelPersonal->listarPersonal($idEmpresa);
         
+        
+        $modelEvaluacion = new App_Model_CriterioEvaluacion();
+        $this->view->evaluacion = $modelEvaluacion->listarCargosCriteriosEvaluacion();
+        
+        
         $idConvocatoria = $this->_getParam('id');
         
         

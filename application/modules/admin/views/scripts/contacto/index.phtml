@@ -57,10 +57,19 @@
                                         <td class="center "><?php echo $contacto['telefono']?></td>
                                         <td class="center ">
                                             <?php if ($contacto['estado'] == 1) : ?>
-                                                <span class="label label-success">Activo</span>
+                                                <span class="label label-success">
+                                                      <a  href="/admin/contacto/estado/id/<?php echo $contacto["idContacto"]; ?>/estado/0">
+                                                            Activo
+                                                    </a>
+                                                </span>
                                             <?php endif; ?>
                                             <?php if ($contacto['estado'] == 0) : ?>
-                                                <span class="label label-important">Eliminado</span>
+                                                <span class="label label-important">
+                                                    <a  href="/admin/contacto/estado/id/<?php echo $contacto["idContacto"]; ?>/estado/1">
+                                                            Inactivo
+                                                    </a>
+                                                    
+                                                </span>
                                             <?php endif; ?>
                                             
                                         </td>
@@ -69,7 +78,9 @@
                                                 <i class="icon-edit icon-white"></i>  
                                                 Editar                                         
                                             </a>
-                                            <a class="btn btn-danger" href="/admin/contacto/eliminar/id/<?php echo $contacto["idContacto"]; ?>">
+                                            <a class="btn btn-danger" 
+                                               href="/admin/contacto/eliminar/id/<?php echo $contacto["idContacto"]; ?>"
+                                               onclick="return confirm('Seguro que desea eliminar el registro?')">
                                                 <i class="icon-trash icon-white"></i> 
                                                 Eliminar
                                             </a>

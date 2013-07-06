@@ -1,0 +1,110 @@
+<script type="text/javascript">
+$(document).ready(function() {
+        $("#evaluacion").validate();
+});
+</script>
+
+<div>
+    <ul class="breadcrumb">
+            <li>
+                    <a href="/admin/procesos/criterios-seleccion">Criterios de Selección</a> <span class="divider">/</span>
+            </li>
+            <li>
+                    <a href="/admin/procesos/criterios-evaluacion-personal/id/<?php echo $this->idEvaluacion?>">Criterios de Evaluación el Personal</a> <span class="divider">/</span>
+            </li>
+            <li>
+                    <a href="#">Agregar Criterio de Evaluación</a>
+            </li>
+    </ul>
+</div>
+<div class="row-fluid sortable ui-sortable">
+    
+    <div class="box span12">
+        <form name="evaluacion" id="evaluacion" action="" method="post" enctype="multipart/form-data" >
+        <div class="box-header well" data-original-title="">
+            <h2><i class="icon-user"></i> Criterios de Evaluación del Personal</h2>
+            <div class="box-icon">                
+                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>                
+            </div>
+        </div>
+        <div class="box-content">
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+                
+                <div id="content">
+                    <div class="inner">
+                        <div class="well">
+                            <div class="row-fluid">
+                                <div class="span10">
+                                    
+                                    <div class="clear"></div>
+                                    <label for="nombre" class="span3 no-margin">Cargo :</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->cargo;?>
+                       
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="nivelacademico" class="span3 no-margin">Nivel Académico :</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->nivelAcademico;?>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+
+                                    <label for="nivelacademico" class="span3 no-margin">Profesión :</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->idProfesion;?>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="nivelacademico" class="span3 no-margin">Especialidad :</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->idEspecialidad;?>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="nivelacademico" class="span3 no-margin">SubEspecialidad :</label>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->idSubEspecialidad;?>
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="expanos" class="span3 no-margin">Experiencia Gnl.Años :</label>
+                                    <div class="span6 no-margin">
+                                         <?php echo $this->form->experienciaGeneralAnos;?> 
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="expanos" class="span3 no-margin">Experiencia Gnl.Meses :</label>
+                                    <div class="span6 no-margin">
+                                         <?php echo $this->form->experienciaGeneralMeses;?> 
+                                    </div>
+                                    
+                                    <div class="clear"></div>
+                                    <label for="expanos" class="span3 no-margin">Descripcion Expe.Especifica :</label>
+                                    <div class="span6 no-margin">
+                                         <?php echo $this->form->descripcionExperienciaEspecifica;?> 
+                                    </div>
+                                    <div class="span7 no-margin">
+                                        <?php echo $this->form->csrf;?>
+                                    </div>
+                                    
+                                   
+                                </div>
+                                <div class="clear"></div>
+                            <div class="form-actions">
+                                <?php echo $this->form->guardar->setAttrib('class', 'btn pull-right')?>
+                            </div> 
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>          
+            </div>            
+        </div>        
+
+     </form>
+    </div>
+    
+    <!--/span-->
+</div>

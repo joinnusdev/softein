@@ -96,7 +96,6 @@ class Admin_ContactoController extends App_Controller_Action_Admin
     
     public function eliminarAction()
     {
-        
         $modelContacto = new App_Model_Contacto();
         $id = $this->_getParam('id');   
         $eliminar = $modelContacto->eliminarContacto($id);      
@@ -104,6 +103,23 @@ class Admin_ContactoController extends App_Controller_Action_Admin
         $this->_redirect('/admin/contacto');
     }
     
+    public function estadoAction(){
+        $modelContacto = new App_Model_Contacto();
+        $id = $this->_getParam('id'); 
+        $estado = $this->_getParam('estado'); 
+        if($estado == 1){
+            $data['estado'] = App_Model_Contacto::ESTADO_ACTIVO;
+            $data['idContacto'] = $id;
+            $eliminar = $modelContacto->actualizarDatos($data);      
+            $this->_flashMessenger->addMessage("Contacto activo con exito");
+        }else{
+            $data['estado'] = App_Model_Contacto::ESTADO_ELIMINADO;
+            $data['idContacto'] = $id;
+            $eliminar = $modelContacto->actualizarDatos($data);      
+            $this->_flashMessenger->addMessage("Contacto inactivo con exito");
+        }
+        $this->_redirect('/admin/contacto');
+    }
 
 }
 

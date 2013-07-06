@@ -146,7 +146,7 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
 
         $form = new App_Form_CrearEmpresa();
         $this->view->form = $form;
-
+        $form->paisEmpresa->setValue("173");
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost();
 

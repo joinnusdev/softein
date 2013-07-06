@@ -2,6 +2,29 @@
 $(document).ready(function() {
 	$("#fichaForm").validate();
 });
+$(document).submit(function() {
+    var fechaConstitucion = $("input#fechaConstitucion").val();
+    var aniosExperiencia = $("input#aniosExperiencia").val();
+    var fecha = new Date();
+    var ano = fecha.getFullYear();
+    var partes = fechaConstitucion.split('-');
+    var resto =  parseInt(ano) -parseInt(partes[2]);
+
+/* alert(fechaConstitucion);
+    alert(aniosExperiencia);
+    alert(ano);
+    alert(partes[2]);
+    alert(resto);
+*/
+    
+    if( aniosExperiencia > resto ){
+        alert("Los años de experincia NO debe de ser mayor a la fecha de consititución");
+        return false;
+    }else{
+        return true;
+    }
+
+});
 </script>
 
 <div>

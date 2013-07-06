@@ -4,7 +4,10 @@
                     <a href="/admin/procesos/criterios-seleccion">Criterios de Selección</a> <span class="divider">/</span>
             </li>
             <li>
-                    <a href="/admin/procesos/criterios-seleccion-crear">Agregar Criterio</a>
+                    <a href="/admin/procesos/criterios-evaluacion-personal/id/<?php echo $this->idEvaluacion;?>">Criterios de Evaluación el Personal</a> <span class="divider">/</span>
+            </li>
+            <li>
+                    <a href="/admin/procesos/criterios-evaluacion-crear/id/<?php echo $this->idEvaluacion;?>">Agregar Criterio de Evaluación</a>
             </li>
     </ul>
 </div>
@@ -21,25 +24,32 @@
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
-                                            colspan="1" style="width: 280px;" aria-label="Status: activate to sort column ascending">
-                                            Convocatoria
+                                            colspan="1" style="width: 20px;" aria-label="Status: activate to sort column ascending">
+                                            IdCriterio
                                         </th>
                                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                             colspan="1" style="width: 50px;" aria-sort="ascending" 
                                             aria-label="Username: activate to sort column descending">
-                                            Antiguedad de Empresa
+                                            Cargo
+                                        </th>
+                                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                            colspan="1" style="width: 50px;" aria-sort="ascending" 
+                                            aria-label="Username: activate to sort column descending">
+                                            Nivel Academico
+                                        </th>
+                                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                            colspan="1" style="width: 50px;" aria-sort="ascending" 
+                                            aria-label="Username: activate to sort column descending">
+                                            Profesión
+                                        </th>
+                                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                            colspan="1" style="width: 50px;" aria-sort="ascending" 
+                                            aria-label="Username: activate to sort column descending">
+                                            Especialidad
                                         </th>
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" 
                                             rowspan="1" colspan="1" style="width: 50px;" aria-label="Date registered: activate to sort column ascending">
-                                            Monto Minimo
-                                        </th>
-                                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" 
-                                            colspan="1" style="width: 30px;" aria-label="Role: activate to sort column ascending">
-                                            Exp.Esp.Años
-                                        </th>
-                                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" 
-                                            colspan="1" style="width: 30px;" aria-label="Role: activate to sort column ascending">
-                                            Exp.Gnl.Años
+                                            Sub Especialidad
                                         </th>
                                         
                                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" c
@@ -50,32 +60,31 @@
                                 </thead>   
 
                                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                     <?php foreach ($this->listaCriterio as $criterio):
+                                     <?php 
+                                     foreach ($this->listaCriterioEvaluacion as $evaluacion):
                                          
                                       ?>
                                     <tr class="odd">
-                                        <td class="  sorting_1"><?php echo $criterio['codigo'] . " " . $criterio['proceso']?></td>
-                                        <td class="center "><?php echo $criterio['antiguedadEmpresa']?></td>
-                                        <td class="center "><?php echo $criterio['montoMinimo']?></td>
-                                        <td class="center "><?php echo $criterio['experienciaEspecificaAnos']?></td>
-                                        <td class="center "><?php echo $criterio['experienciaGeneralAnos']?></td>
+                                        <td class="  sorting_1"><?php echo $evaluacion['idCriterioEvaluacion'];?></td>
+                                        <td class="center "><?php echo $evaluacion['cargo'];?></td>
+                                        <td class="center "><?php echo $evaluacion['nivelAcademico'];?></td>
+                                        <td class="center "><?php echo $evaluacion['profesion'];?></td>
+                                        <td class="center "><?php echo $evaluacion['especialidad'];?></td>
+                                        <td class="center "><?php echo $evaluacion['subEspecialidad'];?></td>
                                         
                                         <td class="center ">
-                                            <a class="btn btn-info" href="/admin/procesos/criterios-seleccion-editar/id/<?php echo $criterio["idCriterio"]; ?>">
+                                            <a class="btn btn-info" href="/admin/procesos/criterios-evaluacion-editar/id/<?php echo $this->idEvaluacion;?>/idEvaluacion/<?php echo $evaluacion["idCriterioEvaluacion"]; ?>">
                                                 <i class="icon-edit icon-white"></i>  
                                                 Editar                                        
                                             </a>
                                             
                                             <a class="btn btn-danger" 
-                                               href="/admin/procesos/criterios-seleccion-eliminar/id/<?php echo $criterio["idCriterio"]; ?>"
+                                               href="/admin/procesos/criterios-evaluacion-eliminar/id/<?php echo $this->idEvaluacion;?>/idEvaluacion/<?php echo $evaluacion["idCriterioEvaluacion"]; ?>"
                                                onclick="return confirm('Seguro que desea eliminar el registro?')">
                                                 <i class="icon-trash icon-white"></i>  
                                                 Eliminar
                                             </a>
-                                            <a class="btn btn-success" href="/admin/procesos/criterios-evaluacion-personal/id/<?php echo $criterio["idCriterio"]; ?>">
-                                                <i class="icon-trash icon-white"></i> 
-                                                Criterios de Evaluacion del Personal
-                                            </a>
+                                            
                                         </td>
                                     </tr>
                                     <?php

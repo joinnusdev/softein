@@ -10,76 +10,76 @@
         <h6> --- Reporte Creado por el Sistema de Gestión de Convocatorias  --- 2013</h6>
         
         <h3>Datos Empresa </h3>
-        <table width="600px">
+        <table width="700px" border="2">
             <tr>
-                <td>Empresa : </td>
-                <td><?php echo $this->empresa['nombreEmpresa'] ?> </td>
+                <td style="font-weight: bold;font-size: 13px;">Empresa : </td>
+                <td style="font-size: 12px;"><?php echo $this->empresa['nombreEmpresa'] ?> </td>
             </tr>            
             <tr>
-                <td>RUC : </td>
-                <td><?php echo $this->empresa['numeroDocumento'] ?> </td>
+                <td style="font-weight: bold;font-size: 13px;">RUC : </td>
+                <td style="font-size: 12px;"><?php echo $this->empresa['numeroDocumento'] ?> </td>
             </tr>
             <tr>
-                <td>Email : </td>
-                <td><?php echo $this->empresa['email'] ?> </td>
+                <td style="font-weight: bold;font-size: 13px;">Email : </td>
+                <td style="font-size: 12px;"><?php echo $this->empresa['email'] ?> </td>
             </tr>
             <tr>
-                <td>Telefono : </td>
-                <td><?php echo $this->empresa['telefono'] ?> </td>
+                <td style="font-weight: bold;font-size: 13px;">Telefono : </td>
+                <td style="font-size: 12px;"><?php echo $this->empresa['telefono'] ?> </td>
             </tr>
             <tr>
-                <td>Convocatoria : </td>
-                <td><?php echo $this->empresa['proceso'] ?> </td>
+                <td style="font-weight: bold;font-size: 13px;">Convocatoria : </td>
+                <td style="font-size: 12px;"><?php echo $this->empresa['proceso'] ?> </td>
             </tr>
             
             <tr>
-                <td>Fecha Registro: </td>
-                <td><?php echo $this->empresa['fechaRegistro'] ?> </td>
+                <td style="font-weight: bold;font-size: 13px;">Fecha Registro: </td>
+                <td style="font-size: 12px;"><?php echo $this->empresa['fechaRegistro'] ?> </td>
             </tr>
             
         </table>
         <br/>
         <h4>Personal participante en la capacitación</h4>
-        <table width="700px">
+        <table width="700px" border="2">
             <tr>
-                <td>Nombre</td>
-                <td>Cargo</td>
-                <td>Email</td>
-                <td>Nivel Académico</td>
-                <td>Experiencia <br/>(Años / Mes)</td>
-                <td>Tipo</td>
+                <td style="font-weight: bold;font-size: 13px;">Nombre</td>
+                <td style="font-weight: bold;font-size: 13px;">Cargo</td>
+                <td style="font-weight: bold;font-size: 13px;">Email</td>
+                <td style="font-weight: bold;font-size: 13px;">Nivel Académico</td>
+                <td style="font-weight: bold;font-size: 13px;">Experiencia <br/>(Años / Mes)</td>
+                <td style="font-weight: bold;font-size: 13px;">Tipo</td>
             </tr>
             <?php foreach ($this->personal as $value) { ?>
             <tr>                
-                <td><?php echo $value['nombre'] . " " . $value['apellido'] ?> </td>                
-                <td><?php echo $value['cargo'] ?> </td>                
-                <td><?php echo $value['email'] ?> </td>                
-                <td><?php echo $value['nivelacademico'] ?> </td>
+                <td style="font-size: 12px;"><?php echo $value['nombre'] . " " . $value['apellido'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['cargo'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['email'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['nivelacademico'] ?> </td>
                 <?php $a = ($value['expanos'])?$value['expanos']:'0'?>
-                <td><?php echo $a . "/" . $value['expmeses'] ?> </td>
+                <td style="font-size: 12px;"><?php echo $a . "/" . $value['expmeses'] ?> </td>
                 <?php $b = ($value['tipo']== '1')?'oferente':'contratado'?>
-                <td><?php echo $b ?> </td>
+                <td style="font-size: 12px;"><?php echo $b ?> </td>
             </tr>
             <?php } ?>
         </table>
         
         <br/>
         <h4>Experiencia de la Empresa : </h4>
-        <table width="700px">
+        <table width="700px" border="2">
             <tr>
-                <td>País</td>
-                <td>Experiencia</td>
-                <td>Ruc</td>
-                <td>Fecha Inicio</td>
-                <td>Fecha Finalización</td>                
+                <td style="font-weight: bold; font-size: 13px;">País</td>
+                <td style="font-weight: bold; font-size: 13px;">Experiencia</td>
+                <td style="font-weight: bold; font-size: 13px;">Ruc</td>
+                <td style="font-weight: bold; font-size: 13px;">Fecha Inicio</td>
+                <td style="font-weight: bold; font-size: 13px;">Fecha Finalización</td>                
             </tr>
             <?php foreach ($this->exp as $value) { ?>
             <tr>                
-                <td><?php echo $value['pais']?> </td>                
-                <td><?php echo $value['servicioNombre'] ?> </td>                
-                <td><?php echo $value['servicioRuc'] ?> </td>                
-                <td><?php echo $value['fechaInicio'] ?> </td>                
-                <td><?php echo $value['fechaFin'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['pais']?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['servicioNombre'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['servicioRuc'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['fechaInicio'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['fechaFin'] ?> </td>                
             </tr>
             <?php } ?>
         </table>

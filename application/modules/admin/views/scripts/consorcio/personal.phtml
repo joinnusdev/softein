@@ -69,7 +69,9 @@
                                                 <i class="icon-list icon-white"></i>  
                                                 Detalle Experiencia
                                             </a>
-                                            <a class="btn btn-danger" href="/admin/consorcio/personal-eliminar/id/<?php echo $experiencia["idPersonal"]; ?>/empresa/<?php echo $this->empresa?>">
+                                            <a class="btn btn-danger" 
+                                               href="/admin/consorcio/personal-eliminar/id/<?php echo $experiencia["idPersonal"]; ?>/empresa/<?php echo $this->empresa?>"
+                                               onclick="return confirm('Seguro que desea eliminar el registro?')">
                                                 <i class="icon-trash icon-white"></i> 
                                                 Eliminar
                                             </a>

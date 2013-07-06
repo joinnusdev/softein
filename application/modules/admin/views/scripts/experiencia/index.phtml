@@ -65,7 +65,9 @@
                                                 <i class="icon-edit icon-white"></i>  
                                                 Editar                                            
                                             </a>
-                                            <a class="btn btn-danger" href="/admin/experiencia/eliminar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>">
+                                            <a class="btn btn-danger" 
+                                               href="/admin/experiencia/eliminar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>"
+                                               onclick="return confirm('Seguro que desea eliminar el registro?')">
                                                 <i class="icon-trash icon-white"></i> 
                                                 Eliminar
                                             </a>

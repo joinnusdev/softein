@@ -70,7 +70,9 @@
                                                 <i class="icon-list icon-white"></i>  
                                                 Detalle Estudios
                                             </a>    
-                                            <a class="btn btn-danger" href="/admin/personal/eliminar/id/<?php echo $experiencia["idPersonal"]; ?>">
+                                            <a class="btn btn-danger" 
+                                               href="/admin/personal/eliminar/id/<?php echo $experiencia["idPersonal"]; ?>"
+                                               onclick="return confirm('Seguro que desea eliminar el registro?')">
                                                 <i class="icon-trash icon-white"></i> 
                                                 Eliminar
                                             </a>
