@@ -20,7 +20,7 @@ class App_Model_Especialidad extends App_Db_Table_Abstract {
     {
         $query = $this->_db->select()
                 ->from($this->_name, array('idEspecialidad', 'descripcion'))
-                ->where('idProfesion = ?', $id);
+                ->where('idProfesion IN (?)', $id);
         
         return $this->_db->fetchAll($query);
     }

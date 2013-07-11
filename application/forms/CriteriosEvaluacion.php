@@ -28,15 +28,15 @@ class App_Form_CriteriosEvaluacion extends App_Form
         $this->addElement($e);
         
         $prof = new App_Model_Profesion();        
-        $e = new Zend_Form_Element_Select('idProfesion');        
-        $e->setMultiOptions(array("0" => "--- Seleccionar ---") + $prof->listarProfesiones());
+        $e = new Zend_Form_Element_Multiselect('idProfesion');
+        $e->setMultiOptions($prof->listarProfesiones());
         $e->setRegisterInArrayValidator(false);
         $e->setAttrib('required', 'required');
         $e->setAttrib('class', 'span5');
         $this->addElement($e);
         
-        $e = new Zend_Form_Element_Select('idEspecialidad');
-        $e->setMultiOptions(array("0" => "--- Seleccionar ---"));
+        $e = new Zend_Form_Element_Multiselect('idEspecialidad');
+        //$e->setMultiOptions();
         $e->setRegisterInArrayValidator(false);
         $e->setAttrib('class', 'span5');
         $this->addElement($e);
