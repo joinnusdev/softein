@@ -20,7 +20,7 @@ class App_Model_SubEspecialidad extends App_Db_Table_Abstract {
     {
         $query = $this->_db->select()
                 ->from($this->_name, array('idSubEspecialidad', 'descripcion'))
-                ->where('idEspecialidad = ?', $id);
+                ->where('idEspecialidad IN (?)', $id);
         
         return $this->_db->fetchAll($query);
     }
