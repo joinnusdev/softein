@@ -12,7 +12,7 @@ class Admin_EspecialidadController extends App_Controller_Action_Admin
     {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender();        
-        $id = $this->_getParam('id');
+        $id = $this->_getParam('id');        
         $modelEspe = new App_Model_Especialidad();
         $result = $modelEspe->getEspecialidadPorProfesion($id);
         
