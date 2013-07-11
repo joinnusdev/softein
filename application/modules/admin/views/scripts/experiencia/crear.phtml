@@ -5,13 +5,16 @@ $(document).ready(function() {
 });
 
 $(document).submit(function() {
-    var fechaInicial = $("input#fechaInicio").val();
-    var fechaFinal = $("input#fechaFinal").val();
-    if(fechaInicial<fechaFinal){
-         return true;
-    }else{    
+
+    var a =  $("#fechaInicio").datepicker("getDate");
+    var b = $("#fechaFin").datepicker("getDate");
+    
+    if( b < a){
         alert("Fecha Final es menor que Fecha Inicial");
+        $("#fechaFin").focus();
         return false;
+    }else{    
+       return true;
     }
 });
 </script>

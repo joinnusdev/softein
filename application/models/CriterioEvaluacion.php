@@ -61,11 +61,11 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
                         ))
                 ->joinInner(array('seleccion' => App_Model_Procesos::TABLA_CRITERIO_SELECCION), 
                         'seleccion.idCriterio = evaluacion.idCriterio')
-                ->joinInner(array('profesion' => App_Model_Profesion::TABLA_PROFESION), 
+                ->joinLeft(array('profesion' => App_Model_Profesion::TABLA_PROFESION), 
                         'profesion.idProfesion = evaluacion.idProfesion')
-                ->joinInner(array('especialidad' => App_Model_Especialidad::TABLA_ESPECIALIDAD), 
+                ->joinLeft(array('especialidad' => App_Model_Especialidad::TABLA_ESPECIALIDAD), 
                         'especialidad.idEspecialidad = evaluacion.idEspecialidad')
-               ->joinInner(array('subEspecialidad' => App_Model_SubEspecialidad::TABLA_SUBESPECIALIDAD), 
+               ->joinLeft(array('subEspecialidad' => App_Model_SubEspecialidad::TABLA_SUBESPECIALIDAD), 
                         'subEspecialidad.idSubEspecialidad = evaluacion.idSubEspecialidad')
                ->where('seleccion.idCriterio = ?', $criterioEvaluacion);
                 
