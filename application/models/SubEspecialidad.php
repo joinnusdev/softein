@@ -33,5 +33,14 @@ class App_Model_SubEspecialidad extends App_Db_Table_Abstract {
         return $this->_db->fetchPairs($query);
     }
     
+    public function getSubEspecialidadCombo($id) 
+    {
+        $query = $this->_db->select()
+                ->from($this->_name, array('idSubEspecialidad', 'descripcion'))
+                ->where('idEspecialidad IN (?)', $id);
+        
+        return $this->_db->fetchPairs($query);
+    }
+    
    
 }

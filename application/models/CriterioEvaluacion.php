@@ -34,12 +34,18 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
                 $condicion = ' AND ' . $condicion;
             }
 
+            $where = $this->_db->quoteInto('idCriterioEvaluacion =?', $id);
+            $this->_db->delete(App_Model_DetaProfesion::TABLA_DETAPROFESION, $where);            
+            $this->_db->delete(App_Model_DetaEspecialidad::TABLA_DETAESPECIALIDAD, $where);
+            
             $cantidad = $this->_db->update($this->_name, $datos, 'idCriterioEvaluacion = ' . $id . $condicion);
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
+            
             $id = $this->_db->insert($this->_name, $datos);
+            
         }
-        return $id;
+        return $this->getDefaultAdapter()->lastInsertId();
     }
 
     public function actualizarDatos($datos) {
@@ -55,18 +61,27 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
                             'evaluacion.cargo',
                             'evaluacion.nivelAcademico',
                             'seleccion.idCriterio',
-                            'profesion.descripcion as profesion',
-                            'especialidad.descripcion as especialidad',
+                            //'profesion.descripcion as profesion',
+                            //'especialidad.descripcion as especialidad',
                             'subEspecialidad.descripcion as subEspecialidad'
                         ))
                 ->joinInner(array('seleccion' => App_Model_Procesos::TABLA_CRITERIO_SELECCION), 
                         'seleccion.idCriterio = evaluacion.idCriterio')
+
+                /*->joinInner(array('profesion' => App_Model_Profesion::TABLA_PROFESION), 
+                        'profesion.idProfesion = evaluacion.idProfesion')
+                ->joinInner(array('especialidad' => App_Model_Especialidad::TABLA_ESPECIALIDAD), 
+                        'especialidad.idEspecialidad = evaluacion.idEspecialidad')*/
+               ->joinInner(array('subEspecialidad' => App_Model_SubEspecialidad::TABLA_SUBESPECIALIDAD), 
+                        'evaluacion.idSubEspecialidad = subEspecialidad.idSubEspecialidad')
+/*
                 ->joinLeft(array('profesion' => App_Model_Profesion::TABLA_PROFESION), 
                         'profesion.idProfesion = evaluacion.idProfesion')
                 ->joinLeft(array('especialidad' => App_Model_Especialidad::TABLA_ESPECIALIDAD), 
                         'especialidad.idEspecialidad = evaluacion.idEspecialidad')
                ->joinLeft(array('subEspecialidad' => App_Model_SubEspecialidad::TABLA_SUBESPECIALIDAD), 
                         'subEspecialidad.idSubEspecialidad = evaluacion.idSubEspecialidad')
+*/
                ->where('seleccion.idCriterio = ?', $criterioEvaluacion);
                 
        return $this->_db->fetchAll($query);

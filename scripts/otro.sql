@@ -1,0 +1,3 @@
+alter table `criterioevaluacion` drop column `idProfesion`, drop column `idEspecialidad`;
+create table `detaProfesion`( `idDetaProfesion` int(11) UNSIGNED NOT NULL AUTO_INCREMENT , `idCriterioEvaluacion` int(11) UNSIGNED NOT NULL , `idProfesion` int(11) UNSIGNED NOT NULL , PRIMARY KEY (`idDetaProfesion`))  ;
+create table `detaEspecialidad`( `idDetaEspecialidad` int(11) UNSIGNED NOT NULL AUTO_INCREMENT , `idCriterioEvaluacion` int(11) UNSIGNED NOT NULL , `idEspecialidad` int(11) UNSIGNED NOT NULL , PRIMARY KEY (`idDetaEspecialidad`))  ;
