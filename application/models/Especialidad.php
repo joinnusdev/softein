@@ -34,5 +34,13 @@ class App_Model_Especialidad extends App_Db_Table_Abstract {
         return $this->_db->fetchPairs($query);
     }
     
+    public function getEspecialidadArray($id) 
+    {
+        $query = $this->_db->select()
+                ->from($this->_name, array('idEspecialidad', 'descripcion'))
+                ->where('idProfesion IN (?)', $id);        
+        return $this->_db->fetchPairs($query);
+    }
+    
    
 }

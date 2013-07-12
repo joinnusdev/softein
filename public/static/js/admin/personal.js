@@ -18,13 +18,13 @@ $(function(){
                                            
                         data: {
                            id : actual.val()
-                        },
-                        
+                        },                        
                         success: function(data){                            
                             if(data.length){   
                                 $("#idSubEspecialidad").children("option").remove();
                                 $("#idSubEspecialidad").append('<option value="0"> --- Seleccionar --- </option>');
-                                $(cd).children("option").remove();
+                                //$(cd).children("option").remove();
+                                $(cd).html("");
                                 //$(cd).append('<option value="0"> --- Seleccionar --- </option>');                                
                                 for(var i = 0;i < data.length; i++){
                                     for(var elem in data[i]){
@@ -38,7 +38,7 @@ $(function(){
                     });
                 } else {
                     $(cd).html("");
-                    $(cd).append("<option value='0'>"+def+"</option>");
+                    //$(cd).append("<option value='0'>"+def+"</option>");
                     //$(cd).attr("disabled", "disabled");
                     
                 }

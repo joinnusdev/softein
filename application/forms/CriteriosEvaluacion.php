@@ -30,6 +30,7 @@ class App_Form_CriteriosEvaluacion extends App_Form
         $prof = new App_Model_Profesion();        
         $e = new Zend_Form_Element_Multiselect('idProfesion');
         $e->setMultiOptions($prof->listarProfesiones());
+        
         $e->setRegisterInArrayValidator(false);
         $e->setAttrib('required', 'required');
         $e->setAttrib('class', 'span5');
@@ -42,7 +43,7 @@ class App_Form_CriteriosEvaluacion extends App_Form
         $this->addElement($e);
         
         $e = new Zend_Form_Element_Select('idSubEspecialidad');
-        $e->setMultiOptions(array("0" => "--- Seleccionar ---"));
+        $e->setMultiOptions(array("0" => "--- Seleccionar ---"));        
         $e->setRegisterInArrayValidator(false);
         $e->setAttrib('class', 'span5');
         $this->addElement($e);

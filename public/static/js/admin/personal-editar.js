@@ -24,8 +24,8 @@ $(function(){
                             if(data.length){
                                 $("#idSubEspecialidad").children("option").remove();
                                 $("#idSubEspecialidad").append('<option value="0"> --- Seleccionar --- </option>');
-                                $(cd).children("option").remove();
-                                $(cd).append('<option value="0"> --- Seleccionar --- </option>');
+                                //$(cd).children("option").remove();
+                                $(cd).html("");
                                 for(var i = 0;i < data.length; i++){
                                     for(var elem in data[i]){
                                         $(cd).append('<option value='+ elem +'>'+ data[i][elem]+'</option>');

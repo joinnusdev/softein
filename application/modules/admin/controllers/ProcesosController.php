@@ -126,13 +126,36 @@ class Admin_ProcesosController extends App_Controller_Action_Admin {
             if ($form->isValid($data)) {
                 $model = new App_Model_CriterioEvaluacion();
                 $data['idCriterio'] = $id;
-                $id = $model->actualizarDatos($data);
+                $profesion = $data['idProfesion'];
+                $especialidad = $data['idEspecialidad'];
+                unset ($data['idProfesion']);
+                unset ($data['idEspecialidad']);
+                
+                $idce = $model->actualizarDatos($data);                
+                // detalle profesion                
+                $modeldp = new App_Model_DetaProfesion();                
+                for ($i=0;$i < count($profesion);$i++) {
+                    $prof = array(
+                        'idCriterioEvaluacion' => $idce,
+                        'idProfesion'          => $profesion[$i],
+                    );
+                    $modeldp->actualizarDatos($prof);
+                }                
+                // detalle especialidad
+                $modelde = new App_Model_DetaEspecialidad();
+                for ($i=0;$i < count($especialidad);$i++) {
+                    $esp = array(
+                        'idCriterioEvaluacion' => $idce,
+                        'idEspecialidad'       => $especialidad[$i],
+                    );
+                    $modelde->actualizarDatos($esp);
+                }                
                 $this->_flashMessenger->addMessage("Criterios de Evaluación Creada");
                 $this->_redirect('/admin/procesos/criterios-evaluacion-personal/id/'.$idEvaluacion);
                 
-            } /*else {
-                $form->populate($data);                
-            }*/
+            } else {
+                $form->populate($data);
+            }
         }
     }
     
@@ -153,7 +176,28 @@ class Admin_ProcesosController extends App_Controller_Action_Admin {
         $idEvaluacion = $this->_getParam('idEvaluacion');
         
         $evalucion = $modelEvaluacion->getCriterioEvaluacionPorId($idEvaluacion);
-        $form->populate($evalucion);        
+        
+        $modeldetapro = new App_Model_DetaProfesion();
+        $detaprofe = $modeldetapro->getDetaProfesion($idEvaluacion);
+                
+        $modeldetaesp = new App_Model_DetaEspecialidad();
+        $detaespe = $modeldetaesp->getDetaEspecialidad($idEvaluacion);
+        
+        $modelSubEsp = new App_Model_SubEspecialidad();
+        $opt = $modelSubEsp->getSubEspecialidadCombo($detaespe);
+        $form->idSubEspecialidad->setMultiOptions($opt);
+        
+        $form->populate($evalucion);
+        $form->idProfesion->setValue($detaprofe);
+        
+        $modelEsp = new App_Model_Especialidad();        
+        $options = $modelEsp->getEspecialidadArray($detaprofe);        
+        $form->idEspecialidad->setMultiOptions($options);
+        $form->idEspecialidad->setValue($detaespe);
+        
+        
+        
+        
         if($this->getRequest()->isPost()){            
             $data = $this->getRequest()->getParams();            
             $data['idCriterioEvaluacion'] = $idEvaluacion;
