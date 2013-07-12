@@ -70,10 +70,13 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                 ->joinInner(array('e' => App_Model_Empresa::TABLA_EMPRESA), 
                         'ce.idEmpresa = e.idEmpresa', 
                         array('idEmpresa', 'nombreEmpresa', 'telefono', 
-                            'paisEmpresa', 'numeroDocumento', 'email')
+                            'paisEmpresa', 'numeroDocumento', 'email',
+                            'tipoOrganizacion','aniosExperiencia')
                         )
-                
-                
+                ->joinInner(array('p' => App_Model_Pais::TABLA_EMPRESA), 
+                        'e.paisEmpresa = p.idPais', 
+                        array('pais')
+                        )
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
         if ($idEmpresa){

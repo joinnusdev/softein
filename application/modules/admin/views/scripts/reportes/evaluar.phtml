@@ -13,13 +13,13 @@
         </div>
         <div class="box-content">
             <div class="row-fluid sortable ui-sortable">		
-                <form class="form-horizontal" action="/admin/reportes/imprimir2/" target="_blank">                    
+                <form class="form-horizontal" action="/admin/reportes/imprimir2/"  method="POST">                    
 
                     <fieldset>
                         <div class="control-group">
                             <label class="control-label" for="convocatoria">Convocatorias :</label>
                             <div class="controls">
-                                <select id="convocatoria">
+                                <select id="convocatoria" name="convocatoria">
                                     <option value="0"> --- Seleccionar ---</option>
                                     <?php foreach ($this->lista as $value) { ?>
                                     <option value="<?php echo $value['ID']?>"><?php echo $value['proceso']?></option>

@@ -104,5 +104,5 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
         $this->_db->delete($this->_name, $where);
     }
     
-   
+    
 }

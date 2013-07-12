@@ -75,5 +75,14 @@ class App_Model_Procesos extends App_Db_Table_Abstract {
         
     }
     
+    
+    
+    public function getCriterioSeleccionConvocatoria($idConvocatoria){
+        $query = $this->_db->select()
+                ->from(array('seleccion' => $this->_name))                
+                ->where('seleccion.idConvocatoria = ?', $idConvocatoria);
+        return $this->_db->fetchRow($query);
+        
+    }
    
 }
