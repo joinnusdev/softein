@@ -34,6 +34,10 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
                 $condicion = ' AND ' . $condicion;
             }
 
+            $where = $this->_db->quoteInto('idCriterioEvaluacion =?', $id);
+            $this->_db->delete(App_Model_DetaProfesion::TABLA_DETAPROFESION, $where);            
+            $this->_db->delete(App_Model_DetaEspecialidad::TABLA_DETAESPECIALIDAD, $where);
+            
             $cantidad = $this->_db->update($this->_name, $datos, 'idCriterioEvaluacion = ' . $id . $condicion);
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
