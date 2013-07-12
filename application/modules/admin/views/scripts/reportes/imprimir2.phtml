@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> SOFTEIN - REPORT</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    
+    </head>
+    <body>
+        <h6> --- Fecha de Convocatoria: dd/mm/aaaa   fecha de cierre: dd/mm/aaaa --- </h6>
+        _______________________________________________________________________________________
+        <br>
+        <h3>Datos Empresa </h3>
+        <table width="750px" border="2">
+            
+                <tr>
+                    <th>Empresa:</th><th colspan="3">Steve:</th>
+                </tr>  
+                <tr>
+                    <th>Tipo de Empresa:</th><th>Comercial:</th>
+                    <th>Nacionalidad:</th><th>Peruna</th>
+                </tr>  
+        </table>
+        <br>
+        <table width="750px" border="2">
+            <tr>
+                <td>Criterio</td><td>Cumplimiento</td>
+                <td>Diferencia</td><td>Solicitado</td>
+                <td>Presentado</td><td>Calificación Max.</td>
+            </tr>
+            <tr><td>Criterio</td>
+                <td>Cumplimiento</td>
+                <td>Diferencia</td>
+                <td>Solicitado</td>
+                <td>Presentado</td>
+                <td>Calificación Max.</td>
+            </tr>
+            <tr>
+                <td colspan="5" style="text-align: right;">TOTAL:</td>
+                <td>50</td>
+            </tr>
+        </table>
+        <br/>
+        <h4>Personal participante en la capacitación</h4>
+        <table width="700px" border="2">
+            <tr>
+                <td style="font-weight: bold;font-size: 13px;">Nombre</td>
+                <td style="font-weight: bold;font-size: 13px;">Cargo</td>
+                <td style="font-weight: bold;font-size: 13px;">Email</td>
+                <td style="font-weight: bold;font-size: 13px;">Nivel Académico</td>
+                <td style="font-weight: bold;font-size: 13px;">Experiencia <br/>(Años / Mes)</td>
+                <td style="font-weight: bold;font-size: 13px;">Tipo</td>
+            </tr>
+            <?php foreach ($this->personal as $value) { ?>
+            <tr>                
+                <td style="font-size: 12px;"><?php echo $value['nombre'] . " " . $value['apellido'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['cargo'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['email'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['nivelacademico'] ?> </td>
+                <?php $a = ($value['expanos'])?$value['expanos']:'0'?>
+                <td style="font-size: 12px;"><?php echo $a . "/" . $value['expmeses'] ?> </td>
+                <?php $b = ($value['tipo']== '1')?'oferente':'contratado'?>
+                <td style="font-size: 12px;"><?php echo $b ?> </td>
+            </tr>
+            <?php } ?>
+        </table>
+        
+        <br/>
+        <h4>Experiencia de la Empresa : </h4>
+        <table width="700px" border="2">
+            <tr>
+                <td style="font-weight: bold; font-size: 13px;">País</td>
+                <td style="font-weight: bold; font-size: 13px;">Experiencia</td>
+                <td style="font-weight: bold; font-size: 13px;">Ruc</td>
+                <td style="font-weight: bold; font-size: 13px;">Fecha Inicio</td>
+                <td style="font-weight: bold; font-size: 13px;">Fecha Finalización</td>                
+            </tr>
+            <?php foreach ($this->exp as $value) { ?>
+            <tr>                
+                <td style="font-size: 12px;"><?php echo $value['pais']?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['servicioNombre'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['servicioRuc'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['fechaInicio'] ?> </td>                
+                <td style="font-size: 12px;"><?php echo $value['fechaFin'] ?> </td>                
+            </tr>
+            <?php } ?>
+        </table>
+        
+        
+    </body>
+</html>
+
+

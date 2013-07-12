@@ -5,13 +5,16 @@ $(document).ready(function() {
 });
 
 $(document).submit(function() {
-    var fechaInicial = $("input#fechaInicio").val();
-    var fechaFinal = $("input#fechaFinal").val();
-    if(fechaInicial<fechaFinal){
-         return true;
+
+    var a =  $("#fechaInicio").datepicker("getDate");
+    var b = $("#fechaFin").datepicker("getDate");
+    
+    if( b < a){
+        alert("Fecha Final es menor que Fecha Inicial");
+        $("#fechaFin").focus();
+        return false;
     }else{    
-        alert("Fecha Final es menor que fecha inicial");
-        return false
+       return true;
     }
 });
 </script>
@@ -87,7 +90,7 @@ $(document).submit(function() {
                                     </div>
                                     
                                     <div class="clear"></div>
-                                    <label for="descripcion" class="span3 no-margin">Descripcion:</label>
+                                    <label for="descripcion" class="span3 no-margin">Descripción:</label>
                                     <div class="span7 no-margin">
                                         <?php echo $this->form->descripcion;?>
                                     </div>

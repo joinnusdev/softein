@@ -63,12 +63,21 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
                         ))
                 ->joinInner(array('seleccion' => App_Model_Procesos::TABLA_CRITERIO_SELECCION), 
                         'seleccion.idCriterio = evaluacion.idCriterio')
+<<<<<<< HEAD
                 /*->joinInner(array('profesion' => App_Model_Profesion::TABLA_PROFESION), 
                         'profesion.idProfesion = evaluacion.idProfesion')
                 ->joinInner(array('especialidad' => App_Model_Especialidad::TABLA_ESPECIALIDAD), 
                         'especialidad.idEspecialidad = evaluacion.idEspecialidad')*/
                ->joinInner(array('subEspecialidad' => App_Model_SubEspecialidad::TABLA_SUBESPECIALIDAD), 
                         'evaluacion.idSubEspecialidad = subEspecialidad.idSubEspecialidad')
+=======
+                ->joinLeft(array('profesion' => App_Model_Profesion::TABLA_PROFESION), 
+                        'profesion.idProfesion = evaluacion.idProfesion')
+                ->joinLeft(array('especialidad' => App_Model_Especialidad::TABLA_ESPECIALIDAD), 
+                        'especialidad.idEspecialidad = evaluacion.idEspecialidad')
+               ->joinLeft(array('subEspecialidad' => App_Model_SubEspecialidad::TABLA_SUBESPECIALIDAD), 
+                        'subEspecialidad.idSubEspecialidad = evaluacion.idSubEspecialidad')
+>>>>>>> f56853ae996f1f4ab62b747d85a0951118ee328d
                ->where('seleccion.idCriterio = ?', $criterioEvaluacion);
                 
        return $this->_db->fetchAll($query);

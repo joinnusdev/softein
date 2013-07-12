@@ -1,0 +1,53 @@
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <a href="#">Listado de convocatorias</a> <span class="divider">/</span>
+        </li>
+    </ul>
+</div>
+<div class="row-fluid sortable ui-sortable">		
+    <div class="box span12">
+        <div class="box-header well" data-original-title="">
+            <h2><i class="icon-list"></i> Convocatorias</h2>
+
+        </div>
+        <div class="box-content">
+            <div class="row-fluid sortable ui-sortable">		
+                <form class="form-horizontal" action="/admin/reportes/imprimir2/" target="_blank">                    
+
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="convocatoria">Convocatorias :</label>
+                            <div class="controls">
+                                <select id="convocatoria">
+                                    <option value="0"> --- Seleccionar ---</option>
+                                    <?php foreach ($this->lista as $value) { ?>
+                                    <option value="<?php echo $value['ID']?>"><?php echo $value['proceso']?></option>
+                                    <?php } ?>                                    
+                                </select>
+                            </div>
+                        </div>
+                        <a target='_blank' href='/admin/reportes/imprimir/' class='btn btn-success'>
+                            <i class='icon-edit'></i>  Evaluar convocados</a>
+                        <input type="submit" value="Evaluar Convocados" class='btn btn-success'>
+                        <!--<div class="control-group">
+                            <div class="form-actions">
+
+                                <span class="help-inline">
+                                    <a id="agregarItem" class="btn btn-primary">
+                                        <span>Agregar Personal a Convocatoria</span>
+                                    </a>
+                                </span>
+
+                            </div>
+                        </div> -->
+                    </fieldset>
+                </form>
+               
+            </div>         
+        </div>
+    </div><!--/span-->
+
+</div>
+
+
