@@ -29,8 +29,7 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
         if ($id > 0) {
             $condicion = '';
             if (!empty($condicion)) {
-              echo  $condicion = ' AND ' . $condicion;
-              exit;
+              echo  $condicion = ' AND ' . $condicion;              
             }
 
            $cantidad = $this->_db->update('cempresa', $datos, 'idConvocatoriaExperiencia= ' . $id . $condicion);
@@ -38,6 +37,7 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
             $id = ($cantidad < 1) ? 0 : $id;
         } else {
             $id = $this->_db->insert('cempresa' ,$datos);
+            return $this->_db->lastInsertId();
         }
         return $id;
     }
@@ -95,6 +95,7 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                         'ce.idConvocatoriaExperiencia = de.idConvocatoriaExperiencia')                
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
+        
         return $this->_db->fetchAll($query);
     }
     

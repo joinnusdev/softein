@@ -62,6 +62,15 @@
                     
                     <?php endforeach; ?>
                 </select>
+            <select class="xlarge disabled" id="cargop" name="cargop">
+                <option value="0"> -- Cargo a Postular --</option>
+                <?php foreach ($this->evaluacion as $item2) : ?>                
+                    <option cargo="<?php echo $item2['cargo']; ?>" value="<?php echo $item2['idCriterioEvaluacion']?>"> 
+                        <?php echo $item2['cargo'];?>
+                    </option>
+                    
+                    <?php endforeach; ?>
+            </select>
             <span class="help-inline">
                 <a class="btn" id="agregarItem">
                     <span>Agregar Personal a Convocatoria</span>

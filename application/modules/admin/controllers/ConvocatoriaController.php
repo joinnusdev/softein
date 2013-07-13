@@ -23,6 +23,9 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $this->view->personal = $modelPersonal->listarPersonal($idEmpresa);        
         $idConvocatoria = $this->_getParam('id');
         
+        $modelEvaluacion = new App_Model_CriterioEvaluacion();
+        $this->view->evaluacion = $modelEvaluacion->listarCargosCriteriosEvaluacion();
+        
         
         $modelConv = new App_Model_ConvocatoriaEmpresa();
         
@@ -40,8 +43,8 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
                     'idConvocatoriaExperiencia' => $convEmpresa['idConvocatoriaExperiencia'],
                     'idPersonal' => $personal[$i],
                     'idCriterioEvaluacion' => $cargop[$i],
-                );                
-                $modelDeta->actualizarDatos($datosDeta);                                
+                );
+                $modelDeta->actualizarDatos($datosDeta);
             }
             $mail = $this->view->authData->email;
             $name = $this->view->authData->nombreEmpresa;
