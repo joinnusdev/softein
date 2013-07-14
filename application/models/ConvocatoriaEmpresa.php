@@ -59,7 +59,7 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
     
     public function getConvocatoriaEmpresa($idConvocatoria, $idEmpresa = NULL) 
     {
-        $query = $this->_db->select()
+      $query = $this->_db->select()
                 ->from(array('ce' => $this->_name))
                 ->joinInner(array('c' => App_Model_Convocatoria::TABLA_CONVOCATORIA), 
                         'ce.idConvocatoria = c.ID', 
@@ -95,7 +95,6 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                         'ce.idConvocatoriaExperiencia = de.idConvocatoriaExperiencia')                
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
-        
         return $this->_db->fetchAll($query);
     }
     

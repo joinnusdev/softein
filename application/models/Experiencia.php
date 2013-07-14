@@ -72,12 +72,6 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
 
         return $db->fetchAll($select);
       
-      
-      
-      
-      
-      
-      
     }
     
     public function getExperienciaPorId($id) 
@@ -88,8 +82,32 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
         return $this->_db->fetchRow($query);
     }
     
-    
-    
+    public function experienciaEmpresa($idEmpresa){
+        $query = "SELECT  sum(montoTotal) as montoTotal,
+                sum((YEAR(fechaFin)-YEAR(fechaInicio))
+                - (RIGHT(CURDATE(),5)<RIGHT(fechaInicio,5)))
+                AS experienciaGeneralEmpresa
+                FROM detalleempresa where idEmpresa = ".$idEmpresa ;
+        return $this->_db->fetchAll($query);
+        
+    }
+
+    public function  experienciaEspecifica($idEmpresa){
+        
+        $query = "select sum((YEAR(detalleempresa.fechaFin)-YEAR(detalleempresa.fechaInicio))
+                - (RIGHT(CURDATE(),5)<RIGHT(detalleempresa.fechaInicio,5)))
+                AS experienciaEspecificaEmpresa
+                from detaexperiencia as experiencia
+                inner join cempresa as  cempresa on cempresa.idConvocatoriaExperiencia = experiencia.idConvocatoriaExperiencia
+                inner JOIN empresa as empresa on empresa.idEmpresa = cempresa.idEmpresa
+                inner join detalleempresa as detalleempresa on detalleempresa.idDetalleEmpresa = experiencia.idExperiencia
+                where cempresa.idEmpresa = ".$idEmpresa;
+        return $this->_db->fetchAll($query);
+    }
+
+
+
+
     public function eliminarExperiencia($id){
         $where = $this->_db->quoteInto('idDetalleEmpresa=?', $id);
             $this->_db->delete(self::TABLA_DETALLEEMPRESA, $where);

@@ -24,7 +24,7 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $idConvocatoria = $this->_getParam('id');
         
         $modelEvaluacion = new App_Model_CriterioEvaluacion();
-        $this->view->evaluacion = $modelEvaluacion->listarCargosCriteriosEvaluacion();
+        $this->view->evaluacion = $modelEvaluacion->listarCargosCriteriosEvaluacion($idConvocatoria);
         
         
         $modelConv = new App_Model_ConvocatoriaEmpresa();
@@ -246,6 +246,7 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $modelConEmp = new App_Model_ConvocatoriaEmpresa();
         $this->view->exp = $modelConEmp->getExperienciaDeta($idConvocatoria);
         
+        
         $session = new Zend_Session_Namespace('registro');
         $session->convocatoria = $idConvocatoria;
 
@@ -255,17 +256,20 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $this->view->experiencia = $modelExperiencia->listarExperiencia(
                 $this->view->authData->idEmpresa
         );
+        
         if ($this->_request->isPost()) {
             $data = $this->_getAllParams();
             if (isset($data['experiencia'])) {
+                
+                
                 $session->experiencia = $data['experiencia'];
                 
                 $idEmpresa = $this->view->authData->idEmpresa;
                 $convexp = $modelConEmp->getConvocatoriaEmpresa($idConvocatoria, $idEmpresa);
                 
-                
                 $modelDetaExp = new App_Model_DetaExperiencia();
                 $modelDetaExp->eliminarDetalle($convexp['idConvocatoriaExperiencia']);
+               
                 for ($i = 0; $i < count($session->experiencia); $i++){                    
                     $exp = $data['experiencia'][$i];
                     $dataDetalle = array(
@@ -292,13 +296,10 @@ class Admin_ConvocatoriaController extends App_Controller_Action_Admin {
         $modelPersonal = new App_Model_Personal();        
         $this->view->personal = $modelPersonal->listarPersonal($idEmpresa);
         
-        
-        $modelEvaluacion = new App_Model_CriterioEvaluacion();
-        $this->view->evaluacion = $modelEvaluacion->listarCargosCriteriosEvaluacion();
-        
-        
         $idConvocatoria = $this->_getParam('id');
-        
+       
+         $modelEvaluacion = new App_Model_CriterioEvaluacion();
+        $this->view->evaluacion = $modelEvaluacion->listarCargosCriteriosEvaluacion($idConvocatoria);
         
         $modelConv = new App_Model_ConvocatoriaEmpresa();
         

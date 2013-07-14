@@ -72,7 +72,7 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
                         'profesion.idProfesion = evaluacion.idProfesion')
                 ->joinInner(array('especialidad' => App_Model_Especialidad::TABLA_ESPECIALIDAD), 
                         'especialidad.idEspecialidad = evaluacion.idEspecialidad')*/
-               ->joinInner(array('subEspecialidad' => App_Model_SubEspecialidad::TABLA_SUBESPECIALIDAD), 
+               ->joinLeft(array('subEspecialidad' => App_Model_SubEspecialidad::TABLA_SUBESPECIALIDAD), 
                         'evaluacion.idSubEspecialidad = subEspecialidad.idSubEspecialidad')
 /*
                 ->joinLeft(array('profesion' => App_Model_Profesion::TABLA_PROFESION), 
@@ -87,7 +87,7 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
        return $this->_db->fetchAll($query);
     }
     
-     public function listarCargosCriteriosEvaluacion() 
+     public function listarCargosCriteriosEvaluacion($idConvocatoria) 
     { 
         $query = $this->_db
                 ->select()->from(array('evaluacion' => $this->_name),
@@ -96,7 +96,11 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
                             'evaluacion.cargo',
                             'evaluacion.nivelAcademico'
                             
-                        ));
+                        ))
+               ->joinInner(array('seleccion' => App_Model_Procesos::TABLA_CRITERIO_SELECCION), 
+                        'seleccion.idCriterio = evaluacion.idCriterio')
+               ->where('seleccion.idConvocatoria = ?', $idConvocatoria);
+        
                 
        return $this->_db->fetchAll($query);
     }

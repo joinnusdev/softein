@@ -12,7 +12,6 @@
         <h7> Fecha de Cierre: <?php echo $this->empresas[0]['limite'];?> </h7>
         _____________________________________________________________________________________________
         <br>
-        <br>
         <h3></h3>
         <?php 
         
@@ -23,7 +22,15 @@
         foreach ($this->empresas as $value) :
         $color = $lista_colores[$indice % $num_colores];
         $indice++;    
-        $aniosExperienciaDiferencia = $value['aniosExperiencia'] - $this->criterioEvaluacion['antiguedadEmpresa']  ;  
+        
+        $modelExperiencia = new App_Model_Experiencia();
+        $experienciaEmpresa = $modelExperiencia->experienciaEmpresa($value['idEmpresa']);
+        $experienciaEspecifica = $modelExperiencia->experienciaEspecifica($value['idEmpresa']);
+        
+        $aniosExperienciaDiferencia = $value['aniosExperiencia'] - $this->criterioEvaluacion['antiguedadEmpresa'];  
+        $aniosExperienciaGeneralDiferencia = $experienciaEmpresa[0]['experienciaGeneralEmpresa'] - $this->criterioEvaluacion['experienciaGeneralAnos'];
+        $aniosExperienciaEspecificaDiferencia = $experienciaEspecifica[0]['experienciaEspecificaEmpresa'] - $this->criterioEvaluacion['experienciaEspecificaAnos'];
+        $montoFacturadoDiferencia = $experienciaEmpresa[0]['montoTotal'] - $this->criterioEvaluacion['montoMinimo'];
         
         if($value['aniosExperiencia']< $this->criterioEvaluacion['antiguedadEmpresa']){
             $estadoAntiguedad = "No";
@@ -32,7 +39,35 @@
             $estadoAntiguedad = "Si";
             $puntajeAntiguedad = $this->criterioEvaluacion['puntajeAntiguedad'];
         }
-            
+        
+        if( $experienciaEmpresa[0]['experienciaGeneralEmpresa'] < $this->criterioEvaluacion['experienciaGeneralAnos']){
+            $estadoExperienciaGeneral = "No";
+            $puntajeExperienciaGeneral= 0;
+        }else{ 
+            $estadoExperienciaGeneral = "Si";
+            $puntajeExperienciaGeneral= $this->criterioEvaluacion['puntajeExperienciaGeneral'];
+        }
+        
+        
+        if( $experienciaEspecifica[0]['experienciaEspecificaEmpresa'] < $this->criterioEvaluacion['experienciaEspecificaAnos']){
+            $estadoExperienciaEspecifica = "No";
+            $puntajeExperienciaEspecifica= 0;
+        }else{ 
+            $estadoExperienciaEspecifica  = "Si";
+            $puntajeExperienciaEspecifica= $this->criterioEvaluacion['puntajeExperienciaGeneral'];
+        }
+        
+        
+        if( $experienciaEmpresa[0]['montoTotal'] < $this->criterioEvaluacion['montoMinimo']){
+            $estadoMontoFacturado = "No";
+            $puntajeMontoFacturado = 0;
+        }else{ 
+            $estadoMontoFacturado = "Si";
+            $puntajeMontoFacturado = $this->criterioEvaluacion['puntajeMonto'];
+        }
+        
+        
+        
         
         
         
@@ -46,11 +81,11 @@
             $tipoOrganizacion = 'Institución del Estado';
         
         ?>
-        <table width="755px" border="1" style="border: 5px;border-width: 10px; border-color: #000000"><tr><td>
+        <table width="750px" border="1" style="border: 5px;border-width: 10px; border-color: #000000"><tr><td>
                 
-        <table width="750px" border="0">
+        <table width="740px" border="0" style="font-size: 13px;font-weight: bold;background-color: #B0E0E6; color: #000000">
                 <tr>
-                    <th style="font-size: 13px;text-align: left;font-weight: bold;background-color: #B0E0E6; color: #000000">Empresa:</th>
+                    <th style="font-size: 13px;text-align: left;">Empresa:</th>
                     <th colspan="3" style="font-size: 13px;text-align: left;font-weight: normal;"><?php echo $value['nombreEmpresa'];?></th>
                 </tr>  
                 <tr>
@@ -61,12 +96,11 @@
                 </tr>  
         </table>
         </td></tr></table>
-        <br>
-        <table width="755px" border="1" style="border: 5px;border-width: 10px; border-color: #000000"><tr><td>
+        <table width="750px" border="1" style="border: 5px;border-width: 10px; border-color: #000000"><tr><td>
                     
                     
         
-        <table width="750px" border="0">
+        <table width="740px" border="0">
             
             <tr style="background-color: #B0E0E6; color: #000000">
                 <td style="font-size: 13px;text-align: left;font-weight: bold;">Criterio</td>
@@ -86,11 +120,80 @@
             </tr>
             <tr>
                 <td style="font-size: 13px;text-align: left;font-weight: bold;">Experiencia General</td>
+                <td style="text-align: center;"> <?php echo $estadoExperienciaGeneral;?></td>
+                <td><?php echo $aniosExperienciaGeneralDiferencia;?> Años</td>
+                <td><?php echo $this->criterioEvaluacion['experienciaGeneralAnos'];?> Años</td>
+                <td><?php echo $experienciaEmpresa[0]['experienciaGeneralEmpresa'];?> Años</td>
+                <td style="text-align:right;padding-right: 10px;"><?php echo $puntajeExperienciaGeneral;?></td>
+            </tr>
+            <tr style="background-color: #E0FFFF;" >
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Experiencia Específica</td>
+                <td style="text-align: center;"><?php echo $estadoExperienciaEspecifica;?></td>
+                <td><?php echo $aniosExperienciaEspecificaDiferencia;?> Años</td>
+                <td><?php echo $this->criterioEvaluacion['experienciaEspecificaAnos'];?> Años</td>
+                <td><?php echo $experienciaEspecifica[0]['experienciaEspecificaEmpresa'];?> Años</td>
+                <td style="text-align:right;padding-right: 10px;"><?php echo $puntajeExperienciaEspecifica;?></td>
+            </tr>
+            <tr>
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Monto Facturado</td>
+                <td style="text-align: center;"><?php echo $estadoMontoFacturado;?></td>
+                <td>S/. <?php echo number_format($montoFacturadoDiferencia, 2) ;?></td>
+                <td>S/. <?php echo number_format($this->criterioEvaluacion['montoMinimo'],2);?></td>
+                <td>S/. <?php echo number_format($experienciaEmpresa[0]['montoTotal'],2);?></td>
+               <td style="text-align:right;padding-right: 10px;"><?php echo $puntajeMontoFacturado;?></td>
+            </tr>
+            <tr style="background-color: #B0E0E6; color: #000000;font-weight: bold;font-size: 13px;">
+                <td colspan="5" style="background-color: #B0E0E6; color: #000000;text-align: right;">TOTAL:</td>
+                <td style="text-align:right;padding-right: 10px;">
+                    <?php echo $puntajeAntiguedad +
+                               $puntajeExperienciaGeneral +
+                               $puntajeExperienciaEspecifica +
+                                $puntajeMontoFacturado?></td>
+            </tr>
+        </table>
+        <h5><span style="padding-left: 255px;">Evaluación del Personal de la Empresa</span></h5>
+        <table width="740px" border="0">
+             <tr style="background-color: #B0E0E6; color: #000000">
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Criterio</td>
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Cumplimiento</td>
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Diferencia</td>
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Solicitado</td>
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Presentado</td>
+            </tr>
+            <!--================================================================================ -->
+            <!--==============================   CUERPO DEL DETALLE =========== ================ -->
+            
+            <tr>
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Profesión (es)</td>
+                <td style="text-align: center;"><?php echo $estadoAntiguedad;?></td>
+                <td><?php echo $aniosExperienciaDiferencia;?>  Años</td>
+                <td><?php echo $this->criterioEvaluacion['antiguedadEmpresa'];?> Años</td>
+                <td><?php echo $value['aniosExperiencia'];?> Años</td>
+            
+            </tr>
+            <tr style="background-color: #E0FFFF;" >
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Especialidad</td>
+                <td style="text-align: center;"><?php echo $estadoAntiguedad;?></td>
+                <td><?php echo $aniosExperienciaDiferencia;?>  Años</td>
+                <td><?php echo $this->criterioEvaluacion['antiguedadEmpresa'];?> Años</td>
+                <td><?php echo $value['aniosExperiencia'];?> Años</td>
+            
+            </tr>
+            <tr>
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">SubEspecialidad</td>
+                <td style="text-align: center;"><?php echo $estadoAntiguedad;?></td>
+                <td><?php echo $aniosExperienciaDiferencia;?>  Años</td>
+                <td><?php echo $this->criterioEvaluacion['antiguedadEmpresa'];?> Años</td>
+                <td><?php echo $value['aniosExperiencia'];?> Años</td>
+            
+            </tr>
+            <tr>
+                <td style="font-size: 13px;text-align: left;font-weight: bold;">Experiencia General</td>
                 <td> </td>
                 <td></td>
                 <td><?php echo $this->criterioEvaluacion['experienciaGeneralAnos'];?> Años</td>
                 <td></td>
-                <td style="text-align:right;padding-right: 10px;"><?php echo $this->criterioEvaluacion['puntajeExperienciaGeneral'];?></td>
+            
             </tr>
             <tr style="background-color: #E0FFFF;" >
                 <td style="font-size: 13px;text-align: left;font-weight: bold;">Experiencia Específica</td>
@@ -98,31 +201,17 @@
                 <td></td>
                 <td><?php echo $this->criterioEvaluacion['experienciaEspecificaAnos'];?> Años</td>
                 <td></td>
-                <td style="text-align:right;padding-right: 10px;"><?php echo $this->criterioEvaluacion['puntajeExperienciaEspecifica'];?></td>
+            
             </tr>
-            <tr>
-                <td style="font-size: 13px;text-align: left;font-weight: bold;">Monto Facturado</td>
-                <td></td>
-                <td></td>
-                <td>S/. <?php echo $this->criterioEvaluacion['montoMinimo'];?></td>
-                <td></td>
-               <td style="text-align:right;padding-right: 10px;"><?php echo $this->criterioEvaluacion['puntajeMonto']?></td>
-            </tr>
-            <tr style="background-color: #B0E0E6; color: #000000;font-weight: bold;font-size: 13px;">
-                <td colspan="5" style="background-color: #B0E0E6; color: #000000;text-align: right;">TOTAL:</td>
-                <td style="text-align:right;padding-right: 10px;">
-                    <?php echo $puntajeAntiguedad +
-                                $this->criterioEvaluacion['puntajeExperienciaGeneral']+
-                                $this->criterioEvaluacion['puntajeExperienciaEspecifica']+
-                                $this->criterioEvaluacion['puntajeMonto']?></td>
-            </tr>
+            
+            <!--================================================================================ -->
+            <!--================================================================================ -->
+            
         </table>
                     
         </td></tr></table>
-        <br>
         <?php endforeach; ?>
         _____________________________________________________________________________________________
-        <br>   
         <h5>Resultados Generales: Se presentarón  <?php echo count($this->empresas);?> empresas.</h5>
         
         

@@ -104,7 +104,6 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
                 $modelCriterioSeleccion = new App_Model_Procesos();
                 $this->view->criterioEvaluacion = $modelCriterioSeleccion->getCriterioSeleccionConvocatoria($data['convocatoria']);
                 
-        
                 
                 $idEmpresa = 1 ; //$this->_getParam("empresa");
                 $idConvocatoria = 261; //$this->_getParam("convocatoria");
