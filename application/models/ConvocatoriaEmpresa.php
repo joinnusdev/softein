@@ -73,16 +73,17 @@ class App_Model_ConvocatoriaEmpresa extends App_Db_Table_Abstract {
                             'paisEmpresa', 'numeroDocumento', 'email',
                             'tipoOrganizacion','aniosExperiencia')
                         )
-                ->joinInner(array('p' => App_Model_Pais::TABLA_EMPRESA), 
+                ->joinLeft(array('p' => App_Model_Pais::TABLA_EMPRESA), 
                         'e.paisEmpresa = p.idPais', 
                         array('pais')
                         )
                 ->where('ce.idConvocatoria = ?', $idConvocatoria)
                 ;
         if ($idEmpresa){
-            $query->where('ce.idEmpresa = ?', $idEmpresa);
+            $query->where('ce.idEmpresa = ?', $idEmpresa);            
             return $this->_db->fetchRow($query);
         }
+        
         return $this->_db->fetchAll($query);
         
     }    
