@@ -6,8 +6,14 @@ $(document).ready(function() {
 
 <div>
     <ul class="breadcrumb">
+         <li>
+                    <a href="/admin/consorcio/editar/id/<?php echo $this->empresa;?>">Datos del Consorcio</a> <span class="divider">/</span>
+            </li>
             <li>
-                    <a href="/admin/experiencia">Personal Empresa</a> <span class="divider">/</span>
+                    <a href="/admin/consorcio/personal/empresa/<?php echo $this->empresa?>">Personal de la Empresa</a> <span class="divider">/</span>
+            </li>
+            <li>
+                    <a href="#">Editar Personal de la Empresa</a> 
             </li>
     </ul>
 </div>

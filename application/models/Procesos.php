@@ -59,7 +59,9 @@ class App_Model_Procesos extends App_Db_Table_Abstract {
     public function getCriterioPorId($id) 
     {
         $query = $this->_db->select()
-                ->from(array('criterio' => $this->_name))                
+                ->from(array('criterio' => $this->_name))    
+                ->joinInner(array('convocatoria' => App_Model_Convocatoria::TABLA_CONVOCATORIA), 
+                        'convocatoria.ID = criterio.idConvocatoria')
                 ->where('criterio.idCriterio = ?', $id);
         return $this->_db->fetchRow($query);
     }
@@ -74,8 +76,6 @@ class App_Model_Procesos extends App_Db_Table_Abstract {
         $this->_db->delete($this->_evaluacion, $where);
         
     }
-    
-    
     
     public function getCriterioSeleccionConvocatoria($idConvocatoria){
         $query = $this->_db->select()

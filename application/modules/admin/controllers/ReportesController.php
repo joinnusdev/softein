@@ -97,25 +97,30 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
         
           if($this->getRequest()->isPost()){            
                 $data = $this->getRequest()->getPost();
+                //$data['convocatoria'] = 261;
                 $modelConv = new App_Model_ConvocatoriaEmpresa();        
                 $convEmpresa = $modelConv->getConvocatoriaEmpresa($data['convocatoria']);
                 $this->view->empresas = $convEmpresa;
           
                 $modelCriterioSeleccion = new App_Model_Procesos();
                 $this->view->criterioEvaluacion = $modelCriterioSeleccion->getCriterioSeleccionConvocatoria($data['convocatoria']);
+
+                $modelCriterioEvaluacion = new App_Model_CriterioEvaluacion();
+                $this->view->listarCargos = $modelCriterioEvaluacion->listarCargos($data['convocatoria']);
                 
+                $this->view->listarProfesion = $modelCriterioEvaluacion->mostrarProfesionxCargo($data['convocatoria']);
+                $this->view->listarEspecialidad = $modelCriterioEvaluacion->mostrarEspecialidadxCargo($data['convocatoria']);
+                $this->view->listarSubEspecialidad = $modelCriterioEvaluacion->mostrarSubEspecialidadxCargo($data['convocatoria']);
                 
+                /*
                 $idEmpresa = 1 ; //$this->_getParam("empresa");
                 $idConvocatoria = 261; //$this->_getParam("convocatoria");
 
                 //Datos Empresa y Convocatoria 
                 $modelCon = new App_Model_ConvocatoriaEmpresa();
                 $convEmpresa = $modelCon->getConvocatoriaEmpresa($idConvocatoria, $idEmpresa);
-
                 $this->view->empresa = $convEmpresa;
-
-
-                //Detalle Personal que ponen
+               //Detalle Personal que ponen
                 $model = new App_Model_DetaPersonal();
                 $personal = $model->getConvocatoriaPersonal($convEmpresa['idConvocatoriaExperiencia']);
                 $this->view->personal = $personal;
@@ -123,7 +128,7 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
                 $modelExp = new App_Model_DetaExperiencia();
                 $exper = $modelExp->getExperienciaEmpresa($idEmpresa, $idConvocatoria);
                 $this->view->exp = $exper;
-
+                */
                 $html = $this->view->render('/reportes/imprimir2.phtml');
 
                 $codigo = $html; 
@@ -131,17 +136,9 @@ class Admin_ReportesController extends App_Controller_Action_Admin {
                 $dompdf->load_html($codigo);
                 $dompdf->render();
                 $dompdf->stream("convocatoria.pdf", array("Attachment" => 0));
-
-
                 exit; 
-
-
-                
-           }
-        
-        
-        
-    }
+       } //if post
+    } //function
     
     
 }

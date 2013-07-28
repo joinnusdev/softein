@@ -36,7 +36,8 @@ class App_Form_CriteriosEvaluacion extends App_Form
         $e->setAttrib('class', 'span5');
         $this->addElement($e);
         
-        $e = new Zend_Form_Element_Multiselect('idEspecialidad');
+        //$e = new Zend_Form_Element_Multiselect('idEspecialidad');
+        $e = new Zend_Form_Element_Select('idEspecialidad');
         //$e->setMultiOptions();
         $e->setRegisterInArrayValidator(false);
         $e->setAttrib('class', 'span5');

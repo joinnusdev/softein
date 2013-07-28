@@ -3,14 +3,16 @@ $(document).ready(function() {
 	$("#contacto").validate();
 });
 </script>
-<ul class="breadcrumb">    
+<ul class="breadcrumb"> 
     <li>
-        <a href="/admin/contacto">Contacto</a> <span class="divider">/</span>
-        
-    </li>    
+            <a href="/admin/consorcio/editar/id/<?php echo $this->empresa;?>">Datos del Consorcio</a> <span class="divider">/</span>
+    </li>
     <li>
-                    <a href="#">Editar Contacto</a>
-            </li>
+            <a href="/admin/consorcio/contacto/empresa/<?php echo $this->empresa?>">Contactos</a> <span class="divider">/</span>
+    </li>
+    <li>
+            <a href="#">Editar Contacto</a>
+    </li>
 </ul>
 <div id="content_wrapper">
      <div id="content">

@@ -67,6 +67,7 @@ class Admin_ProcesosController extends App_Controller_Action_Admin {
         $form = new App_Form_CriteriosSeleccion();
         $id = $this->_getParam('id');
         $seleccion = $modelProceso->getCriterioPorId($id);
+        $this->view->proceso = $seleccion['proceso'];
         $form->populate($seleccion);        
         if($this->getRequest()->isPost()){            
             $data = $this->getRequest()->getParams();            

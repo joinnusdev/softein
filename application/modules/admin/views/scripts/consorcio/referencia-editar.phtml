@@ -3,14 +3,16 @@ $(document).ready(function() {
 	$("#referencia").validate();
 });
 </script>
-<ul class="breadcrumb">    
+<ul class="breadcrumb">   
+     <li>
+            <a href="/admin/consorcio/editar/id/<?php echo $this->empresa;?>">Datos del Consorcio</a> <span class="divider">/</span>
+    </li>
     <li>
-        <a href="/admin/consorcio/">Referencia</a> <span class="divider">/</span>
-        
+            <a href="/admin/consorcio/referencia/empresa/<?php echo $this->empresa?>">Referencia</a> <span class="divider">/</span>
     </li>    
     <li>
-                    <a href="#">Editar Referencia</a>
-            </li>
+           Editar Referencia
+    </li>
 </ul>
 <div id="content_wrapper">
      <div id="content">

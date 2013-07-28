@@ -1,7 +1,10 @@
 <div>
     <ul class="breadcrumb">
             <li>
-                    <a href="#">Experiencia de la Empresa</a> <span class="divider">/</span>
+                    <a href="/admin/consorcio/editar/id/<?php echo $this->empresa;?>">Datos del Consorcio</a> <span class="divider">/</span>
+            </li>
+            <li>
+                    <a href="/admin/consorcio/experiencia/empresa/<?php echo $this->empresa;?>">Experiencia de la Empresa</a> <span class="divider">/</span>
             </li>
             <li>
                     <a href="/admin/consorcio/experiencia-crear/empresa/<?php echo $this->empresa?>">Agregar Experiencia</a>
@@ -61,12 +64,13 @@
                                         <td class="center "><?php echo $experiencia['fechaFin']?></td>
                                         
                                         <td class="center ">
-                                            <a class="btn btn-info" href="/admin/consorcio/experiencia-editar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>">
+                                            <a class="btn btn-info" 
+                                               href="/admin/consorcio/experiencia-editar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>/idEmpresa/<?php echo $this->empresa;?>">
                                                 <i class="icon-edit icon-white"></i>  
                                                 Editar                                            
                                             </a>
                                             <a class="btn btn-danger" 
-                                               href="/admin/consorcio/experiencia-eliminar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>"
+                                               href="/admin/consorcio/experiencia-eliminar/id/<?php echo $experiencia["idDetalleEmpresa"]; ?>/idEmpresa/<?php echo $this->empresa;?>"
                                                onclick="return confirm('Seguro que desea eliminar el registro?')">
                                                 <i class="icon-trash icon-white"></i> 
                                                 Eliminar

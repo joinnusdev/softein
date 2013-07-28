@@ -123,5 +123,62 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
         $this->_db->delete($this->_name, $where);
     }
     
+    public function listarCargos($idConvocatoria){
+        $query = "SELECT ce.idCriterioEvaluacion, ce.cargo, 
+                    ce.experienciaGeneralAnos,ce.experienciaGeneralMeses
+                    from criterioevaluacion as ce
+                    inner join criterioseleccion as cs on ce.idCriterio = cs.idCriterio
+                    where cs.idConvocatoria = ".$idConvocatoria;
+        return $this->_db->fetchAll($query);
+    }
     
+    public function mostrarProfesionxCargo($idConvocatoria){
+        $query = "select ce.idCriterioEvaluacion,cs.idConvocatoria,p.descripcion as profesion from detaprofesion as dp
+                inner join criterioevaluacion as ce on ce.idCriterioEvaluacion = dp.idCriterioEvaluacion
+                inner join criterioseleccion as cs on cs.idCriterio= ce.idCriterio
+                inner join profesion as p on   p.idProfesion = dp.idProfesion
+                where cs.idConvocatoria = ".$idConvocatoria;
+        return $this->_db->fetchAll($query);
+    }
+    
+    public function mostrarEspecialidadxCargo($idConvocatoria){
+        $query = "select ce.idCriterioEvaluacion,cs.idConvocatoria,e.descripcion as especialidad 
+                from detaespecialidad as de
+                inner join criterioevaluacion as ce on ce.idCriterioEvaluacion = de.idCriterioEvaluacion
+                inner join criterioseleccion as cs on cs.idCriterio= ce.idCriterio
+                inner join especialidad as e on e.idEspecialidad = de.idEspecialidad
+                where cs.idConvocatoria =  ".$idConvocatoria;
+        return $this->_db->fetchAll($query);
+    }
+    
+    public function mostrarSubEspecialidadxCargo($idConvocatoria){
+        $query = "select  se.idSubEspecialidad, se.descripcion as subEspecialidad  from criterioevaluacion as ce
+                inner join criterioseleccion as cs on cs.idCriterio= ce.idCriterio
+                inner join subespecialidad  as se on se.idSubEspecialidad = ce.idSubEspecialidad
+                where cs.idConvocatoria =  ".$idConvocatoria;
+        return $this->_db->fetchAll($query);
+        
+    }
+    
+    
+    public function datosCargoPresentado($idConvocatoria,$cargo,$idEmpresa){
+        $query = "select p.idPersonal,p.cargo as cargoPresentado,p.expanos,p.expmeses,
+	e.nombreEmpresa,e.idEmpresa,
+	ce.cargo as cargoPostular,
+	profesion.descripcion as profesion,
+	especialidad.descripcion as especialidad,
+	subespecialidad.descripcion as subespecialidad
+	from personal as p 
+	inner join empresa as e on e.idEmpresa = p.idEmpresa
+	inner join detapersonal as dp on dp.idPersonal = p.idPersonal
+	inner join profesion as profesion on profesion.idProfesion = p.idProfesion
+	left join especialidad as especialidad on especialidad.idEspecialidad = p.idEspecialidad
+	left join subespecialidad as subespecialidad on subespecialidad.idSubEspecialidad = p.idSubEspecialidad
+	inner join criterioevaluacion as ce on ce.idCriterioEvaluacion = dp.idCriterioEvaluacion
+	inner join criterioseleccion as cs on cs.idCriterio = ce.idCriterio
+	where cs.idConvocatoria = ". $idConvocatoria ."
+	and ce.cargo = '". $cargo ."'
+	and e.idEmpresa = ".$idEmpresa;
+	return $this->_db->fetchRow($query);      
+    }
 }

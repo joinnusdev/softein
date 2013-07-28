@@ -62,6 +62,7 @@ class App_Form_CrearEmpresa extends App_Form
         $e = new Zend_Form_Element_Text('email');
         $e->setAttrib('class', 'required email');
         $e->setFilters(array("StripTags", "StringTrim"));
+        $e->setAttrib('size', '40');
         $v = new Zend_Validate_EmailAddress();
         $e->addValidator($v);
         $e->setRequired(true);

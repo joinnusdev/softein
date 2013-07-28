@@ -2,12 +2,29 @@
 $(document).ready(function() {
 	$("#experiencia").validate();
 });
+
+$(document).submit(function() {
+
+    var a =  $("#fechaInicio").datepicker("getDate");
+    var b = $("#fechaFin").datepicker("getDate");
+    
+    if( b < a){
+        alert("Fecha Final es menor que Fecha Inicial");
+        $("#fechaFin").focus();
+        return false;
+    }else{    
+       return true;
+    }
+});
 </script>
 
 <div>
     <ul class="breadcrumb">
             <li>
-                    <a href="/admin/consorcio/">Listado Consorcio</a> <span class="divider">/</span>
+                    <a href="/admin/consorcio/editar/id/<?php echo $this->empresa;?>">Datos del Consorcio</a> <span class="divider">/</span>
+            </li>
+            <li>
+                    <a href="/admin/consorcio/experiencia/empresa/<?php echo $this->empresa;?>">Experiencia de la Empresa</a> <span class="divider">/</span>
             </li>
             <li>
                     <a href="#">Editar Experiencia</a>

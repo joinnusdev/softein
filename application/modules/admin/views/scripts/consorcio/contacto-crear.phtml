@@ -3,12 +3,14 @@ $(document).ready(function() {
 	$("#contacto").validate();
 });
 </script>
-<ul class="breadcrumb">    
-    <li>
-        <a href="/admin/consorcio/contacto/empresa/<?php echo $this->empresa;?>">Contacto</a> <span class="divider">/</span>
-        
-    </li>    
-    <li>
+<ul class="breadcrumb"> 
+            <li>
+                    <a href="/admin/consorcio/editar/id/<?php echo $this->empresa;?>">Datos del Consorcio</a> <span class="divider">/</span>
+            </li>
+            <li>
+                    <a href="/admin/consorcio/contacto/empresa/<?php echo $this->empresa?>">Contactos</a> <span class="divider">/</span>
+            </li>
+            <li>
                     Crear Contacto
             </li>
 </ul>

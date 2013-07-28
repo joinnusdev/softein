@@ -183,10 +183,12 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
         $this->view->headScript()->appendFile(
                 $this->getConfig()->app->mediaUrl . '/js/form/jquery.validate.js'
         );
-
+        
         $modelExperiencia = new App_Model_Experiencia();
         $form = new App_Form_CrearExperiencia();
         $id = $this->_getParam('id');
+        $idEmpresa = $this->_getParam('idEmpresa');
+        $this->view->empresa = $idEmpresa;
         $this->view->experiencia = $experiencia = $modelExperiencia->getExperienciaPorId($id);
         $form->populate($experiencia);
         if ($this->getRequest()->isPost()) {
@@ -195,7 +197,8 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
             //if ($form->isValid($data)) {                
             $id = $modelExperiencia->actualizarDatos($data);
             $this->_flashMessenger->addMessage("Experiencia modificada con éxito");
-            $this->_redirect('/admin/consorcio/');
+            $this->_redirect('/admin/consorcio/experiencia/empresa/'.$idEmpresa);
+            
 
             /* } else {
               $form->populate($data);
@@ -207,14 +210,18 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
     public function experienciaEliminarAction() {
         $modelExperiencia = new App_Model_Experiencia();
         $id = $this->_getParam('id');
+        $empresa = $this->_getParam('idEmpresa');
         $modelExperiencia->eliminarExperiencia($id);
         $this->_flashMessenger->addMessage("Experiencia eliminada con exito");
-        $this->_redirect('/admin/consorcio');
+        $this->_redirect('/admin/consorcio/experiencia/empresa/'.$empresa);
+            
     }
 
     public function experienciaCrearAction() {
         $idEmpresa = $this->_getParam("empresa");
         if ($idEmpresa) {
+            
+            $this->view->empresa =  $idEmpresa;
             $this->view->headScript()->appendFile(
                     $this->getConfig()->app->mediaUrl . '/js/form/lib/jquery.js'
             );
@@ -240,6 +247,7 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
             }
         }
     }
+    
     public function contactoAction()
     {     
         $modelContacto = new App_Model_Contacto();
@@ -356,6 +364,7 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
         );
         
         $idEmpresa = $this->_getParam('empresa');
+        $this->view->empresa =$idEmpresa;
         if (!$idEmpresa)
             $this->_redirect("/admin/consorcio");
         $form = new App_Form_CrearPersonal();
@@ -392,7 +401,7 @@ class Admin_ConsorcioController extends App_Controller_Action_Admin {
         $id = $this->_getParam('id');
         $idEmpresa = $this->_getParam('empresa');
         $experiencia = $model->getPersonalPorId($id);
-        
+        $this->view->empresa =$idEmpresa;
         $modelEsp = new App_Model_Especialidad();
         $espec = $modelEsp->getComboEspecialidad($experiencia['idProfesion']);
         $modelSubEsp = new App_Model_SubEspecialidad();
