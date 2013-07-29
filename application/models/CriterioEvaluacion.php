@@ -89,7 +89,7 @@ class App_Model_CriterioEvaluacion extends App_Db_Table_Abstract {
     
      public function listarCargosCriteriosEvaluacion($idConvocatoria) 
     { 
-        $query = $this->_db
+       $query = $this->_db
                 ->select()->from(array('evaluacion' => $this->_name),
                         array(
                             'evaluacion.idCriterioEvaluacion',

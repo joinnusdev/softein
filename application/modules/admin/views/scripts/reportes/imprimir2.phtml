@@ -27,9 +27,65 @@
         $experienciaEmpresa = $modelExperiencia->experienciaEmpresa($value['idEmpresa']);
         $experienciaEspecifica = $modelExperiencia->experienciaEspecifica($value['idEmpresa']);
         
+       /* ======= EXPERIENCIA GENERAL ANIOS MESES =========== */
+        $tiempo = $modelExperiencia->tiempo($value['idEmpresa']);
+        $anio = 0;
+        $meses = 0;
+        for ($t = 0; $t < count($tiempo); $t++) {
+            $datetime1 = new DateTime($tiempo[$t]['fechaInicio']);
+            $datetime2 = new DateTime($tiempo[$t]['fechaFin']);
+            $interval = $datetime1->diff($datetime2);
+            $anio+= $interval->format('%Y');
+
+            $intervalMeses = $datetime1->diff($datetime2);
+            $meses+= $intervalMeses->format('%M');
+
+            }
+            if($meses>12){
+                $meses = $meses/12;
+                $total = round($meses, 1, PHP_ROUND_HALF_UP);
+                $partes = explode(".", $total);
+                $anio += $partes[0];
+                $meses = $partes[1];
+           }
+           
+       /* ======= EXPERIENCIA ESPECIFICA ANIOS MESES =========== */
+        $tiempoEspecifica = $modelExperiencia->tiempoExperienciaEspecifica($value['idEmpresa']);
+        $anioEspecifica = 0;
+        $mesesEspecifica = 0;
+        for ($te = 0; $te < count($tiempoEspecifica); $te++) {
+            $datetime1 = new DateTime($tiempoEspecifica[$te]['fechaInicio']);
+            $datetime2 = new DateTime($tiempoEspecifica[$te]['fechaFin']);
+            $interval = $datetime1->diff($datetime2);
+            $anioEspecifica+= $interval->format('%Y');
+
+            $intervalMeses = $datetime1->diff($datetime2);
+            $mesesEspecifica+= $intervalMeses->format('%M');
+
+            }
+            if($mesesEspecifica>12){
+                $mesesEspecifica = $mesesEspecifica/12;
+                $totalEspecifico = round($mesesEspecifica, 1, PHP_ROUND_HALF_UP);
+                $partesEspecifica = explode(".", $total);
+                $anioEspecifica += $partesEspecifica[0];
+                $mesesEspecifica = $partesEspecifica[1];
+           }
+           
+           
+           
+        /* ========================= INICIO  =================*/   
+        $experienciaEmpresa[0]['experienciaGeneralEmpresa'] = $anio;
+        /* ========================= FIN  =================*/   
+        
+        $experienciaEspecifica[0]['experienciaEspecificaEmpresa'] = $anioEspecifica;
+        
+        
         $aniosExperienciaDiferencia = $value['aniosExperiencia'] - $this->criterioEvaluacion['antiguedadEmpresa'];  
-        $aniosExperienciaGeneralDiferencia = $experienciaEmpresa[0]['experienciaGeneralEmpresa'] - $this->criterioEvaluacion['experienciaGeneralAnos'];
+        $aniosExperienciaGeneralDiferencia =  $experienciaEmpresa[0]['experienciaGeneralEmpresa'] - $this->criterioEvaluacion['experienciaGeneralAnos'];
+        $mesesExperienciaGeneralDiferencia =  $meses - $this->criterioEvaluacion['experienciaGeneralMeses'];
+       
         $aniosExperienciaEspecificaDiferencia = $experienciaEspecifica[0]['experienciaEspecificaEmpresa'] - $this->criterioEvaluacion['experienciaEspecificaAnos'];
+        $mesesExperienciaEspecificaDiferencia = $mesesEspecifica - $this->criterioEvaluacion['experienciaEspecificaMeses'];
         $montoFacturadoDiferencia = $experienciaEmpresa[0]['montoTotal'] - $this->criterioEvaluacion['montoMinimo'];
         
         if($value['aniosExperiencia']< $this->criterioEvaluacion['antiguedadEmpresa']){
@@ -61,6 +117,8 @@
             $estadoMontoFacturado = "Si";
             $puntajeMontoFacturado = $this->criterioEvaluacion['puntajeMonto'];
         }
+        
+        /* ======== TIPO ORGANIZACION =============*/
         if($value['tipoOrganizacion']=='sac')
             $tipoOrganizacion = 'Sociedad Anonima Cerrada';
         if($value['tipoOrganizacion']=='srl')
@@ -69,7 +127,7 @@
             $tipoOrganizacion = 'Organizacion no Gubernamental';
         if($value['tipoOrganizacion']=='ie')
             $tipoOrganizacion = 'Institución del Estado';
-        
+        /* ======== FIN TIPO ORGANIZACION =============*/
         ?>
        <!-- <table width="750px" border="1" style="border: 5px;border-width: 10px; border-color: #000000"><tr><td>-->
         <table width="740px" border="0" style="font-size: 13px;font-weight: bold;background-color: #B0E0E6; color: #000000">
@@ -107,17 +165,35 @@
             <tr>
                 <td style="font-size: 13px;text-align: left;font-weight: bold;">Experiencia General</td>
                 <td style="text-align: center;"> <?php echo $estadoExperienciaGeneral;?></td>
-                <td><?php echo $aniosExperienciaGeneralDiferencia;?> Años</td>
-                <td><?php echo $this->criterioEvaluacion['experienciaGeneralAnos'];?> Años</td>
-                <td><?php echo $experienciaEmpresa[0]['experienciaGeneralEmpresa'];?> Años</td>
+                <td>
+                    <?php echo $aniosExperienciaGeneralDiferencia;?> Años,
+                    <?php echo $mesesExperienciaGeneralDiferencia;?> Meses
+                </td>
+                <td>
+                    <?php echo $this->criterioEvaluacion['experienciaGeneralAnos'];?> Años,
+                    <?php echo $this->criterioEvaluacion['experienciaGeneralMeses'];?> Meses
+                </td>
+                <td>
+                    <?php echo $experienciaEmpresa[0]['experienciaGeneralEmpresa'];?> Años,
+                    <?php echo $meses;?> Meses
+                </td>
                 <td style="text-align:right;padding-right: 10px;"><?php echo $puntajeExperienciaGeneral;?></td>
             </tr>
             <tr style="background-color: #E0FFFF;" >
                 <td style="font-size: 13px;text-align: left;font-weight: bold;">Experiencia Específica</td>
                 <td style="text-align: center;"><?php echo $estadoExperienciaEspecifica;?></td>
-                <td><?php echo $aniosExperienciaEspecificaDiferencia;?> Años</td>
-                <td><?php echo $this->criterioEvaluacion['experienciaEspecificaAnos'];?> Años</td>
-                <td><?php echo $experienciaEspecifica[0]['experienciaEspecificaEmpresa'];?> Años</td>
+                <td>
+                    <?php echo $aniosExperienciaEspecificaDiferencia;?> Años,
+                    <?php echo $mesesExperienciaEspecificaDiferencia;?> Meses
+                </td>
+                <td>
+                    <?php echo $this->criterioEvaluacion['experienciaEspecificaAnos'];?> Años,
+                    <?php echo $this->criterioEvaluacion['experienciaEspecificaMeses'];?> Meses
+                </td>
+                <td>
+                    <?php echo $experienciaEspecifica[0]['experienciaEspecificaEmpresa'];?> Años,
+                    <?php echo $mesesEspecifica;?> Meses
+                </td>
                 <td style="text-align:right;padding-right: 10px;"><?php echo $puntajeExperienciaEspecifica;?></td>
             </tr>
             <tr>

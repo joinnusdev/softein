@@ -105,7 +105,21 @@ class App_Model_Experiencia extends App_Db_Table_Abstract {
         return $this->_db->fetchAll($query);
     }
 
-
+    public function tiempo($idEmpresa){
+        
+        $query = "select * from detalleempresa where idEmpresa = ".$idEmpresa;
+        return $this->_db->fetchAll($query);
+    }
+    
+    public function tiempoExperienciaEspecifica($idEmpresa){
+        
+        $query = "select detalleempresa.fechaInicio,detalleempresa.fechaFin from detaexperiencia as experiencia
+                inner join cempresa as  cempresa on cempresa.idConvocatoriaExperiencia = experiencia.idConvocatoriaExperiencia
+                inner JOIN empresa as empresa on empresa.idEmpresa = cempresa.idEmpresa
+                inner join detalleempresa as detalleempresa on detalleempresa.idDetalleEmpresa = experiencia.idExperiencia
+                where cempresa.idEmpresa= ".$idEmpresa;
+        return $this->_db->fetchAll($query);
+    }
 
 
     public function eliminarExperiencia($id){
